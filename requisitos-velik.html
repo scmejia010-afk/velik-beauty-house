@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Requisitos E-commerce — Velik Beauty House</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 48px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header {
+      border-bottom: 3px solid #c9a96e;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    header h1 {
+      font-size: 26px;
+      color: #1a1a1a;
+      letter-spacing: 1px;
+    }
+    header p {
+      font-size: 13px;
+      color: #888;
+      margin-top: 6px;
+    }
+    .badge {
+      display: inline-block;
+      background: #c9a96e;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    /* Barra de progreso */
+    .progress-bar-wrap {
+      margin-bottom: 32px;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .progress-label span:last-child { font-weight: 600; color: #c9a96e; }
+    .progress-track {
+      background: #f0f0f0;
+      border-radius: 20px;
+      height: 10px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #c9a96e, #e8c990);
+      border-radius: 20px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    section {
+      margin-bottom: 36px;
+    }
+    section h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #c9a96e;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    ul { list-style: none; padding: 0; }
+    ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 14px;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-radius: 4px;
+      padding-left: 4px;
+    }
+    ul li:last-child { border-bottom: none; }
+    ul li:hover { background: #fdf6ec; }
+    ul li.done { color: #aaa; text-decoration: line-through; }
+    ul li.done .checkbox { background: #c9a96e; border-color: #c9a96e; }
+    ul li.done .checkbox::after {
+      content: '✓';
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .checkbox {
+      min-width: 18px;
+      min-height: 18px;
+      border: 1.5px solid #c9a96e;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .info-box {
+      background: #fdf6ec;
+      border-left: 4px solid #c9a96e;
+      padding: 16px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .info-box p { margin-bottom: 8px; }
+    .info-box p:last-child { margin-bottom: 0; }
+    .info-box strong { color: #c9a96e; }
+    .wompi-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    .wompi-table th {
+      background: #c9a96e;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .wompi-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .wompi-table tr:last-child td { border-bottom: none; }
+    .wompi-table tr:nth-child(even) td { background: #fdf6ec; }
+    /* Checkboxes en tabla Wompi */
+    .wompi-table td:first-child {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .wompi-table tr { cursor: pointer; }
+    .wompi-table tr:hover td { background: #fdf6ec; }
+    .wompi-table tr.done td { color: #aaa; text-decoration: line-through; }
+    .wompi-table tr.done .checkbox { background: #c9a96e; border-color: #c9a96e; }
+    .wompi-table tr.done .checkbox::after {
+      content: '✓';
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .opciones {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .opcion {
+      flex: 1;
+      border: 1.5px solid #c9a96e;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .opcion h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #c9a96e;
+      margin-bottom: 6px;
+    }
+    .alerta {
+      background: #fff3cd;
+      border-left: 4px solid #e6a817;
+      padding: 14px 18px;
+      border-radius: 4px;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+    .alerta strong { color: #b07a00; }
+    footer {
+      margin-top: 48px;
+      border-top: 1px solid #eee;
+      padding-top: 16px;
+      font-size: 12px;
+      color: #aaa;
+      text-align: center;
+    }
+    @media print {
+      body { padding: 24px; }
+      .opciones { flex-direction: column; }
+      .progress-bar-wrap { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">Documento de requisitos</div>
+    <h1>Velik Beauty House — E-commerce</h1>
+    <p>Preparado para primera reunión con el cliente · Mayo 2026</p>
+  </header>
+
+  <!-- BARRA DE PROGRESO -->
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <span>Progreso de requisitos</span>
+      <span id="progress-text">0 / 0 completados</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1 -->
+  <section>
+    <h2>1. Información de marca e identidad</h2>
+    <ul>
+      <li onclick="toggle(this)" data-id="m1"><span class="checkbox"></span>Nombre completo del negocio y NIT</li>
+      <li onclick="toggle(this)" data-id="m2"><span class="checkbox"></span>Logo en alta resolución (PNG con fondo transparente)</li>
+      <li onclick="toggle(this)" data-id="m3"><span class="checkbox"></span>Paleta de colores oficial de la marca (códigos HEX si los tienen)</li>
+      <li onclick="toggle(this)" data-id="m4"><span class="checkbox"></span>Tipografías que usa la marca</li>
+      <li onclick="toggle(this)" data-id="m5"><span class="checkbox"></span>Textos para página "Sobre nosotros" o historia de la marca</li>
+      <li onclick="toggle(this)" data-id="m6"><span class="checkbox"></span>Redes sociales activas (Instagram, TikTok, Facebook)</li>
+    </ul>
+  </section>
+
+  <!-- SECCIÓN 2 -->
+  <section>
+    <h2>2. Catálogo de productos (60 productos)</h2>
+    <ul>
+      <li onclick="toggle(this)" data-id="p1"><span class="checkbox"></span>Fotos de cada producto (fondo blanco preferiblemente)</li>
+      <li onclick="toggle(this)" data-id="p2"><span class="checkbox"></span>Nombre y descripción corta de cada producto</li>
+      <li onclick="toggle(this)" data-id="p3"><span class="checkbox"></span>Precio de cada producto en COP</li>
+      <li onclick="toggle(this)" data-id="p4"><span class="checkbox"></span>Categorías en las que se dividen los productos</li>
+      <li onclick="toggle(this)" data-id="p5"><span class="checkbox"></span>¿Manejan stock/inventario o todos los productos están siempre disponibles?</li>
+    </ul>
+  </section>
+
+  <!-- SECCIÓN 3 -->
+  <section>
+    <h2>3. Envíos y logística</h2>
+    <ul>
+      <li onclick="toggle(this)" data-id="e1"><span class="checkbox"></span>¿Hacen envíos? ¿A qué ciudades?</li>
+      <li onclick="toggle(this)" data-id="e2"><span class="checkbox"></span>¿Quién maneja la logística (operador propio, Servientrega, Coordinadora, etc.)?</li>
+      <li onclick="toggle(this)" data-id="e3"><span class="checkbox"></span>Costo de envío o ¿es gratis desde cierto monto?</li>
+      <li onclick="toggle(this)" data-id="e4"><span class="checkbox"></span>¿Aceptan devoluciones? ¿Cuál es la política?</li>
+    </ul>
+  </section>
+
+  <!-- SECCIÓN 4 -->
+  <section>
+    <h2>4. Información de contacto</h2>
+    <ul>
+      <li onclick="toggle(this)" data-id="c1"><span class="checkbox"></span>Número de WhatsApp para botón de contacto</li>
+      <li onclick="toggle(this)" data-id="c2"><span class="checkbox"></span>Correo electrónico de atención al cliente</li>
+      <li onclick="toggle(this)" data-id="c3"><span class="checkbox"></span>Dirección física del local (si aplica)</li>
+      <li onclick="toggle(this)" data-id="c4"><span class="checkbox"></span>¿Ya tienen dominio propio? ¿Cuál es?</li>
+      <li onclick="toggle(this)" data-id="c5"><span class="checkbox"></span>¿Quién va a administrar el sitio después de entregado?</li>
+    </ul>
+  </section>
+
+  <!-- SECCIÓN 5: WOMPI -->
+  <section>
+    <h2>5. Pasarela de pagos — Wompi</h2>
+
+    <div class="info-box">
+      <p><strong>¿Qué es Wompi?</strong> Es la plataforma de pagos en línea más usada en Colombia. Permite recibir pagos con tarjeta crédito/débito y PSE directamente en el sitio web. La cuenta es gratuita — solo cobra una comisión por cada venta aprobada.</p>
+      <p><strong>Costo:</strong> Aproximadamente el <strong>2.95% + IVA</strong> del valor de cada transacción aprobada. Este costo <strong>no está incluido</strong> en el desarrollo del sitio web y es un costo operativo permanente del negocio.</p>
+    </div>
+
+    <table class="wompi-table">
+      <thead>
+        <tr>
+          <th>Dato requerido</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="toggleRow(this)" data-id="w1">
+          <td><span class="checkbox"></span>Tipo de persona</td>
+          <td>Natural o jurídica</td>
+        </tr>
+        <tr onclick="toggleRow(this)" data-id="w2">
+          <td><span class="checkbox"></span>NIT o cédula</td>
+          <td>Del representante legal</td>
+        </tr>
+        <tr onclick="toggleRow(this)" data-id="w3">
+          <td><span class="checkbox"></span>Banco y número de cuenta</td>
+          <td>Donde recibirán los pagos</td>
+        </tr>
+        <tr onclick="toggleRow(this)" data-id="w4">
+          <td><span class="checkbox"></span>Tipo de cuenta</td>
+          <td>Ahorros o corriente</td>
+        </tr>
+        <tr onclick="toggleRow(this)" data-id="w5">
+          <td><span class="checkbox"></span>Correo para registro</td>
+          <td>Con el que crearán la cuenta en wompi.co</td>
+        </tr>
+        <tr onclick="toggleRow(this)" data-id="w6">
+          <td><span class="checkbox"></span>Métodos de pago</td>
+          <td>Tarjeta crédito/débito, PSE o ambos</td>
+        </tr>
+        <tr onclick="toggleRow(this)" data-id="w7">
+          <td><span class="checkbox"></span>Factura electrónica</td>
+          <td>¿Van a emitir factura con cada compra?</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 20px;">
+      <p style="font-size: 14px; font-weight: 600; margin-bottom: 10px;">¿Cómo manejar la comisión de Wompi?</p>
+      <div class="opciones">
+        <div class="opcion">
+          <h3>Opción 1 — Absorberla en el precio</h3>
+          Ajustar los precios de los productos para que la comisión ya esté incluida en el precio final que ve el cliente.
+        </div>
+        <div class="opcion">
+          <h3>Opción 2 — Cobrarla al comprador</h3>
+          Mostrar en el checkout un cargo adicional por "procesamiento de pago" que cubre la comisión de Wompi.
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta">
+      <strong>Importante:</strong> El costo de Wompi (~2.95% + IVA por transacción) debe tenerse en cuenta al momento de definir los precios de los productos. Este valor <strong>no está incluido</strong> en los 5 millones del desarrollo y es responsabilidad del negocio asumirlo de forma permanente.
+    </div>
+  </section>
+
+  <footer>
+    Velik Beauty House · Documento preparado para primera reunión · Mayo 2026
+  </footer>
+
+  <script>
+    function toggle(el) {
+      const id = el.dataset.id;
+      el.classList.toggle('done');
+      const done = el.classList.contains('done');
+      localStorage.setItem('velik_' + id, done ? '1' : '0');
+      updateProgress();
+    }
+
+    function toggleRow(el) {
+      const id = el.dataset.id;
+      el.classList.toggle('done');
+      const done = el.classList.contains('done');
+      localStorage.setItem('velik_' + id, done ? '1' : '0');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const all = document.querySelectorAll('[data-id]');
+      const done = document.querySelectorAll('[data-id].done');
+      const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-text').textContent = done.length + ' / ' + all.length + ' completados';
+    }
+
+    // Restaurar estado guardado
+    document.querySelectorAll('[data-id]').forEach(el => {
+      const id = el.dataset.id;
+      if (localStorage.getItem('velik_' + id) === '1') {
+        el.classList.add('done');
+      }
+    });
+
+    updateProgress();
+  </script>
+
+</body>
+</html>

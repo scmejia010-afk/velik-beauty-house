@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"c:\\\\Users\\\\scmej\\\\velik beauty house\\\\requisitos-velik.html\")",
+      "Bash(Start-Process \"c:\\\\Users\\\\scmej\\\\velik beauty house\\\\requisitos-velik.html\")",
+      "PowerShell(Start-Process \"c:\\\\Users\\\\scmej\\\\velik beauty house\\\\requisitos-velik.html\")",
+      "WebSearch"
+    ]
+  }
+}
