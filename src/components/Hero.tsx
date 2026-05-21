@@ -5,8 +5,8 @@ import { ScrollVideo } from "./ScrollVideo";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Video codificado en formato All-Intra y comprimido (3MB) para Vercel gratis
-const VIDEO_URL = "/hero-intra-compressed.mp4";
+// Video de alta calidad (All-Intra) sin compresión agresiva
+const VIDEO_URL = "/hero-intra.mp4";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);
