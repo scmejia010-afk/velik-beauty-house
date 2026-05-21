@@ -5,8 +5,8 @@ import { ScrollVideo } from "./ScrollVideo";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Video generado subido a la carpeta public
-const VIDEO_URL = "/velik-video.mp4";
+// Video HLS generado localmente para máximo rendimiento
+const VIDEO_URL = "/hero-stream/stream.m3u8";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);
