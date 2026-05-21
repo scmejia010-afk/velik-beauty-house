@@ -5,8 +5,10 @@ import { ScrollVideo } from "./ScrollVideo";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Video de alta calidad (All-Intra) sin compresión agresiva
-const VIDEO_URL = "/hero-intra.mp4";
+// Video de alta calidad para PC (12MB)
+const VIDEO_URL_DESKTOP = "/hero-intra.mp4";
+// Video súper ligero para Celulares (2.9MB)
+const VIDEO_URL_MOBILE = "/hero-intra-compressed.mp4";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);
@@ -35,7 +37,7 @@ function ScrollFloat({ text }: { text: string }) {
     );
   }, []);
 
-  const lines = text.split("\\n");
+  const lines = text.split("\n");
   return (
     <div
       ref={textRef}
@@ -165,8 +167,8 @@ function GlassPanel() {
 export function Hero() {
   return (
     <section id="hero-container" className="relative h-[250vh] bg-[#1E1E1E]">
-      <ScrollVideo src={VIDEO_URL} />
-      <ScrollFloat text={"Belleza\\nQue Sana"} />
+      <ScrollVideo desktopSrc={VIDEO_URL_DESKTOP} mobileSrc={VIDEO_URL_MOBILE} />
+      <ScrollFloat text={"Belleza\nQue Sana"} />
       <GlassPanel />
     </section>
   );

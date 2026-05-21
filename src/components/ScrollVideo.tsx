@@ -6,14 +6,24 @@ import Hls from "hls.js";
 gsap.registerPlugin(ScrollTrigger);
 
 interface ScrollVideoProps {
-  src: string;
+  desktopSrc: string;
+  mobileSrc?: string;
 }
 
-export function ScrollVideo({ src }: ScrollVideoProps) {
+export function ScrollVideo({ desktopSrc, mobileSrc }: ScrollVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [progress, setProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currentSrc, setCurrentSrc] = useState(desktopSrc);
+
+  // Detectar si es móvil al cargar
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile && mobileSrc) {
+      setCurrentSrc(mobileSrc);
+    }
+  }, [mobileSrc, desktopSrc]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -41,7 +51,7 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
     });
 
     const initVideo = () => {
-      if (Hls.isSupported() && src.includes(".m3u8")) {
+      if (Hls.isSupported() && currentSrc.includes(".m3u8")) {
         hls = new Hls({
           maxBufferLength: 120,
           maxMaxBufferLength: 600,
@@ -52,7 +62,7 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
           autoStartLoad: true,
         });
 
-        hls.loadSource(src);
+        hls.loadSource(currentSrc);
         hls.attachMedia(video);
 
         hls.on(Hls.Events.MANIFEST_PARSED, (_event, data) => {
@@ -69,12 +79,12 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
             setProgress(Math.min(100, Math.round((bufferedEnd / duration) * 100)));
           }
         });
-      } else if (video.canPlayType("application/vnd.apple.mpegurl") && src.includes(".m3u8")) {
+      } else if (video.canPlayType("application/vnd.apple.mpegurl") && currentSrc.includes(".m3u8")) {
         // Safari nativo
-        video.src = src;
+        video.src = currentSrc;
       } else {
         // Fallback para MP4 locales
-        video.src = src;
+        video.src = currentSrc;
         video.addEventListener("progress", () => {
           if (video.buffered.length > 0) {
             const bufferedEnd = video.buffered.end(video.buffered.length - 1);
@@ -127,7 +137,7 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
       }
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, [src]);
+  }, [currentSrc]);
 
   // Parallax del ratón
   useEffect(() => {
