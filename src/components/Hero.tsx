@@ -5,8 +5,8 @@ import { ScrollVideo } from "./ScrollVideo";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Video HLS generado localmente para máximo rendimiento
-const VIDEO_URL = "/hero-stream/stream.m3u8";
+// Video codificado en formato All-Intra localmente para scrubbing sin lag
+const VIDEO_URL = "/hero-intra.mp4";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);
