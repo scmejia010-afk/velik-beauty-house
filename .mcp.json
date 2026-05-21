@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "ghl-velik": {
+      "type": "http",
+      "url": "https://services.leadconnectorhq.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer pit-f7e40478-4e4d-4427-a5d6-7c2ccd453f8e",
+        "locationId": "0zeAaf3V1WrlkbyD4tJo"
+      }
+    }
+  }
+}

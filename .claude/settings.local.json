@@ -10,7 +10,15 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git push *)",
-      "Bash(git revert *)"
+      "Bash(git revert *)",
+      "WebFetch(domain:help.gohighlevel.com)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(Test-Path \"C:\\\\Users\\\\scmej\\\\.claude\\\\.mcp.json\")",
+      "Bash(ls \"C:/Users/scmej/.claude/\" 2>/dev/null | head -20)",
+      "Read(//c/Users/scmej/.claude/**)",
+      "mcp__ghl-velik__locations_get-location",
+      "mcp__ghl-velik__contacts_get-contacts"
     ]
   }
 }
