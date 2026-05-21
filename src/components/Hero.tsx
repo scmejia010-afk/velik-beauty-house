@@ -6,7 +6,7 @@ import { ScrollVideo } from "./ScrollVideo";
 gsap.registerPlugin(ScrollTrigger);
 
 // URL maestra de MUX (Se adapta automáticamente a celulares y PC sin perder calidad)
-const MUX_VIDEO_URL = "https://stream.mux.com/uIMliXbwSvVv8gN7sAGsdrN00EcrfMr1Tzhs01w2dgoTg.m3u8";
+const MUX_VIDEO_URL = "https://stream.mux.com/hsV00N01Rg00gIBAq02Pk006W01MNbFhD00Jcf0285NoGFiFJ3g.m3u8";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);
