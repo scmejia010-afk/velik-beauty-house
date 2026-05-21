@@ -20,8 +20,8 @@ const products: Product[] = [
     "size": "50ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-champu.png",
+    "hoverImage": "/productos/hydrate-champu.png"
   },
   {
     "title": "ABC Champú Hydrate",
@@ -29,8 +29,8 @@ const products: Product[] = [
     "size": "300ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-champu.png",
+    "hoverImage": "/productos/hydrate-champu.png"
   },
   {
     "title": "ABC Champú Hydrate",
@@ -38,8 +38,8 @@ const products: Product[] = [
     "size": "1L",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-champu.png",
+    "hoverImage": "/productos/hydrate-champu.png"
   },
   {
     "title": "ABC Acondicionador Hydrate",
@@ -47,8 +47,8 @@ const products: Product[] = [
     "size": "250ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-acondicionador.png",
+    "hoverImage": "/productos/hydrate-acondicionador.png"
   },
   {
     "title": "ABC Acondicionador Hydrate",
@@ -56,8 +56,8 @@ const products: Product[] = [
     "size": "1L",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-acondicionador.png",
+    "hoverImage": "/productos/hydrate-acondicionador.png"
   },
   {
     "title": "ABC Spray Acondicionador Hydrate",
@@ -65,8 +65,8 @@ const products: Product[] = [
     "size": "250ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-spray.png",
+    "hoverImage": "/productos/hydrate-spray.png"
   },
   {
     "title": "ABC Tratamiento Hydrate",
@@ -74,8 +74,8 @@ const products: Product[] = [
     "size": "30ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-tratamiento.png",
+    "hoverImage": "/productos/hydrate-tratamiento.png"
   },
   {
     "title": "ABC Tratamiento Hydrate",
@@ -83,8 +83,8 @@ const products: Product[] = [
     "size": "200ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-tratamiento.png",
+    "hoverImage": "/productos/hydrate-tratamiento.png"
   },
   {
     "title": "ABC Tratamiento Hydrate",
@@ -92,17 +92,17 @@ const products: Product[] = [
     "size": "500ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-tratamiento.png",
+    "hoverImage": "/productos/hydrate-tratamiento.png"
   },
   {
-    "title": "ABC Tratamiento intensivo Hydrate (crespo)",
+    "title": "ABC Tratamiento intensivo Hydrate",
     "category": "Hydrate",
     "size": "200ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-intensivo.png",
+    "hoverImage": "/productos/hydrate-intensivo.png"
   },
   {
     "title": "ABC Hydrate Locion",
@@ -110,8 +110,8 @@ const products: Product[] = [
     "size": "150ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-locion.png",
+    "hoverImage": "/productos/hydrate-locion.png"
   },
   {
     "title": "ABC Sérum Suavizante Hydrate",
@@ -119,8 +119,17 @@ const products: Product[] = [
     "size": "100ml",
     "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop"
+    "image": "/productos/hydrate-serum.png",
+    "hoverImage": "/productos/hydrate-serum.png"
+  },
+  {
+    "title": "ABC Hydrate Curl Enhancer",
+    "category": "Hydrate",
+    "size": "250ml",
+    "price": "Por definir",
+    "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
+    "image": "/productos/hydrate-curl.png",
+    "hoverImage": "/productos/hydrate-curl.png"
   },
   {
     "title": "ABC Champú Glow",
