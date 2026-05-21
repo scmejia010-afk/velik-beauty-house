@@ -1,25 +1,37 @@
 @import "tailwindcss";
 
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@theme {
+  --color-brand-nude: #DCC7B2;
+  --color-brand-white: #F9F6F1;
+  --color-brand-gold: #BFA15A;
+  --color-brand-light: #EFE9E4;
+  --color-brand-dark: #1E1E1E;
+  
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Poppins", sans-serif;
+  --font-accent: "Cinzel", serif;
+}
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+:root {
+  --text: var(--color-brand-dark);
+  --text-h: var(--color-brand-dark);
+  --bg: var(--color-brand-white);
+  --border: var(--color-brand-light);
+  --code-bg: var(--color-brand-light);
+  --accent: var(--color-brand-gold);
+  --accent-bg: rgba(191, 161, 90, 0.1);
+  --accent-border: var(--color-brand-gold);
+  --social-bg: var(--color-brand-light);
+  --shadow:
+    rgba(30, 30, 30, 0.1) 0 10px 15px -3px, rgba(30, 30, 30, 0.05) 0 4px 6px -2px;
+
+  --sans: var(--font-sans);
+  --heading: var(--font-serif);
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -34,17 +46,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    /* Mantenemos el look spa boutique incluso en dark mode, tal vez un poco más contrastado */
+    --text: #F9F6F1;
+    --text-h: #DCC7B2;
+    --bg: #1E1E1E;
+    --border: rgba(220, 199, 178, 0.2);
+    --code-bg: rgba(0,0,0,0.2);
+    --accent: #BFA15A;
+    --accent-bg: rgba(191, 161, 90, 0.15);
+    --accent-border: rgba(191, 161, 90, 0.5);
+    --social-bg: rgba(255,255,255,0.05);
   }
 
   #social .button-icon {
