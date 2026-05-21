@@ -649,7 +649,7 @@ export function ProductsGrid() {
               <img
                 src={product.image}
                 alt={product.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                className="absolute inset-0 w-full h-full object-contain object-center p-6 bg-white transition-transform duration-700 ease-out group-hover:scale-110"
               />
               
               <div className="absolute inset-0 bg-brand-dark/5 group-hover:bg-transparent transition-colors duration-500" />
