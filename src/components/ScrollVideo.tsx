@@ -69,9 +69,19 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
             setProgress(Math.min(100, Math.round((bufferedEnd / duration) * 100)));
           }
         });
-      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      } else if (video.canPlayType("application/vnd.apple.mpegurl") && src.includes(".m3u8")) {
         // Safari nativo
         video.src = src;
+      } else {
+        // Fallback para MP4 locales
+        video.src = src;
+        video.addEventListener("progress", () => {
+          if (video.buffered.length > 0) {
+            const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+            const duration = video.duration || 1;
+            setProgress(Math.min(100, Math.round((bufferedEnd / duration) * 100)));
+          }
+        });
       }
 
       video.addEventListener("canplay", () => {

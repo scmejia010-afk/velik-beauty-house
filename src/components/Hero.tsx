@@ -5,8 +5,8 @@ import { ScrollVideo } from "./ScrollVideo";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Video de prueba MUX (usamos la URL .m3u8 directa como especificaba el prompt para hls.js)
-const VIDEO_URL = "https://stream.mux.com/43NlHXsaMrmyzWamMk87m01fNyxSTekAD669BBAPBNm00.m3u8";
+// Video generado subido a la carpeta public
+const VIDEO_URL = "/hero-video.mp4";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);
