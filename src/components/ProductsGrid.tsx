@@ -3,538 +3,579 @@ import { X, ShoppingBag } from "lucide-react"
 
 export type ProductCategory = "Hydrate" | "Glow" | "Amplify" | "Replenish" | "Bare" | "Tratamientos" | "Accesorios";
 
+export type ProductSize = {
+  size: string;
+  price: string;
+};
+
 export type Product = {
   title: string;
   category: ProductCategory;
-  price: string;
   desc: string;
-  size: string;
   image: string;
-  hoverImage: string;
+  sizes: ProductSize[];
 }
 
 const products: Product[] = [
   {
-    "title": "ABC Champú Hydrate",
+    "title": "Champú Hydrate",
     "category": "Hydrate",
-    "size": "50ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-champu.png",
-    "hoverImage": "/productos/hydrate-champu.png"
+    "sizes": [
+      {
+        "size": "50ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "300ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "1L",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Champú Hydrate",
+    "title": "Acondicionador Hydrate",
     "category": "Hydrate",
-    "size": "300ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "/productos/hydrate-champu.png",
-    "hoverImage": "/productos/hydrate-champu.png"
-  },
-  {
-    "title": "ABC Champú Hydrate",
-    "category": "Hydrate",
-    "size": "1L",
-    "price": "Por definir",
-    "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "/productos/hydrate-champu.png",
-    "hoverImage": "/productos/hydrate-champu.png"
-  },
-  {
-    "title": "ABC Acondicionador Hydrate",
-    "category": "Hydrate",
-    "size": "250ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-acondicionador.png",
-    "hoverImage": "/productos/hydrate-acondicionador.png"
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "1L",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Acondicionador Hydrate",
+    "title": "Spray Acondicionador Hydrate",
     "category": "Hydrate",
-    "size": "1L",
-    "price": "Por definir",
-    "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "/productos/hydrate-acondicionador.png",
-    "hoverImage": "/productos/hydrate-acondicionador.png"
-  },
-  {
-    "title": "ABC Spray Acondicionador Hydrate",
-    "category": "Hydrate",
-    "size": "250ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-spray.png",
-    "hoverImage": "/productos/hydrate-spray.png"
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Tratamiento Hydrate",
+    "title": "Tratamiento Hydrate",
     "category": "Hydrate",
-    "size": "30ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-tratamiento.png",
-    "hoverImage": "/productos/hydrate-tratamiento.png"
+    "sizes": [
+      {
+        "size": "30ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "200ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "500ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Tratamiento Hydrate",
+    "title": "Tratamiento intensivo Hydrate",
     "category": "Hydrate",
-    "size": "200ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "/productos/hydrate-tratamiento.png",
-    "hoverImage": "/productos/hydrate-tratamiento.png"
-  },
-  {
-    "title": "ABC Tratamiento Hydrate",
-    "category": "Hydrate",
-    "size": "500ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "/productos/hydrate-tratamiento.png",
-    "hoverImage": "/productos/hydrate-tratamiento.png"
-  },
-  {
-    "title": "ABC Tratamiento intensivo Hydrate",
-    "category": "Hydrate",
-    "size": "200ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-intensivo.png",
-    "hoverImage": "/productos/hydrate-intensivo.png"
+    "sizes": [
+      {
+        "size": "200ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Hydrate Locion",
+    "title": "Hydrate Locion",
     "category": "Hydrate",
-    "size": "150ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-locion.png",
-    "hoverImage": "/productos/hydrate-locion.png"
+    "sizes": [
+      {
+        "size": "150ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Sérum Suavizante Hydrate",
+    "title": "Sérum Suavizante Hydrate",
     "category": "Hydrate",
-    "size": "100ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-serum.png",
-    "hoverImage": "/productos/hydrate-serum.png"
+    "sizes": [
+      {
+        "size": "100ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Hydrate Curl Enhancer",
+    "title": "Hydrate Curl Enhancer",
     "category": "Hydrate",
-    "size": "250ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-curl.png",
-    "hoverImage": "/productos/hydrate-curl.png"
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Champú Glow",
+    "title": "Champú Glow",
     "category": "Glow",
-    "size": "300ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "1L",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Champú Glow",
+    "title": "Champú Cool Glow",
     "category": "Glow",
-    "size": "1L",
-    "price": "Por definir",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Champú Cool Glow",
+    "title": "Acondicionador Glow",
     "category": "Glow",
-    "size": "300ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Acondicionador Glow",
+    "title": "Glow Conditioner",
     "category": "Glow",
-    "size": "250ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "1L INT",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Glow Conditioner",
+    "title": "Tratamiento Glow",
     "category": "Glow",
-    "size": "1L INT",
-    "price": "Por definir",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "30ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "200ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "500ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Tratamiento Glow",
+    "title": "Glow Spray Serum",
     "category": "Glow",
-    "size": "30ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "200ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Tratamiento Glow",
-    "category": "Glow",
-    "size": "200ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Tratamiento Glow",
-    "category": "Glow",
-    "size": "500ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Glow Spray Serum",
-    "category": "Glow",
-    "size": "200ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Champú Amplify",
+    "title": "Champú Amplify",
     "category": "Amplify",
-    "size": "50ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1604654894610-df490998570e?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "50ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "300ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "1L",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Champú Amplify",
+    "title": "Acondicionador Amplify",
     "category": "Amplify",
-    "size": "300ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1604654894610-df490998570e?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "1000ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Champú Amplify",
+    "title": "Espuma Amplificadora",
     "category": "Amplify",
-    "size": "1L",
-    "price": "Por definir",
     "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1604654894610-df490998570e?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "200ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Acondicionador Amplify",
-    "category": "Amplify",
-    "size": "1000ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1604654894610-df490998570e?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Espuma Amplificadora",
-    "category": "Amplify",
-    "size": "200ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1604654894610-df490998570e?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Replenish Champú",
+    "title": "Replenish Champú",
     "category": "Replenish",
-    "size": "50ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "50ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "300ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "1000ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Replenish Champú",
+    "title": "Replenish Acondicionador",
     "category": "Replenish",
-    "size": "300ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "1000ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Replenish Champú",
+    "title": "Replenish Spray Acond.",
     "category": "Replenish",
-    "size": "1000ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Replenish Acondicionador",
+    "title": "Replenish Tratamiento Light",
     "category": "Replenish",
-    "size": "250ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "30ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "200ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "500ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Replenish Acondicionador",
+    "title": "Replenish Tratamiento Rich",
     "category": "Replenish",
-    "size": "1000ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "30ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "200ml",
+        "price": "Por definir"
+      },
+      {
+        "size": "500ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Replenish Spray Acond.",
-    "category": "Replenish",
-    "size": "250ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Replenish Tratamiento Light",
-    "category": "Replenish",
-    "size": "30ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Replenish Tratamiento Light",
-    "category": "Replenish",
-    "size": "200ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Replenish Tratamiento Light",
-    "category": "Replenish",
-    "size": "500ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Replenish Tratamiento Rich",
-    "category": "Replenish",
-    "size": "30ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Replenish Tratamiento Rich",
-    "category": "Replenish",
-    "size": "200ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Replenish Tratamiento Rich",
-    "category": "Replenish",
-    "size": "500ml",
-    "price": "Por definir",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop"
-  },
-  {
-    "title": "ABC Champú Bare",
+    "title": "Champú Bare",
     "category": "Bare",
-    "size": "1000ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "1000ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Bare Cleanser",
+    "title": "Bare Cleanser",
     "category": "Bare",
-    "size": "300ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Mascarilla de Gel Hidratante",
+    "title": "Mascarilla de Gel Hidratante",
     "category": "Bare",
-    "size": "500ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "500ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Champú Purificante",
+    "title": "Champú Purificante",
     "category": "Bare",
-    "size": "1L",
-    "price": "Por definir",
     "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "1L",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Champú Deep Cleansing",
+    "title": "Champú Deep Cleansing",
     "category": "Bare",
-    "size": "300ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Indulging Oil (cabellos finos)",
+    "title": "Indulging Oil (cabellos finos)",
     "category": "Tratamientos",
-    "size": "100ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "100ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Aceite Embellecedor",
+    "title": "Aceite Embellecedor",
     "category": "Tratamientos",
-    "size": "100ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "100ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Laca de Fijacion Fuerte",
+    "title": "Laca de Fijacion Fuerte",
     "category": "Tratamientos",
-    "size": "300ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Cosmic Blow-Dry Jelly",
+    "title": "Cosmic Blow-Dry Jelly",
     "category": "Tratamientos",
-    "size": "30ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "30ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Pocion Belleza",
+    "title": "Pocion Belleza",
     "category": "Tratamientos",
-    "size": "50ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "50ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Sensorial Cream Scrub",
+    "title": "Sensorial Cream Scrub",
     "category": "Tratamientos",
-    "size": "250ml INT",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "250ml INT",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Crema para Manos y Cabello",
+    "title": "Crema para Manos y Cabello",
     "category": "Tratamientos",
-    "size": "30ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "30ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Mini Crema de forma",
+    "title": "Mini Crema de forma",
     "category": "Tratamientos",
-    "size": "30ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "30ml",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Eau de Toilette",
+    "title": "Eau de Toilette",
     "category": "Tratamientos",
-    "size": "50ml INT",
-    "price": "Por definir",
     "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "50ml INT",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Aplicador Pocion Belleza",
+    "title": "Aplicador Pocion Belleza",
     "category": "Accesorios",
-    "size": "-",
-    "price": "Por definir",
     "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "Único",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC MANDIL GLOW",
+    "title": "MANDIL GLOW",
     "category": "Accesorios",
-    "size": "x24 unidades",
-    "price": "Por definir",
     "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "x24 unidades",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Set de Tools Bol/Espatula/Paletina",
+    "title": "Set de Tools Bol/Espatula/Paletina",
     "category": "Accesorios",
-    "size": "-",
-    "price": "Por definir",
     "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "Único",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ABC Toallas",
+    "title": "Toallas",
     "category": "Accesorios",
-    "size": "Pack x5",
-    "price": "Por definir",
     "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "Pack x5",
+        "price": "Por definir"
+      }
+    ]
   },
   {
-    "title": "ST Dosificador",
+    "title": "Dosificador",
     "category": "Accesorios",
-    "size": "1000ml",
-    "price": "Por definir",
     "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
     "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
-    "hoverImage": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=600&fit=crop"
+    "sizes": [
+      {
+        "size": "1000ml",
+        "price": "Por definir"
+      }
+    ]
   }
 ];
 
@@ -543,10 +584,12 @@ const categories = ["Todas", "Hydrate", "Glow", "Amplify", "Replenish", "Bare", 
 export function ProductsGrid() {
   const [selectedCategory, setSelectedCategory] = useState("Todas")
   const [checkoutProduct, setCheckoutProduct] = useState<Product | null>(null)
+  const [selectedSize, setSelectedSize] = useState<ProductSize | null>(null)
   const [checkoutStep, setCheckoutStep] = useState<"cart" | "success">("cart")
 
   const handleBuyClick = (product: Product) => {
     setCheckoutProduct(product)
+    setSelectedSize(product.sizes[0] || null)
     setCheckoutStep("cart")
   }
 
@@ -611,17 +654,14 @@ export function ProductsGrid() {
               
               <div className="absolute inset-0 bg-brand-dark/5 group-hover:bg-transparent transition-colors duration-500" />
               
-              {/* Size Label (Top Left) */}
-              {product.size && product.size !== "-" && (
+              {/* Sizes Label (Top Left) */}
+              {product.sizes && product.sizes.length > 0 && (
                 <div className="absolute top-6 left-6 bg-brand-white/90 backdrop-blur text-brand-dark rounded-full px-3 py-1 shadow-sm z-10 transition-transform duration-500 group-hover:scale-110">
-                  <span className="text-[10px] font-bold uppercase tracking-widest font-sans">{product.size}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest font-sans">
+                    {product.sizes.length > 1 ? "Varios Tamaños" : product.sizes[0].size}
+                  </span>
                 </div>
               )}
-
-              {/* Floating Price */}
-              <div className="absolute top-6 right-6 bg-brand-dark text-brand-white rounded-full px-4 py-2 shadow-xl z-10 transition-transform duration-500 group-hover:scale-110">
-                <span className="text-sm font-bold font-sans">{product.price}</span>
-              </div>
             </div>
 
             <div className="mt-8 space-y-2 px-4">
@@ -661,12 +701,26 @@ export function ProductsGrid() {
                     <div>
                       <p className="text-[10px] font-accent text-brand-gold uppercase tracking-widest">{checkoutProduct.category}</p>
                       <p className="font-serif text-xl text-brand-dark line-clamp-1">{checkoutProduct.title}</p>
-                      <p className="text-xl font-bold font-sans text-brand-dark mt-1">{checkoutProduct.price}</p>
+                      <p className="text-xl font-bold font-sans text-brand-dark mt-1">{selectedSize?.price || "Por definir"}</p>
                     </div>
                   </div>
 
                   {/* Form */}
                   <div className="space-y-4">
+                    {checkoutProduct.sizes.length > 1 && (
+                      <div>
+                        <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Selecciona el Tamaño</label>
+                        <select 
+                          className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans"
+                          value={selectedSize?.size || ""}
+                          onChange={(e) => setSelectedSize(checkoutProduct.sizes.find(s => s.size === e.target.value) || null)}
+                        >
+                          {checkoutProduct.sizes.map(s => (
+                            <option key={s.size} value={s.size}>{s.size} - {s.price}</option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Nombre Completo</label>
                       <input type="text" placeholder="Ej. Ana García" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
@@ -690,7 +744,7 @@ export function ProductsGrid() {
                     onClick={() => setCheckoutStep("success")}
                     className="w-full py-4 bg-brand-dark text-brand-nude rounded-full font-bold uppercase tracking-widest text-sm hover:bg-[#000] transition-colors font-sans"
                   >
-                    Pagar {checkoutProduct.price}
+                    Pagar {selectedSize?.price || "Por definir"}
                   </button>
                 </div>
               ) : (
