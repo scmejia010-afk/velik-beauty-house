@@ -32,6 +32,8 @@ export function ScrollVideo({ desktopSrc, mobileSrc }: ScrollVideoProps) {
     let hls: Hls | null = null;
     let seekPending = false;
     let currentTarget = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+    let hasLoaded = false;
 
     const doSeek = () => {
       if (!video) return;
@@ -49,6 +51,43 @@ export function ScrollVideo({ desktopSrc, mobileSrc }: ScrollVideoProps) {
         doSeek();
       }
     });
+
+    const handleLoad = () => {
+      if (!hasLoaded) {
+        hasLoaded = true;
+        setIsLoaded(true);
+        // Configuramos GSAP ScrollTrigger para el scrubbing (solo dentro del Hero)
+        ScrollTrigger.create({
+          trigger: "#hero-container",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.5, // Suavizado
+          onUpdate: (self) => {
+            if (video.duration) {
+              currentTarget = self.progress * video.duration;
+              doSeek();
+            }
+          },
+        });
+
+        // Fade out del video al llegar al final del hero
+        if (containerRef.current) {
+          gsap.fromTo(
+            containerRef.current,
+            { opacity: 1 },
+            {
+              opacity: 0,
+              scrollTrigger: {
+                trigger: "#hero-container",
+                start: "bottom bottom", // Empieza a desaparecer cuando llegamos al final del hero
+                end: "bottom+=400 bottom", // Termina de desaparecer a la vez que sube el panel de cristal
+                scrub: 1.5,
+              },
+            }
+          );
+        }
+      }
+    };
 
     const initVideo = () => {
       if (Hls.isSupported() && currentSrc.includes(".m3u8")) {
@@ -94,44 +133,20 @@ export function ScrollVideo({ desktopSrc, mobileSrc }: ScrollVideoProps) {
         });
       }
 
-      video.addEventListener("canplay", () => {
-        setIsLoaded(true);
-        // Configuramos GSAP ScrollTrigger para el scrubbing (solo dentro del Hero)
-        ScrollTrigger.create({
-          trigger: "#hero-container",
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1.5, // Suavizado
-          onUpdate: (self) => {
-            if (video.duration) {
-              currentTarget = self.progress * video.duration;
-              doSeek();
-            }
-          },
-        });
-
-        // Fade out del video al llegar al final del hero
-        if (containerRef.current) {
-          gsap.fromTo(
-            containerRef.current,
-            { opacity: 1 },
-            {
-              opacity: 0,
-              scrollTrigger: {
-                trigger: "#hero-container",
-                start: "bottom bottom", // Empieza a desaparecer cuando llegamos al final del hero
-                end: "bottom+=400 bottom", // Termina de desaparecer a la vez que sube el panel de cristal
-                scrub: 1.5,
-              },
-            }
-          );
-        }
-      });
+      video.addEventListener("loadeddata", handleLoad);
+      
+      // En móviles, forzamos la carga y desbloqueamos la pantalla después de 2.5 segundos
+      video.load();
+      timeout = setTimeout(handleLoad, 2500);
     };
 
     initVideo();
 
     return () => {
+      clearTimeout(timeout);
+      if (video) {
+        video.removeEventListener("loadeddata", handleLoad);
+      }
       if (hls) {
         hls.destroy();
       }
