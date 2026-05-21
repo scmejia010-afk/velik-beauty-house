@@ -84,7 +84,7 @@ function GlassPanel() {
         scrollTrigger: {
           trigger: "#hero-container",
           start: "bottom bottom", // Cuando el final del hero toca el final de la pantalla
-          end: "bottom+=800 bottom",
+          end: "bottom+=400 bottom",
           scrub: 1.5,
         },
       }
@@ -164,7 +164,7 @@ function GlassPanel() {
 
 export function Hero() {
   return (
-    <section id="hero-container" className="relative h-[500vh] bg-[#1E1E1E]">
+    <section id="hero-container" className="relative h-[250vh] bg-[#1E1E1E]">
       <ScrollVideo src={VIDEO_URL} />
       <ScrollFloat text={"Belleza\\nQue Sana"} />
       <GlassPanel />

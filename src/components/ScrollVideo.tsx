@@ -86,12 +86,12 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
 
       video.addEventListener("canplay", () => {
         setIsLoaded(true);
-        // Configuramos GSAP ScrollTrigger una vez que el video puede reproducirse
+        // Configuramos GSAP ScrollTrigger para el scrubbing (solo dentro del Hero)
         ScrollTrigger.create({
-          trigger: document.documentElement,
+          trigger: "#hero-container",
           start: "top top",
           end: "bottom bottom",
-          scrub: 1.5, // Suavizado mucho mayor para que los .mp4 locales no se traben
+          scrub: 1.5, // Suavizado
           onUpdate: (self) => {
             if (video.duration) {
               currentTarget = self.progress * video.duration;
@@ -99,6 +99,23 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
             }
           },
         });
+
+        // Fade out del video al llegar al final del hero
+        if (containerRef.current) {
+          gsap.fromTo(
+            containerRef.current,
+            { opacity: 1 },
+            {
+              opacity: 0,
+              scrollTrigger: {
+                trigger: "#hero-container",
+                start: "bottom bottom", // Empieza a desaparecer cuando llegamos al final del hero
+                end: "bottom+=400 bottom", // Termina de desaparecer a la vez que sube el panel de cristal
+                scrub: 1.5,
+              },
+            }
+          );
+        }
       });
     };
 
