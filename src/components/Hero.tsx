@@ -6,7 +6,7 @@ import { ScrollVideo } from "./ScrollVideo";
 gsap.registerPlugin(ScrollTrigger);
 
 // Video generado subido a la carpeta public
-const VIDEO_URL = "/hero-video.mp4";
+const VIDEO_URL = "/velik-video.mp4";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);

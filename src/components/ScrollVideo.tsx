@@ -91,7 +91,7 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
           trigger: document.documentElement,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.5, // Leve suavizado en el scrub
+          scrub: 1.5, // Suavizado mucho mayor para que los .mp4 locales no se traben
           onUpdate: (self) => {
             if (video.duration) {
               currentTarget = self.progress * video.duration;
@@ -145,14 +145,15 @@ export function ScrollVideo({ src }: ScrollVideoProps) {
       )}
       <div 
         ref={containerRef}
-        className="fixed top-0 left-0 w-full h-full z-0 origin-center scale-[1.05]"
+        className="fixed top-0 left-0 w-full h-full z-0 origin-center scale-[1.02]"
       >
         <video
           ref={videoRef}
           muted
           playsInline
+          preload="auto"
           crossOrigin="anonymous"
-          className="w-full h-full object-cover scale-[1.35]"
+          className="w-full h-full object-cover scale-[1.02]"
         />
         {/* Overlay oscuro para legibilidad del texto */}
         <div className="absolute inset-0 bg-black/40 pointer-events-none" />
