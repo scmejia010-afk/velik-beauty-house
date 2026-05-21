@@ -5,10 +5,8 @@ import { ScrollVideo } from "./ScrollVideo";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Video de alta calidad para PC (12MB)
-const VIDEO_URL_DESKTOP = "/hero-intra.mp4";
-// Video súper ligero para Celulares (2.9MB)
-const VIDEO_URL_MOBILE = "/hero-intra-compressed.mp4";
+// URL maestra de MUX (Se adapta automáticamente a celulares y PC sin perder calidad)
+const MUX_VIDEO_URL = "https://stream.mux.com/uIMliXbwSvVv8gN7sAGsdrN00EcrfMr1Tzhs01w2dgoTg.m3u8";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);
@@ -167,7 +165,7 @@ function GlassPanel() {
 export function Hero() {
   return (
     <section id="hero-container" className="relative h-[250vh] bg-[#1E1E1E]">
-      <ScrollVideo desktopSrc={VIDEO_URL_DESKTOP} mobileSrc={VIDEO_URL_MOBILE} />
+      <ScrollVideo desktopSrc={MUX_VIDEO_URL} mobileSrc={MUX_VIDEO_URL} />
       <ScrollFloat text={"Belleza\nQue Sana"} />
       <GlassPanel />
     </section>
