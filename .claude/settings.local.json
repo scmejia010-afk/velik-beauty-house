@@ -4,7 +4,13 @@
       "Bash(start \"c:\\\\Users\\\\scmej\\\\velik beauty house\\\\requisitos-velik.html\")",
       "Bash(Start-Process \"c:\\\\Users\\\\scmej\\\\velik beauty house\\\\requisitos-velik.html\")",
       "PowerShell(Start-Process \"c:\\\\Users\\\\scmej\\\\velik beauty house\\\\requisitos-velik.html\")",
-      "WebSearch"
+      "WebSearch",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git revert *)"
     ]
   }
 }
