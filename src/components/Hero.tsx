@@ -6,7 +6,7 @@ import { ScrollVideo } from "./ScrollVideo";
 gsap.registerPlugin(ScrollTrigger);
 
 // Volvemos al video de 12MB All-Intra local para forzar a los iPhones a mostrar 1080p
-const VIDEO_URL = "/hero-intra.mp4";
+const VIDEO_URL = "https://stream.mux.com/6zer2PTcDdC019Hrx3ZtlYrecOU286c7q02GDAXfhmTtg.m3u8";
 
 function ScrollFloat({ text }: { text: string }) {
   const textRef = useRef<HTMLDivElement>(null);
