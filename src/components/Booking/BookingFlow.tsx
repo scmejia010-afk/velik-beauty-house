@@ -125,30 +125,37 @@ function Step3({ onSelect }: { onSelect: (p: Profesional) => void }) {
     <div className="animate-fade-in">
       <h2 className="font-serif text-3xl sm:text-4xl text-[#DCC7B2] text-center mb-2">Elige tu Profesional</h2>
       <p className="text-white/40 text-center text-sm mb-10 tracking-wide">¿Con quién te gustaría ser atendida?</p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-2xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
         {PROFESIONALES.map((p) => {
           const isSelected = selected === p.userId
           return (
             <button
               key={p.userId}
               onClick={() => { setSelected(p.userId); setTimeout(() => onSelect(p), 220) }}
-              className={`group flex flex-col items-center gap-4 rounded-2xl p-6 border transition-all duration-300 ${
+              className={`group flex flex-col items-center gap-4 rounded-2xl overflow-hidden border transition-all duration-300 ${
                 isSelected
-                  ? "border-[#DCC7B2] bg-[#DCC7B2]/8 scale-[1.03]"
-                  : "border-white/10 hover:border-[#DCC7B2]/40 bg-white/3 hover:bg-white/5 hover:scale-[1.02]"
+                  ? "border-[#DCC7B2] bg-[#DCC7B2]/8 scale-[1.02]"
+                  : "border-white/10 hover:border-[#DCC7B2]/40 bg-white/3 hover:bg-white/5 hover:scale-[1.01]"
               }`}
             >
-              {/* Avatar */}
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center text-xl font-bold border-2 transition-all duration-300 ${
-                isSelected ? "border-[#DCC7B2] text-[#DCC7B2]" : "border-white/20 text-white/50 group-hover:border-[#DCC7B2]/50 group-hover:text-[#DCC7B2]/70"
-              }`} style={{ background: "rgba(220,199,178,0.06)" }}>
-                {p.iniciales}
+              {/* Foto grande */}
+              <div className="w-full aspect-[3/4] overflow-hidden">
+                {p.foto ? (
+                  <img src={p.foto} alt={p.nombre} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                ) : (
+                  <div className={`w-full h-full flex items-center justify-center text-4xl font-bold transition-all duration-300 ${
+                    isSelected ? "text-[#DCC7B2]" : "text-white/30 group-hover:text-[#DCC7B2]/60"
+                  }`} style={{ background: "rgba(220,199,178,0.04)" }}>
+                    {p.iniciales}
+                  </div>
+                )}
               </div>
-              <div className="text-center">
+              {/* Info */}
+              <div className="text-center pb-5 px-4">
                 <p className={`font-semibold text-sm transition-colors ${isSelected ? "text-[#DCC7B2]" : "text-white/85 group-hover:text-white"}`}>{p.nombre}</p>
                 <p className="text-xs text-white/40 mt-1">{p.especialidad}</p>
+                {isSelected && <CheckCircle className="w-4 h-4 text-[#DCC7B2] mx-auto mt-2" />}
               </div>
-              {isSelected && <CheckCircle className="w-5 h-5 text-[#DCC7B2]" />}
             </button>
           )
         })}

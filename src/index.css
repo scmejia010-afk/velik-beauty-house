@@ -44,37 +44,6 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Mantenemos el look spa boutique incluso en dark mode, tal vez un poco más contrastado */
-    --text: #F9F6F1;
-    --text-h: #DCC7B2;
-    --bg: #1E1E1E;
-    --border: rgba(220, 199, 178, 0.2);
-    --code-bg: rgba(0,0,0,0.2);
-    --accent: #BFA15A;
-    --accent-bg: rgba(191, 161, 90, 0.15);
-    --accent-border: rgba(191, 161, 90, 0.5);
-    --social-bg: rgba(255,255,255,0.05);
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
 }
