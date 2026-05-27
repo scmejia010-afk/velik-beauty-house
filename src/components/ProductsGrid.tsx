@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { X, ShoppingBag } from "lucide-react"
 
-export type ProductCategory = "Hydrate" | "Glow" | "Amplify" | "Replenish" | "Bare" | "Tratamientos" | "Accesorios";
+export type ProductCategory = "Hydrate" | "Glow" | "Amplify" | "Replenish" | "All Hair Types" | "Beyond The Hair" | "Styling";
 
 export type ProductSize = {
   size: string;
@@ -18,106 +18,230 @@ export type Product = {
 
 const products: Product[] = [
   {
-    "title": "Champú Hydrate",
+    "title": "Replenish Shampoo",
+    "category": "Replenish",
+    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
+    "image": "/productos/replenish-shampoo.jpg",
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "$ 140.990"
+      }
+    ]
+  },
+  {
+    "title": "Replenish Acondicionador",
+    "category": "Replenish",
+    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
+    "image": "/productos/replenish-acondicionador.jpg",
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "$ 184.990"
+      }
+    ]
+  },
+  {
+    "title": "Replenish Acondicionador Spray",
+    "category": "Replenish",
+    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
+    "image": "/productos/replenish-acondicionador-spray.jpg",
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "$ 172.990"
+      }
+    ]
+  },
+  {
+    "title": "Replenish Rich Mascarilla",
+    "category": "Replenish",
+    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
+    "image": "/productos/replenish-rich-mascarilla.jpg",
+    "sizes": [
+      {
+        "size": "200ml",
+        "price": "$ 232.990"
+      }
+    ]
+  },
+  {
+    "title": "Replenish Light Mascarilla",
+    "category": "Replenish",
+    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
+    "image": "/productos/replenish-light-mascarilla.jpg",
+    "sizes": [
+      {
+        "size": "200ml",
+        "price": "$ 232.990"
+      }
+    ]
+  },
+  {
+    "title": "Amplify Shampoo",
+    "category": "Amplify",
+    "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
+    "image": "/productos/amplify-shampoo.jpg",
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "$ 140.990"
+      }
+    ]
+  },
+  {
+    "title": "Amplify Acondicionador",
+    "category": "Amplify",
+    "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
+    "image": "/productos/amplify-acondicionador.jpg",
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "$ 184.990"
+      }
+    ]
+  },
+  {
+    "title": "Amplify Acondicionador Spray",
+    "category": "Amplify",
+    "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
+    "image": "/productos/amplify-acondicionador-spray.jpg",
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "$ 172.990"
+      }
+    ]
+  },
+  {
+    "title": "Glow Shampoo",
+    "category": "Glow",
+    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
+    "image": "/productos/glow-shampoo.jpg",
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "$ 140.990"
+      }
+    ]
+  },
+  {
+    "title": "Glow Acondicionador",
+    "category": "Glow",
+    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
+    "image": "/productos/glow-acondicionador.jpg",
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "$ 184.990"
+      }
+    ]
+  },
+  {
+    "title": "Glow Mascarilla",
+    "category": "Glow",
+    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
+    "image": "/productos/glow-mascarilla.jpg",
+    "sizes": [
+      {
+        "size": "200ml",
+        "price": "$ 232.990"
+      }
+    ]
+  },
+  {
+    "title": "Glow Cool Cleanser",
+    "category": "Glow",
+    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
+    "image": "/productos/glow-cool-cleanser.jpg",
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "$ 140.990"
+      }
+    ]
+  },
+  {
+    "title": "Glow Sprayable Serum",
+    "category": "Glow",
+    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
+    "image": "/productos/glow-sprayable-serum.jpg",
+    "sizes": [
+      {
+        "size": "200ml",
+        "price": "$ 193.990"
+      }
+    ]
+  },
+  {
+    "title": "Hydrate Shampoo",
     "category": "Hydrate",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-champu.png",
     "sizes": [
       {
-        "size": "50ml",
-        "price": "Por definir"
-      },
-      {
         "size": "300ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "1L",
-        "price": "Por definir"
+        "price": "$ 140.990"
       }
     ]
   },
   {
-    "title": "Acondicionador Hydrate",
+    "title": "Hydrate Acondicionador",
     "category": "Hydrate",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-acondicionador.png",
     "sizes": [
       {
         "size": "250ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "1L",
-        "price": "Por definir"
+        "price": "$ 184.990"
       }
     ]
   },
   {
-    "title": "Spray Acondicionador Hydrate",
+    "title": "Hydrate Acondicionador Spray",
     "category": "Hydrate",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-spray.png",
     "sizes": [
       {
         "size": "250ml",
-        "price": "Por definir"
+        "price": "$ 172.990"
       }
     ]
   },
   {
-    "title": "Tratamiento Hydrate",
+    "title": "Hydrate Mascarilla",
     "category": "Hydrate",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-tratamiento.png",
     "sizes": [
       {
-        "size": "30ml",
-        "price": "Por definir"
-      },
-      {
         "size": "200ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "500ml",
-        "price": "Por definir"
+        "price": "$ 232.990"
       }
     ]
   },
   {
-    "title": "Tratamiento intensivo Hydrate",
-    "category": "Hydrate",
-    "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
-    "image": "/productos/hydrate-intensivo.png",
-    "sizes": [
-      {
-        "size": "200ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Hydrate Locion",
+    "title": "Hydrate Lotion",
     "category": "Hydrate",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-locion.png",
     "sizes": [
       {
         "size": "150ml",
-        "price": "Por definir"
+        "price": "$ 180.990"
       }
     ]
   },
   {
-    "title": "Sérum Suavizante Hydrate",
+    "title": "Hydrate Smoothing Serum",
     "category": "Hydrate",
     "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
     "image": "/productos/hydrate-serum.png",
     "sizes": [
       {
         "size": "100ml",
-        "price": "Por definir"
+        "price": "$ 195.990"
       }
     ]
   },
@@ -129,457 +253,285 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "Por definir"
+        "price": "$ 180.990"
       }
     ]
   },
   {
-    "title": "Champú Glow",
-    "category": "Glow",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
+    "title": "Hydrate Intense Treatment",
+    "category": "Hydrate",
+    "desc": "Producto de la línea Hydrate de Authentic Beauty Concept.",
+    "image": "/productos/hydrate-intensivo.png",
+    "sizes": [
+      {
+        "size": "200ml",
+        "price": "$ 232.990"
+      }
+    ]
+  },
+  {
+    "title": "Deep Cleansing Shampoo",
+    "category": "All Hair Types",
+    "desc": "Producto de Authentic Beauty Concept.",
+    "image": "/productos/deep-cleansing-shampoo.jpg",
     "sizes": [
       {
         "size": "300ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "1L",
-        "price": "Por definir"
+        "price": "$ 140.990"
       }
     ]
   },
   {
-    "title": "Champú Cool Glow",
-    "category": "Glow",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
+    "title": "Indulging Fluid Oil",
+    "category": "All Hair Types",
+    "desc": "Producto de Authentic Beauty Concept.",
+    "image": "/productos/indulging-fluid-oil.jpg",
     "sizes": [
       {
-        "size": "300ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Acondicionador Glow",
-    "category": "Glow",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "250ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Glow Conditioner",
-    "category": "Glow",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "1L INT",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Tratamiento Glow",
-    "category": "Glow",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "30ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "200ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "500ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Glow Spray Serum",
-    "category": "Glow",
-    "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "200ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Champú Amplify",
-    "category": "Amplify",
-    "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "50ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "300ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "1L",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Acondicionador Amplify",
-    "category": "Amplify",
-    "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "1000ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Espuma Amplificadora",
-    "category": "Amplify",
-    "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "200ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Replenish Champú",
-    "category": "Replenish",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "50ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "300ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "1000ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Replenish Acondicionador",
-    "category": "Replenish",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "250ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "1000ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Replenish Spray Acond.",
-    "category": "Replenish",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "250ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Replenish Tratamiento Light",
-    "category": "Replenish",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "30ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "200ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "500ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Replenish Tratamiento Rich",
-    "category": "Replenish",
-    "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1608248593842-8021c6a1b187?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "30ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "200ml",
-        "price": "Por definir"
-      },
-      {
-        "size": "500ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Champú Bare",
-    "category": "Bare",
-    "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "1000ml",
-        "price": "Por definir"
+        "size": "100ml",
+        "price": "$ 193.990"
       }
     ]
   },
   {
     "title": "Bare Cleanser",
-    "category": "Bare",
-    "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
+    "category": "All Hair Types",
+    "desc": "Producto de Authentic Beauty Concept.",
+    "image": "/productos/bare-cleanser.jpg",
     "sizes": [
       {
         "size": "300ml",
-        "price": "Por definir"
+        "price": "$ 140.990"
       }
     ]
   },
   {
-    "title": "Mascarilla de Gel Hidratante",
-    "category": "Bare",
-    "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
+    "title": "Jelly Mask",
+    "category": "All Hair Types",
+    "desc": "Producto de Authentic Beauty Concept.",
+    "image": "/productos/jelly-mask.jpg",
     "sizes": [
       {
-        "size": "500ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Champú Purificante",
-    "category": "Bare",
-    "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "1L",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Champú Deep Cleansing",
-    "category": "Bare",
-    "desc": "Producto de la línea Bare de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "300ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Indulging Oil (cabellos finos)",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "100ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Aceite Embellecedor",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "100ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Laca de Fijacion Fuerte",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "300ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Cosmic Blow-Dry Jelly",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "30ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Pocion Belleza",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "50ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Sensorial Cream Scrub",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "250ml INT",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Crema para Manos y Cabello",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "30ml",
-        "price": "Por definir"
-      }
-    ]
-  },
-  {
-    "title": "Mini Crema de forma",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
-    "sizes": [
-      {
-        "size": "30ml",
-        "price": "Por definir"
+        "size": "200ml",
+        "price": "$ 204.990"
       }
     ]
   },
   {
     "title": "Eau de Toilette",
-    "category": "Tratamientos",
-    "desc": "Producto de la línea Tratamientos de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&h=600&fit=crop",
+    "category": "Beyond The Hair",
+    "desc": "Producto de Authentic Beauty Concept.",
+    "image": "/productos/eau-de-toilette.jpg",
     "sizes": [
       {
-        "size": "50ml INT",
-        "price": "Por definir"
+        "size": "50ml",
+        "price": "$ 195.990"
       }
     ]
   },
   {
-    "title": "Aplicador Pocion Belleza",
-    "category": "Accesorios",
-    "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
+    "title": "Hand & Hair Light Cream",
+    "category": "Beyond The Hair",
+    "desc": "Producto de Authentic Beauty Concept.",
+    "image": "/productos/hand-hair-light-cream.jpg",
     "sizes": [
       {
-        "size": "Único",
-        "price": "Por definir"
+        "size": "75ml",
+        "price": "$ 86.990"
       }
     ]
   },
   {
-    "title": "MANDIL GLOW",
-    "category": "Accesorios",
-    "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
+    "title": "Enhancing Water",
+    "category": "Beyond The Hair",
+    "desc": "Producto de Authentic Beauty Concept.",
+    "image": "/productos/enhancing-water.jpg",
     "sizes": [
       {
-        "size": "x24 unidades",
-        "price": "Por definir"
+        "size": "100ml",
+        "price": "$ 114.990"
       }
     ]
   },
   {
-    "title": "Set de Tools Bol/Espatula/Paletina",
-    "category": "Accesorios",
-    "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
+    "title": "Sensorial Cream Scrub",
+    "category": "Beyond The Hair",
+    "desc": "Producto de Authentic Beauty Concept.",
+    "image": "/productos/sensorial-cream-scrub.jpg",
     "sizes": [
       {
-        "size": "Único",
-        "price": "Por definir"
+        "size": "250ml",
+        "price": "$ 171.990"
       }
     ]
   },
   {
-    "title": "Toallas",
-    "category": "Accesorios",
-    "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
+    "title": "Amplify Mousse",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/amplify-mousse.jpg",
     "sizes": [
       {
-        "size": "Pack x5",
-        "price": "Por definir"
+        "size": "200ml",
+        "price": "$ 144.990"
       }
     ]
   },
   {
-    "title": "Dosificador",
-    "category": "Accesorios",
-    "desc": "Producto de la línea Accesorios de Authentic Beauty Concept.",
-    "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
+    "title": "Flawless Primer",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/flawless-primer.jpg",
     "sizes": [
       {
-        "size": "1000ml",
-        "price": "Por definir"
+        "size": "250ml",
+        "price": "$ 164.990"
+      }
+    ]
+  },
+  {
+    "title": "Shaping Cream",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/shaping-cream.jpg",
+    "sizes": [
+      {
+        "size": "150ml",
+        "price": "$ 180.990"
+      }
+    ]
+  },
+  {
+    "title": "Gritty Wax Paste",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/gritty-wax-paste.jpg",
+    "sizes": [
+      {
+        "size": "85ml",
+        "price": "$ 143.990"
+      }
+    ]
+  },
+  {
+    "title": "Solid Pomade",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/solid-pomade.jpg",
+    "sizes": [
+      {
+        "size": "85ml",
+        "price": "$ 143.990"
+      }
+    ]
+  },
+  {
+    "title": "Pliable Styling Paste",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/pliable-styling-paste.jpg",
+    "sizes": [
+      {
+        "size": "85ml",
+        "price": "$ 143.990"
+      }
+    ]
+  },
+  {
+    "title": "Working HairSpray",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/working-hairspray.jpg",
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "$ 125.990"
+      }
+    ]
+  },
+  {
+    "title": "Strong Hold Spray",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/strong-hold-spray.jpg",
+    "sizes": [
+      {
+        "size": "100ml",
+        "price": "$ 51.990"
+      },
+      {
+        "size": "300ml",
+        "price": "$ 125.990"
+      }
+    ]
+  },
+  {
+    "title": "Airy Texture Spray",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/airy-texture-spray.jpg",
+    "sizes": [
+      {
+        "size": "300ml",
+        "price": "$ 125.990"
+      }
+    ]
+  },
+  {
+    "title": "Dry Shampoo",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/dry-shampoo.jpg",
+    "sizes": [
+      {
+        "size": "100ml",
+        "price": "$ 51.990"
+      },
+      {
+        "size": "250ml",
+        "price": "$ 129.990"
+      }
+    ]
+  },
+  {
+    "title": "Nude Powder SPR",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/nude-powder-spr.jpg",
+    "sizes": [
+      {
+        "size": "12g",
+        "price": "$ 166.990"
+      }
+    ]
+  },
+  {
+    "title": "Nymph Salt Spray",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/nymph-salt-spray.jpg",
+    "sizes": [
+      {
+        "size": "250ml",
+        "price": "$ 164.990"
+      }
+    ]
+  },
+  {
+    "title": "Cosmic Blow-Dry Jelly",
+    "category": "Styling",
+    "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
+    "image": "/productos/cosmic-blow-dry-jelly.jpg",
+    "sizes": [
+      {
+        "size": "150ml",
+        "price": "$ 180.990"
       }
     ]
   }
 ];
 
-const categories = ["Todas", "Hydrate", "Glow", "Amplify", "Replenish", "Bare", "Tratamientos", "Accesorios"];
+const categories = ["Todas", "Hydrate", "Glow", "Amplify", "Replenish", "All Hair Types", "Beyond The Hair", "Styling"];
 
 export function ProductsGrid() {
   const [selectedCategory, setSelectedCategory] = useState("Todas")

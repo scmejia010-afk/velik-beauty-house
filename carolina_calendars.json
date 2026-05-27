@@ -1,0 +1,516 @@
+{
+  "MANICURE": [
+    {
+      "name": "Manos semipermanente",
+      "id": "EDiqwAb54xY6nID5yzB8",
+      "duration": 60,
+      "price": 60000
+    },
+    {
+      "name": "Base rubber manos",
+      "id": "yVTJ5MuqOiTIG6aW4Zzu",
+      "duration": 60,
+      "price": 85000
+    },
+    {
+      "name": "Baby boomer",
+      "id": "HhrSGv6kTKZOtLwLtLaO",
+      "duration": 170,
+      "price": 160000
+    },
+    {
+      "name": "Recubrimiento Polygel/Acrilico",
+      "id": "MmI8fIlxThj3dg3qXB5E",
+      "duration": 150,
+      "price": 100000
+    },
+    {
+      "name": "Retoque de press on",
+      "id": "rSP0C1qAAvA82qSGwSsz",
+      "duration": 80,
+      "price": 85000
+    },
+    {
+      "name": "Retiro rubber/dipping",
+      "id": "KDdZgv19rQYsaxXNeIMB",
+      "duration": 20,
+      "price": 20000
+    },
+    {
+      "name": "Esmaltado tradicional manos",
+      "id": "54RoAHSPDVzWjfk4N2cR",
+      "duration": 30,
+      "price": 25000
+    },
+    {
+      "name": "Extension de sistemas o reparacion c/u en servicio",
+      "id": "HowlM3DRvUNe4H9AeSLV",
+      "duration": 15,
+      "price": 10000
+    },
+    {
+      "name": "Garantias",
+      "id": "Oi2Dn1v3MpIR3wn06LyY",
+      "duration": 30,
+      "price": 0
+    },
+    {
+      "name": "Manos tradicional",
+      "id": "ItIbYfgFYYvZYQ6Oje0B",
+      "duration": 45,
+      "price": 35000
+    },
+    {
+      "name": "Builder Gel",
+      "id": "58aCvkqxbMBcFFPgZmyk",
+      "duration": 120,
+      "price": 85000
+    },
+    {
+      "name": "Unas esculpidas Polygel/Acrilico",
+      "id": "5FzBoBw7GCdwViMPesPC",
+      "duration": 150,
+      "price": 140000
+    },
+    {
+      "name": "Retoque recubrimiento Poly/acrilico",
+      "id": "g7a3uGcoBdAdrffowsY1",
+      "duration": 100,
+      "price": 90000
+    },
+    {
+      "name": "Retiro semipermanente manos",
+      "id": "CUY39YrfaRmiHvMdGTol",
+      "duration": 15,
+      "price": 15000
+    },
+    {
+      "name": "Limpieza manos",
+      "id": "yENMASOfLO8JTFgjW23z",
+      "duration": 30,
+      "price": 25000
+    },
+    {
+      "name": "Solo limpieza manos",
+      "id": "fnJgqRtJlV8VAbEp2veA",
+      "duration": 30,
+      "price": 25000
+    },
+    {
+      "name": "Extension del sistema o reparacion c/u fuera del servicio",
+      "id": "IaeOZwQoDAm6m1Ysvz41",
+      "duration": 10,
+      "price": 15000
+    },
+    {
+      "name": "Manos Evolution",
+      "id": "uyBy6KxStea3tyJXkxvE",
+      "duration": 45,
+      "price": 40000
+    },
+    {
+      "name": "Unas Dip Powder + Esmaltado Semipermanente",
+      "id": "DIDIge2ItuyDQU3hfjqA",
+      "duration": 70,
+      "price": 85000
+    },
+    {
+      "name": "Retoque esculpidas en Polygel/acrilico",
+      "id": "JuHPG8vMNXKSOiyVNzjR",
+      "duration": 110,
+      "price": 100000
+    },
+    {
+      "name": "Unas Press On",
+      "id": "CwNB6YUweNhSrYOTFElB",
+      "duration": 90,
+      "price": 100000
+    },
+    {
+      "name": "Retiro Polygel/acrilico",
+      "id": "NbDO7tF3rTsVlsNAqweR",
+      "duration": 30,
+      "price": 25000
+    },
+    {
+      "name": "Esmaltado semipermanente manos",
+      "id": "UdfCTzTMPNhYuemDnWsb",
+      "duration": 20,
+      "price": 40000
+    },
+    {
+      "name": "Masaje relajante de manos",
+      "id": "74JOMcKwGJTEqfgqo2Ra",
+      "duration": 7,
+      "price": 25000
+    },
+    {
+      "name": "Diseno",
+      "id": "ZIeJPQLAeo3bM3tLDL8z",
+      "duration": 10,
+      "price": 0
+    }
+  ],
+  "PEDICURE": [
+    {
+      "name": "Pies semipermanente",
+      "id": "szaDqVWMTKAFCVcYjgTh",
+      "duration": 60,
+      "price": 60000
+    },
+    {
+      "name": "Pedicura tradicional + pedi spa",
+      "id": "MPv75km6l8sal1NKHqtV",
+      "duration": 60,
+      "price": 85000
+    },
+    {
+      "name": "Retiro semipermanente pies",
+      "id": "FJDuHD0L2DqBLPUeYsqM",
+      "duration": 20,
+      "price": 15000
+    },
+    {
+      "name": "Pies Evolution",
+      "id": "tKn5Hy3A7pKqg7nhVpgC",
+      "duration": 40,
+      "price": 45000
+    },
+    {
+      "name": "Pedicura semi + pedi spa",
+      "id": "1OpkJJuQoNlATF5hd9Zi",
+      "duration": 70,
+      "price": 105000
+    },
+    {
+      "name": "Tradicional pies",
+      "id": "XbxF4HF4VH3KNB16sNBU",
+      "duration": 45,
+      "price": 40000
+    },
+    {
+      "name": "Solo limpieza pies",
+      "id": "rcuBG3bPRNwG11VFqgH2",
+      "duration": 30,
+      "price": 30000
+    }
+  ],
+  "MANICURA Y PEDICURA": [
+    {
+      "name": "Unas semipermanente (manos y pies)",
+      "id": "0jYIRtI8bl33hIyhVJC1",
+      "duration": 90,
+      "price": 120000
+    },
+    {
+      "name": "Manos semipermanentes y pies tradicional",
+      "id": "xpyrWObNXPeV2kMJtlIy",
+      "duration": 120,
+      "price": 100000
+    },
+    {
+      "name": "Manos Evolution y pies semipermanentes",
+      "id": "zfKlMG4wsoLWam1yRQCl",
+      "duration": 100,
+      "price": 100000
+    },
+    {
+      "name": "Unas esmaltado tradicional (manos y pies)",
+      "id": "OYVNrcCxrbSYEd1SbV3f",
+      "duration": 100,
+      "price": 75000
+    },
+    {
+      "name": "Manos semipermanente y pies Evo",
+      "id": "z6VLaBzxm2hxO4JglzOI",
+      "duration": 120,
+      "price": 105000
+    },
+    {
+      "name": "Solo limpieza manos y pies",
+      "id": "FMTaDks9JBTh1hXZ9k2U",
+      "duration": 60,
+      "price": 50000
+    },
+    {
+      "name": "Evolution (manos y pies)",
+      "id": "ZLEVvENlOAsJdUVyyLGf",
+      "duration": 80,
+      "price": 85000
+    },
+    {
+      "name": "Manos tradicionales + pies semipermanente",
+      "id": "iAOrgphopFSqRQt5dxTm",
+      "duration": 120,
+      "price": 95000
+    },
+    {
+      "name": "Retiro semipermanente manos y pies",
+      "id": "fcpxmqMktM3vzoyrhumR",
+      "duration": 30,
+      "price": 30000
+    }
+  ],
+  "CABELLO": [
+    {
+      "name": "Alisado natural argan y coco (corto)",
+      "id": "tYgB9RKWsWnAY6yzHbzo",
+      "duration": 300,
+      "price": 250000
+    },
+    {
+      "name": "Alisado natural argan y coco (medio)",
+      "id": "YsyBC5BKtrnN8YQYRDBm",
+      "duration": 300,
+      "price": 290000
+    },
+    {
+      "name": "Terapia capilar de LOreal",
+      "id": "gJhd4efPJ7Zs7Ogybq95",
+      "duration": 20,
+      "price": 120000
+    },
+    {
+      "name": "Cepillado cabello corto",
+      "id": "AFzeRInudMfQvytS7rYI",
+      "duration": 30,
+      "price": 50000
+    },
+    {
+      "name": "Cepillado cabello extralargo",
+      "id": "IM2RYaBSfWNytuAmACml",
+      "duration": 60,
+      "price": 120000
+    },
+    {
+      "name": "Color cabello largo",
+      "id": "SZnHg7E8gOsBB0CxxpAk",
+      "duration": 90,
+      "price": 290000
+    },
+    {
+      "name": "Corte caballero",
+      "id": "6V88WbxYuumHKt5RBfGO",
+      "duration": 30,
+      "price": 50000
+    },
+    {
+      "name": "Toxina botulinica",
+      "id": "7G42EdlizK39sGWSRTWO",
+      "duration": 20,
+      "price": 0
+    },
+    {
+      "name": "Alisado natural de argan y/o coco largo",
+      "id": "aO1pbT4UQDyqLJwXnPqX",
+      "duration": 300,
+      "price": 400000
+    },
+    {
+      "name": "Ondas",
+      "id": "pyw2lCLu7OmMz5i1Xj0i",
+      "duration": 45,
+      "price": 70000
+    },
+    {
+      "name": "Cepillado cabello medio",
+      "id": "BhjqV08NlQwTyAer5Rah",
+      "duration": 40,
+      "price": 70000
+    },
+    {
+      "name": "Color cabello corto",
+      "id": "tdu7sEKcoUaJGN6TS5dR",
+      "duration": 60,
+      "price": 150000
+    },
+    {
+      "name": "Color cabello extra largo",
+      "id": "HXfDgBJXCdD5xD7rqgmW",
+      "duration": 90,
+      "price": 360000
+    },
+    {
+      "name": "Corte en capas",
+      "id": "cYESJstUsKOBcrKLfI61",
+      "duration": 35,
+      "price": 70000
+    },
+    {
+      "name": "Alisado natural argan y/o coco (medio, altura del codo)",
+      "id": "1yG992Jgff0sTUyGHzfQ",
+      "duration": 300,
+      "price": 380000
+    },
+    {
+      "name": "Alisado natural de argan y/o coco extra largo",
+      "id": "NFFYkmfD3gwaVACAOBxq",
+      "duration": 300,
+      "price": 430000
+    },
+    {
+      "name": "Planchado de cabello",
+      "id": "eSmQWFTgnrsIhICBidoF",
+      "duration": 40,
+      "price": 50000
+    },
+    {
+      "name": "Cepillado cabello largo",
+      "id": "zxVN8YcfF9nQh3uOhLcD",
+      "duration": 45,
+      "price": 90000
+    },
+    {
+      "name": "Color cabello medio",
+      "id": "XEmC3LZdNFLzri44z5fe",
+      "duration": 60,
+      "price": 220000
+    },
+    {
+      "name": "Corte de puntas",
+      "id": "4aMo5CLViO46g2Q6jnip",
+      "duration": 30,
+      "price": 45000
+    }
+  ],
+  "CEJAS Y PESTANAS": [
+    {
+      "name": "Depilacion de cejas con cera",
+      "id": "VYpzK2GHuBJ63aO2lSaV",
+      "duration": 10,
+      "price": 25000
+    },
+    {
+      "name": "Depilacion perfilado/cuchilla cejas",
+      "id": "GcGJ59uvGEDf3LZCyrg2",
+      "duration": 25,
+      "price": 20000
+    },
+    {
+      "name": "Lifting de pestanas",
+      "id": "Z7WKPMSF94iQoA8Mf9ne",
+      "duration": 60,
+      "price": 120000
+    },
+    {
+      "name": "Depilacion de cejas con hilo",
+      "id": "ozLRNZ5V55zBOpGxcygz",
+      "duration": 15,
+      "price": 30000
+    },
+    {
+      "name": "Laminado de cejas y lifting de pestanas",
+      "id": "KuZ6tseSF1WIC3wmAwGj",
+      "duration": 70,
+      "price": 200000
+    },
+    {
+      "name": "Depilacion de cejas con henna",
+      "id": "n49lc4VkUvtvdtCRcgTB",
+      "duration": 10,
+      "price": 55000
+    },
+    {
+      "name": "Laminado de cejas",
+      "id": "JGZXM08wqm28dl4qfp9T",
+      "duration": 50,
+      "price": 100000
+    }
+  ],
+  "DEPILACION": [
+    {
+      "name": "Depilacion rostro completo con hilo",
+      "id": "hKENNyPe7hZhcz5HGHny",
+      "duration": 30,
+      "price": 100000
+    },
+    {
+      "name": "Depilacion media pierna",
+      "id": "eRj3f8o8CLcD7i0rIgm3",
+      "duration": 60,
+      "price": 50000
+    },
+    {
+      "name": "Depilacion nariz",
+      "id": "ZdfgP31Jmj4hWCEezhda",
+      "duration": 20,
+      "price": 20000
+    },
+    {
+      "name": "Depilacion espalda baja",
+      "id": "9HqMBn6P9DBAsMqZmFit",
+      "duration": 60,
+      "price": 50000
+    },
+    {
+      "name": "Depilacion de gluteos",
+      "id": "woQv67dSOZkRipYxGaXm",
+      "duration": 20,
+      "price": 35000
+    },
+    {
+      "name": "Depilacion bigote con hilo",
+      "id": "eHXH3nwnTLLoacCnQKeh",
+      "duration": 10,
+      "price": 25000
+    },
+    {
+      "name": "Depilacion pierna completa",
+      "id": "cmyFlDKVr8UemAn9N71W",
+      "duration": 90,
+      "price": 100000
+    },
+    {
+      "name": "Depilacion orejas",
+      "id": "whI104AHCNJGaV35yii2",
+      "duration": 20,
+      "price": 20000
+    },
+    {
+      "name": "Depilacion de pubis completo",
+      "id": "1vn5jyzI6R8TstZCZhOI",
+      "duration": 60,
+      "price": 80000
+    },
+    {
+      "name": "Depilacion barbilla con hilo",
+      "id": "9M1FFJKZmz9tPhwEitAb",
+      "duration": 10,
+      "price": 20000
+    },
+    {
+      "name": "Depilacion bigote",
+      "id": "UKZG99bvj0QCeFJaLNk7",
+      "duration": 10,
+      "price": 20000
+    },
+    {
+      "name": "Depilacion de axilas",
+      "id": "mSw9Swdz68i0hC5cqNme",
+      "duration": 18,
+      "price": 35000
+    },
+    {
+      "name": "Depilacion linea del bikini",
+      "id": "mfXJuW1bdCIPV4GgCSx3",
+      "duration": 45,
+      "price": 45000
+    }
+  ],
+  "MAQUILLAJE PROFESIONAL": [
+    {
+      "name": "Pestanas punto a punto",
+      "id": "zT9oLreL1DCiwWDmO1Dx",
+      "duration": 45,
+      "price": 50000
+    }
+  ],
+  "CORPORAL": [
+    {
+      "name": "Bano de novia brazos",
+      "id": "OybBhb6gij304Vromp7n",
+      "duration": 15,
+      "price": 30000
+    }
+  ]
+}

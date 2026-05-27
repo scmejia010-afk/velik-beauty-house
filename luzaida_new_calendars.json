@@ -1,0 +1,100 @@
+{
+  "CEJAS Y PESTANAS": [
+    {
+      "name": "Extension de pestanas pelo a pelo (efecto clasica)",
+      "id": "dry2VkC24zeouSdN4VEm",
+      "duration": 70,
+      "price": 160000
+    },
+    {
+      "name": "Extension de pestanas pelo a pelo (efecto hibrido)",
+      "id": "dbxPJAla6tTHNv73eo1l",
+      "duration": 90,
+      "price": 180000
+    },
+    {
+      "name": "Extension de pestanas pelo a pelo (efecto tecnologico)",
+      "id": "4O1RVMdKaXEUaHqQqVP1",
+      "duration": 90,
+      "price": 200000
+    },
+    {
+      "name": "Retoque pestanas",
+      "id": "yuikssBrbkVHsArQoe65",
+      "duration": 60,
+      "price": 80000
+    }
+  ],
+  "MAQUILLAJE PROFESIONAL": [
+    {
+      "name": "Maquillaje social",
+      "id": "71J4eTC3TIEuDXfsP1Iw",
+      "duration": 60,
+      "price": 170000
+    },
+    {
+      "name": "Maquillaje blindado",
+      "id": "hdrmUKbZXwO4tbNVsIkb",
+      "duration": 60,
+      "price": 200000
+    },
+    {
+      "name": "Maquillaje halloween",
+      "id": "PelRqVASPHp0QEu7P5Xs",
+      "duration": 60,
+      "price": 230000
+    }
+  ],
+  "CORPORAL": [
+    {
+      "name": "Drenaje linfatico",
+      "id": "wAwK46EAzP7OMVbVZ4Na",
+      "duration": 60,
+      "price": 100000
+    },
+    {
+      "name": "Paquete 1 masaje reductor",
+      "id": "kjgB0Whm8mjpYv8I075K",
+      "duration": 45,
+      "price": 450000
+    },
+    {
+      "name": "Paquete 2 masaje reductor",
+      "id": "8iU9qGnCM5nT6816pEAh",
+      "duration": 45,
+      "price": 650000
+    },
+    {
+      "name": "Paquete 3 masaje reductor",
+      "id": "uajeiWuAmnwZ9BPA4RlT",
+      "duration": 45,
+      "price": 850000
+    },
+    {
+      "name": "Reestructuracion de estrias",
+      "id": "9PiZEDHNec91qK58o3de",
+      "duration": 40,
+      "price": 400000
+    },
+    {
+      "name": "Camuflaje de estrias",
+      "id": "xU7HfkiIbhZwHo1EnrTz",
+      "duration": 120,
+      "price": 1600000
+    }
+  ],
+  "COSMETOLOGIA FACIAL": [
+    {
+      "name": "Limpieza Facial Especial",
+      "id": "vxUBF94v8PKqobjUBeZc",
+      "duration": 90,
+      "price": 150000
+    },
+    {
+      "name": "Limpieza Facial Tradicional",
+      "id": "fz9614uqbCIz8bLDXYNR",
+      "duration": 60,
+      "price": 100000
+    }
+  ]
+}

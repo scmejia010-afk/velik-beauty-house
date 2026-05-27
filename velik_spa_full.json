@@ -1,0 +1,4504 @@
+{
+  "updatedAt": "2026-05-23T20:20:10.670Z",
+  "createdAt": "2026-03-17T00:08:14.855Z",
+  "id": "03ruI6r2UcMn9fms",
+  "name": "VELIK BEAUTY SPA",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "velik",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -3648,
+        816
+      ],
+      "id": "7ede3113-0f1b-4cad-a50d-2147a62d3caa",
+      "name": "Webhook",
+      "webhookId": "6ecfa442-aed3-463c-9892-1a3c8c12c1c9"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.body.data.message.audioMessage.mimetype }}",
+                    "rightValue": "audio/ogg; codecs=opus",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "2368cf38-b8fc-4997-8736-acfe81907717"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Mensaje de audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "cdf13c7c-732c-42bd-9d2d-1e2e6a414148",
+                    "leftValue": "={{ $('Webhook').item.json.body.data.message.imageMessage.mimetype }}",
+                    "rightValue": "image",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "image/jpeg"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Mensaje de texto"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        576,
+        512
+      ],
+      "id": "de3e7a55-77fc-457e-b136-ec6551671305",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1344,
+        832
+      ],
+      "id": "6b524624-19d4-40cb-b159-ebf7fb18996f",
+      "name": "Wait",
+      "webhookId": "2fb91f12-1de7-4129-ab67-4dd37d1a3c3a"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1632,
+        1024
+      ],
+      "id": "5c53667f-1d4c-4d0b-9aec-7b110dd62e1e",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "3U3vHJuMvh7XLZ1c",
+          "name": "SM-DIGITALS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Webhook').item.json.body.data.message.imageMessage.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        464
+      ],
+      "id": "1251af81-3ef8-4c9e-af7a-53ef32fb069d",
+      "name": "Obtener Imagen"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Webhook').item.json.body.data.message.audioMessage.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1232,
+        128
+      ],
+      "id": "170b2e76-8a76-4457-a25e-4c854829acb7",
+      "name": "ObtenerAudio"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "text": "Aqui tienes una imagen enviada por el usuario. Describe la imagen y transcribe cualquier texto visible en la imagen. Incluye tantos detalles como sea posible.",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1904,
+        448
+      ],
+      "id": "c9f4f76b-73d0-4e88-888d-8d8a3fb9d6c6",
+      "name": "Describe Imagen",
+      "alwaysOutputData": false,
+      "credentials": {
+        "openAiApi": {
+          "id": "3U3vHJuMvh7XLZ1c",
+          "name": "SM-DIGITALS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1888,
+        128
+      ],
+      "id": "ebf4cb40-cb9f-4b4f-b540-29d4dd818bc7",
+      "name": "Transcribe Audio",
+      "alwaysOutputData": false,
+      "credentials": {
+        "openAiApi": {
+          "id": "3U3vHJuMvh7XLZ1c",
+          "name": "SM-DIGITALS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Resume el mensaje del usuario: \n\n\"{{ $json.cleanedResponse }}\n\"\nSi el mensaje es claro y corto, déjalo tal cual como lo recibes. Si son datos como nombre, email y teléfono. Entrégalos tal cual lo recibes \n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        1712,
+        832
+      ],
+      "id": "772dc570-09aa-4d78-bfe0-b5c1ff2a45e9",
+      "name": "Resumen Mensaje"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6064f840-b235-4939-8cac-5db8e86c8eef",
+              "name": "mensaje_usuario",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "a2de6ff9-4e8e-4698-b801-8aa8ae48c68c",
+              "name": "mensaje_usuario",
+              "value": "={{ $json.text }}{{ $json.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2544,
+        480
+      ],
+      "id": "0110a947-bcd0-4283-8552-ea7e3613e30e",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Webhook').item.json.body.data.key.remoteJidAlt }}",
+        "messageData": "={{ $('Webhook').item.json.body.data.message.conversation || $('Webhook').item.json.body.data.message.audioMessage?.url || $('Webhook').item.json.body.data.message.imageMessage?.url || $('Webhook').item.json.body.data.message.documentMessage?.title }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        480
+      ],
+      "id": "c2610991-3f3e-444f-987b-e606fed3c8cf",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "9ebKtdGSQaCn70HT",
+          "name": "Redis Velik"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 6
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -656,
+        480
+      ],
+      "id": "d3240589-5c6f-4c10-9bf8-5c7314448bbb",
+      "name": "Wait1",
+      "webhookId": "82218bdc-217c-4037-a638-3396f63655d3"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "mensajes",
+        "key": "={{ $('Webhook').item.json.body.data.key.remoteJidAlt }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        480
+      ],
+      "id": "5e3f3294-09ad-49fb-a154-c19ef0290907",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "9ebKtdGSQaCn70HT",
+          "name": "Redis Velik"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cee240a2-6e11-496c-8653-bf31a1f75b56",
+              "leftValue": "={{ $json.mensajes[$json.mensajes.length - 1] }}",
+              "rightValue": "={{ $('Webhook').item.json.body.message.body }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "64261588-f2e3-428c-abb5-007fb9a36b7a",
+              "leftValue": "={{ $json.mensajes[$json.mensajes.length - 1] }}",
+              "rightValue": "={{ $('Webhook').item.json.body.customData.attachments }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "31bb2d3a-00f5-4457-91c5-2feff8c2ab76",
+              "leftValue": "={{ $json.mensajes[$json.mensajes.length - 1] }}",
+              "rightValue": "={{ $json.mensajes[0] }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "d00ea038-1fa8-4357-bcb5-87a268858d63",
+              "leftValue": "={{ $json.mensajes[$json.mensajes.length - 1] }}",
+              "rightValue": "={{ $('Webhook').item.json.body.data.message.imageMessage?.url }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "93d88f8a-a3f9-486c-9736-1496e6266d9c",
+              "leftValue": "={{ $('Webhook').item.json.body.data.message.imageMessage?.url }}",
+              "rightValue": "={{ $('Webhook').item.json.body.data.message.documentMessage?.title }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -288,
+        480
+      ],
+      "id": "7150a04c-9183-4d14-9a07-ffe2ac423430",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        640
+      ],
+      "id": "0b694143-808d-4fe7-b965-96b1711e84a4",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0156fde9-7fa4-4036-853e-a47f1128292a",
+              "name": "response",
+              "value": "={{ $('Redis1').item.json.mensajes }}",
+              "type": "string"
+            },
+            {
+              "id": "7721dd00-dd46-4c42-a119-abc5c231089e",
+              "name": "phone",
+              "value": "={{ $('Obtener ID Chat').item.json.message.chat.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -48,
+        432
+      ],
+      "id": "313d8db3-98d1-409e-ac34-609e25f2a265",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        192,
+        512
+      ],
+      "id": "6189bc6f-6467-421d-8adf-c0d6fe4176f2",
+      "name": "Redis2",
+      "credentials": {
+        "redis": {
+          "id": "9ebKtdGSQaCn70HT",
+          "name": "Redis Velik"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        2864,
+        480
+      ],
+      "id": "d27aba23-ef48-48cd-9ec9-b700ddc4b993",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "dd-MM-yyyy HH:mm",
+        "options": {
+          "timezone": true
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        3088,
+        480
+      ],
+      "id": "ab8a737a-b4b2-4ddf-9c0d-276d4353fe54",
+      "name": "Date & Time1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $json.formattedDate; // \"02-04-2025 11:43\"\n\n// Separar la fecha y hora\nconst [datePart, timePart] = input.split(\" \");\nconst [day, month, year] = datePart.split(\"-\");\nconst [hour, minute] = timePart.split(\":\");\n\n// Crear objeto base (hora local)\nconst baseDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:00`);\n\n// Constante de un día en milisegundos\nconst oneDay = 24 * 60 * 60 * 1000;\n\n// Fechas desplazadas\nconst startDate = new Date(baseDate.getTime() + oneDay);     // +1 día\nconst endDate = new Date(baseDate.getTime() + 4 * oneDay);   // +4 días\n\n// Función para dar formato legible\nfunction formatDate(date) {\n  const dd = String(date.getDate()).padStart(2, '0');\n  const mm = String(date.getMonth() + 1).padStart(2, '0'); // Meses van de 0 a 11\n  const yyyy = date.getFullYear();\n  const hh = String(date.getHours()).padStart(2, '0');\n  const min = String(date.getMinutes()).padStart(2, '0');\n  return `${dd}-${mm}-${yyyy} ${hh}:${min}`;\n}\n\n// Construcción del resultado\nreturn [\n  {\n    json: {\n      startDateTime: startDate.getTime(),\n      endDateTime: endDate.getTime(),\n      startDateTime_legible: formatDate(startDate),\n      endDateTime_legible: formatDate(endDate)\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3328,
+        480
+      ],
+      "id": "de7c4f3d-d54c-42d8-bf05-25d958860874",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "135a001c-0b02-45e4-aa98-591e5fd0effe",
+              "name": "message.chat.id",
+              "value": "={{ $json.body.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1120,
+        544
+      ],
+      "id": "70a74013-3c3e-43e5-9b3c-5cc94d3cfce8",
+      "name": "Obtener ID Chat"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\n\nfunction limpiarSaludoInicial(texto) {\n  const normalizado = String(texto ?? \"\")\n    .replace(/\\r/g, \"\")\n    .replace(/\\\\n/g, \"\\n\")\n    .replace(/\\n{2,}/g, \"\\n\\n\")\n    .trim();\n\n  const patronesSaludo = [\n    /^¡Hola,[\\s\\S]*?directora Luza:\\s*\\[Enlace\\]\\(https:\\/\\/drive\\.google\\.com\\/file\\/d\\/[^)]+\\)\\.\\s*/i,\n    /^¡Hola,[\\s\\S]*?directora Luza:\\s*\\[Enlace\\]\\.\\s*/i\n  ];\n\n  let textoLimpio = normalizado;\n  let encontroSaludo = false;\n\n  for (const regex of patronesSaludo) {\n    if (regex.test(textoLimpio)) {\n      textoLimpio = textoLimpio.replace(regex, \"\").trim();\n      encontroSaludo = true;\n      break;\n    }\n  }\n\n  return {\n    solo_saludo: encontroSaludo && textoLimpio.length === 0 ? 1 : 0,\n    texto: textoLimpio\n  };\n}\n\nfor (const item of $input.all()) {\n  const input = item.json.output || \"\";\n  const resultado = limpiarSaludoInicial(input);\n\n  const instance =\n    item.json.body?.instance ??\n    item.json.body?.data?.instance ??\n    item.json.instance ??\n    \"\";\n\n  const remoteJid =\n    item.json.body?.data?.key?.remoteJid ??\n    item.json.data?.key?.remoteJid ??\n    item.json.remoteJid ??\n    \"\";\n\n  results.push({\n    json: {\n      ...item.json,\n      instance,\n      remoteJid,\n      solo_saludo: resultado.solo_saludo,\n      parte: 1,\n      total_partes: 1,\n      mensaje: resultado.texto\n    }\n  });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4624,
+        -112
+      ],
+      "id": "bfd43c41-00ab-466d-81d0-09e4b8eaaf35",
+      "name": "Code1",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        5024,
+        -144
+      ],
+      "id": "1ecc0681-d436-4d8f-99c8-c85a9b617935",
+      "name": "Wait2",
+      "webhookId": "a0db5a2b-f734-4bb6-b140-378929f6f717",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "57ea6591-317b-4d05-9591-7653ab5c338b",
+              "leftValue": "={{ $('Code1').item.json.parte_2 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        5136,
+        -112
+      ],
+      "id": "0ff078ac-c559-4cb8-a105-c937560f725f",
+      "name": "If2",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        5472,
+        -144
+      ],
+      "id": "84c017f7-6e22-45f9-a842-809bdf60af30",
+      "name": "Wait3",
+      "webhookId": "a56c4406-4b47-4a2e-bdad-59099b372080",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9077dcbe-1d4e-41f9-8c35-70ffd6d82060",
+              "leftValue": "={{ $('Code1').item.json.parte_3 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        5632,
+        -144
+      ],
+      "id": "b8e06025-cf34-4716-96a5-3d4b235e4b14",
+      "name": "If3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// items es el array que recibe el nodo Code\nreturn items.map(item => {\n  // 1) Parsear la lista\n  const fragments = JSON.parse(item.json.response);\n\n  // 2) Limpiar cada fragmento\n  const cleaned = fragments\n    // Reemplaza cualquier aparición de [➡️ Received on 573234501828]\"]\n    .map(f => f.replace(/\\[➡️ Received on 573234501828\\]\"?\\]?/g, '').trim())\n    // Filtra fragmentos vacíos\n    .filter(f => f.length > 0);\n\n  // 3) Unirlos en una sola cadena\n  const cleanedResponse = cleaned.join('\\n');\n\n  // 4) Devolver el resultado limpio\n  return {\n    json: { cleanedResponse }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1520,
+        832
+      ],
+      "id": "9d6bc4ec-0907-4b84-8187-994e089adb16",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4a12b880-9389-4b6d-bba6-8ce992593f32",
+              "leftValue": "={{ $json.solo_saludo }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "1ae89acc-cb5f-461b-989a-e68af59a0d3e",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "(https://drive.google.com/file/d/1ICnX4kWtpDEXCuDGncckjXRtiPxE_PIk/view?usp=sharing)",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        4192,
+        464
+      ],
+      "id": "67511501-ec43-47a2-a782-90b1a49a596d",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+        "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+        "messageText": "={{ $json.mensaje }}",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        4848,
+        240
+      ],
+      "id": "e6aa582c-7f81-4a88-b8fb-0acd1c77fe53",
+      "name": "Enviar texto",
+      "credentials": {
+        "evolutionApi": {
+          "id": "CEwTrClxkXLuaUDg",
+          "name": "Evolution account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat-api",
+        "operation": "get-media-base64",
+        "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+        "messageId": "={{ $('Webhook').item.json.body.data.key.id }}"
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        128
+      ],
+      "id": "fc19c7b3-a9e4-4062-92e6-0a8c541fa01b",
+      "name": "Obter m dia em base64",
+      "credentials": {
+        "evolutionApi": {
+          "id": "CEwTrClxkXLuaUDg",
+          "name": "Evolution account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data.base64",
+        "options": {
+          "fileName": "audio.mp3"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1648,
+        128
+      ],
+      "id": "7851045c-d376-4117-bfe5-646a30caaf34",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "resource": "chat-api",
+        "operation": "get-media-base64",
+        "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+        "messageId": "={{ $('Webhook').item.json.body.data.key.id }}"
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        464
+      ],
+      "id": "2f65c851-a9cd-454a-b0ac-a18adf2403a7",
+      "name": "Obter m dia em base",
+      "credentials": {
+        "evolutionApi": {
+          "id": "CEwTrClxkXLuaUDg",
+          "name": "Evolution account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data.base64",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1664,
+        464
+      ],
+      "id": "6e2aede9-f6f9-4bc9-ad88-9a81003c3aca",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+        "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+        "messageText": "={{ $('Code1').item.json.parte_2 }}",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        5328,
+        -144
+      ],
+      "id": "ed1ebc6e-40b3-497c-98c9-49b9349e87c8",
+      "name": "Enviar texto1",
+      "credentials": {
+        "evolutionApi": {
+          "id": "CEwTrClxkXLuaUDg",
+          "name": "Evolution account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+        "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+        "messageText": "={{ $('Code1').item.json.parte_3 }}",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        5808,
+        -160
+      ],
+      "id": "3ea9c086-3fb0-41d8-996c-021da3727c1c",
+      "name": "Enviar texto2",
+      "credentials": {
+        "evolutionApi": {
+          "id": "CEwTrClxkXLuaUDg",
+          "name": "Evolution account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a354cb65-6309-423b-97df-bd7115539bdc",
+              "leftValue": "={{ $json.abierto }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1376,
+        608
+      ],
+      "id": "d78f8230-67fe-43b5-8cdc-42ef25411f88",
+      "name": "If9"
+    },
+    {
+      "parameters": {
+        "jsCode": "const now = new Date().toLocaleString(\"es-CO\", {\n  timeZone: \"America/Bogota\",\n  hour: \"2-digit\",\n  minute: \"2-digit\",\n  second: \"2-digit\",\n  hour12: false\n});\n\nreturn [{\n  json: {\n    hora_actual: now\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1776,
+        608
+      ],
+      "id": "4be36195-94ea-4bf9-9445-8297bf3f59e1",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Fecha/hora en Colombia\nconst nowBogota = new Date(\n  new Date().toLocaleString(\"en-US\", { timeZone: \"America/Bogota\" })\n);\n\nconst hour = nowBogota.getHours();\nconst minutes = nowBogota.getMinutes();\n\nlet abierto = false;\n\n// Horario todos los días: 11:00 – 20:00\nconst afterOpen = hour > 11 || (hour === 11 && minutes >= 0);\nconst beforeClose = hour < 20 || (hour === 20 && minutes === 0);\n\nabierto = afterOpen && beforeClose;\n\nreturn [{\n  json: {\n    abierto,\n    hour,\n    minutes,\n    now_bogota: nowBogota.toISOString()\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1568,
+        608
+      ],
+      "id": "db8eb954-a56e-4f2d-94b7-1830dcb615e9",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+        "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+        "messageText": "Hola, nuestro horario de atención es de 11am a 8pm, responderemos lo antes posible,  Igualmente Por aca te comparto nuestra carta para que visualices nuestros platos 😁  https://drive.google.com/file/d/1wdVDjka22YYB8ifO4IMa8uUc6OwSK2cF/view?usp=sharing",
+        "options_message": {}
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        768
+      ],
+      "id": "d4448c85-f22c-4d6c-a121-80be5a933ab3",
+      "name": "Enviar texto4",
+      "credentials": {
+        "evolutionApi": {
+          "id": "CEwTrClxkXLuaUDg",
+          "name": "Evolution account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        800
+      ],
+      "id": "4141d3bc-008c-4aac-9336-7486a7693e31",
+      "name": "No Operation, do nothing3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Webhook').item.json.body.data.key.remoteJid }}\n\nHora actual en Colombia: {{ $('Code in JavaScript2').item.json.hora_actual }}\nNombre del cliente en WhatsApp: {{ $('Webhook').item.json.body.data.pushName }}\n\n{{ $('Edit Fields').item.json.mensaje_usuario }}",
+        "options": {
+          "systemMessage": "=## Identidad\n\nNombre: Eli\n\nDescripción: Velik Beauty House es un lugar donde los clientes \nencuentran todo para cuidarse en un solo lugar. Ofrece spa de \nuñas, tratamientos faciales y corporales, depilación y servicios \nde peluquería como alisados naturales de coco y argán, tintura, \ncorte y cepillado. Es una experiencia de bienestar diseñada para \nconsentir al cliente.\n\nTono: Extremadamente amable, cálido, femenino, educado y muy \nservicial. Utilizas un lenguaje cercano y dulce sin perder el \nprofesionalismo. Te enfocas mucho en que la clienta se sienta \ntranquila y feliz con el servicio.\n\nPalabras Clave/Frases: \"Hola, ¡qué gustito saludarte!\", \n\"Claro que sí, hermosa/hermoso\", \"Déjame saber\", \"Vale\", \n\"La intención es que quedes muy contenta\", \"Con muchísimo gusto\", \n\"Quedamos muy atentas\", \"Linda tarde 🌿☀️\".\n\n---\n\n\n## Herramientas de Agendamiento\n\nTienes 3 herramientas activas para gestionar citas. DEBES usarlas — NO envies el enlace de AgendaPro.\n\n**verificar_disponibilidad**: cuando el cliente pregunte por horarios o quiera agendar.\n  Input: {\"servicio\": \"nombre del servicio\", \"fecha\": \"YYYY-MM-DD\"}\n\n**crear_cita**: cuando el cliente haya elegido un horario y quiera confirmar.\n  Input: {\"servicio\": \"...\", \"slot_time\": \"ISO datetime del slot elegido\", \"cliente_nombre\": \"Nombre Apellido\", \"cliente_telefono\": \"+57XXXXXXXXXX\"}\n\n**cancelar_cita**: cuando el cliente quiera cancelar.\n  Input: {\"appointment_id\": \"ID de la cita\"}\n\nREGLAS:\n- Horario Velik: lunes a sabado 9AM-7PM. DOMINGO CERRADO.\n- Flujo: verificar_disponibilidad → el cliente elige → pedir nombre+telefono → crear_cita → mostrar confirmacion.\n- El telefono SIEMPRE con codigo de pais: +57 para Colombia.\n- NO uses el enlace agendapro, usa las herramientas directamente.\n\n\n## Instrucciones Generales\n# HORA ACTUAL\nEn cada mensaje del usuario verás \"Hora actual en Colombia:  {{ $('Code in JavaScript2').item.json.hora_actual }}\".\nÚsala para determinar el saludo correcto:\n- 05:00–11:59 → \"buenos días\"\n- 12:00–17:59 → \"buenas tardes\"\n- 18:00–04:59 → \"buenas noches\"\nNUNCA uses \"linda noche\" ni \"linda mañana\". Solo \"buenos días\", \"buenas tardes\" o \"buenas noches\".\n\n1. En el primer mensaje, saluda con calidez y pregunta \n   el nombre del cliente.\n\nMensaje de bienvenida:\n\"¡Hola! Qué gustito saludarte, bienvenid@ a Velik Beauty \nHouse 🌸 ¿Me podrías brindar tu nombre?\"\n\nREGLA DE NOMBRE — PRIORIDAD MÁXIMA:\nEl nombre del cliente llega al inicio de cada mensaje \ncomo \"Nombre del cliente en WhatsApp: [nombre]\".\n\n- Si ese nombre está disponible, úsalo directamente \n  desde el primer mensaje SIN pedirlo.\n- Si el nombre dice \"S-M\", iniciales, números o algo \n  que no sea un nombre real, entonces sí pregúntalo \n  amablemente.\n- Si no llega ningún nombre, pregúntalo en el \n  primer mensaje.\n\nPROHIBIDO ABSOLUTO:\n- Nunca escribas \"[nombre]\" como texto literal.\n- Nunca uses el número de teléfono como nombre.\n- Siempre reemplaza [nombre] con el nombre real \n  del cliente.\n- Si no tienes el nombre, omite el espacio o \n  pregúntalo, pero jamás escribas el placeholder.\n\nREGLA DE FRANJA HORARIA:\nDetecta la hora del mensaje y adapta el saludo y la despedida \nsegún la franja del día:\n\n🌅 Mañana (5:00 a.m. – 11:59 a.m.):\n- Saludo: \"¡Buenos días!\"\n- Despedida: \"Que tengas un lindo día 🌿☀️\"\n\n🌤️ Tarde (12:00 p.m. – 6:59 p.m.):\n- Saludo: \"¡Buenas tardes!\"\n- Despedida: \"Que tengas una linda tarde 🌿☀️\"\n\n🌙 Noche (7:00 p.m. – 4:59 a.m.):\n- Saludo: \"¡Buenas noches!\"\n- Despedida: \"Que tengas una linda noche 🌿✨\"\n\nREGLA:\n- Aplica la franja horaria en el saludo inicial y en \n  la despedida de cada conversación.\n- Si no es posible detectar la hora, usa un saludo \n  neutro: \"¡Hola!\" y despedida: \"Que tengas un \n  lindo momento 🌿✨\"\n\n\n2. IMPORTANTE — Solo una vez por conversación: En tu primer \nsaludo a un cliente nuevo, incluye SIEMPRE este enlace de audio \nde bienvenida: \nhttps://drive.google.com/file/d/1ICnX4kWtpDEXCuDGncckjXRtiPxE_PIk/view?usp=sharing\n\n3. Muestra siempre disposición absoluta para ayudar...\n\n\n2. IMPORTANTE — Solo una vez por conversación: En tu primer \nsaludo a un cliente nuevo, incluye SIEMPRE este enlace de audio \nde bienvenida: \nhttps://drive.google.com/file/d/1ICnX4kWtpDEXCuDGncckjXRtiPxE_PIk/view?usp=sharing\n\n3. Muestra siempre disposición absoluta para ayudar \n(Ej: \"Claro que sí, con muchísimo gusto te brindo la información\").\n\n4. Al dar precios, hazlo de forma clara, amable y persuasiva. \nBrinda la información del servicio, sus beneficios y resuelve \ndudas con intención de venta, pero NO envíes el enlace de \nagendamiento ni hables de disponibilidad a menos que el cliente \npregunte explícitamente por horarios, cupos, disponibilidad, \nreserva o diga que desea agendar.\n\n5. Despídete siempre deseando un buen día \n(Ej: \"Que tengas una linda tarde 🌿☀️\", \n\"Quedamos muy atentas a tu reserva, [nombre]\"\n\n6. PRECIOS — Regla crítica: Todos los precios listados \ncorresponden al servicio completo de mano o pie según corresponda, \nno a unidades individuales. Nunca dividas ni multipliques un \nprecio por cantidad de uñas u otras unidades. Si el cliente \npregunta el precio por unidad, aclara amablemente que el precio \nes por el servicio completo.\n\n7. REPARACIONES — Regla crítica: \n- El precio de retoque o reparación aplica para la MANO COMPLETA, \n  independientemente del número de dedos que tenga el cliente.\n- Reparación por uña individual (press on, polygel, acrílico u \n  otros sistemas): $10.000 c/u\n- Retoque Press On mano completa: $85.000\n- Retoque esculpidas Polygel/Acrílico mano completa: $100.000\n- Si el cliente solicita diseños complejos o cotizaciones \n  especiales, NO cotices. Indica que una especialista le dará \n  la cotización personalizada.\n\n8. IDIOMA: Detecta siempre el idioma en el que el cliente te \nescribe y responde en ese mismo idioma. Si el cliente escribe \nen inglés, responde en inglés. Si escribe en español, responde \nen español. Mantén siempre el mismo tono cálido y profesional \nsin importar el idioma.\n\n9. MAKE OVER DE UÑAS — Regla de respuesta:\n   Cuando el cliente pregunte por el make over de uñas\n   (qué incluye, cuánto cuesta, si se puede pedir solo, etc.),\n   responde siempre en este orden:\n\n   1. EXPLICAR: Es un beneficio de cortesía incluido al tomar\n      el servicio de color en Velik. No es un servicio\n      independiente ni tiene Inversión adicional.\n\n   2. DETALLAR: Es un arreglo básico de uñas para que\n      la clienta salga completamente renovada, cabello y uñas.\n\n   3. ACLARAR: Solo aplica al agendar el servicio de color\n      con una de nuestras profesionales.\n      Está sujeto a disponibilidad de agenda.\n\n   4. INVITAR: Cierra siempre invitando a agendar la cita.\n\n   Ejemplo de respuesta:\n   \"¡El make over de uñas es un beneficio que te incluimos\n   de cortesía cuando vienes a hacer tu color aquí en Velik! 💅\n   Es un arreglo básico para que salgas completamente renovada,\n   cabello y uñas. Solo aplica al tomar el servicio de color\n   con una de nuestras profesionales y está sujeto a\n   disponibilidad. ¿Te gustaría agendar tu cita? 🌸\"\n\n   PROHIBIDO:\n   - Cotizar el make over como servicio independiente.\n   - Dar un precio separado por el make over.\n   - Ofrecerlo sin mencionar que requiere el servicio de color.\n\n10. PROMO UÑAS + MASAJE — Regla de respuesta:\n    Cuando el cliente pregunte por la promo\n    \"Renuévate en Velik: Uñas + Masaje Especial\",\n    responde siempre en este orden:\n\n    1. EXPLICAR el beneficio principal:\n       Diseño de uñas con sistema con atención profesional\n       y personalizada en Velik.\n\n    2. DESTACAR la exclusividad:\n       Solo aplica para las primeras 10 clientas del mes.\n       Genera urgencia sin presionar.\n\n    3. DETALLAR el beneficio adicional:\n       Al tomar el servicio de uñas con sistema, la clienta\n       desbloquea acceso a masaje relajante con 20% de descuento.\n       No es un descuento suelto, es un beneficio por elegir\n       su servicio en Velik.\n\n    4. ACLARAR condición:\n       Sujeto a disponibilidad de agenda.\n\n    5. INVITAR a agendar.\n\n    Ejemplo de respuesta:\n    \"¡Esta promo está muy especial! 🌸 Al tomar tu diseño de\n    uñas con sistema en Velik, desbloqueas acceso a un masaje\n    relajante con 20% de descuento 💆‍♀️ Es exclusiva para las\n    primeras 10 clientas del mes, así que los cupos son\n    limitados ⏳ ¿Te gustaría asegurar el tuyo?\"\n\n    PROHIBIDO:\n    - Presentar el masaje como descuento suelto sin relacionarlo\n      al servicio de uñas.\n    - Ofrecer el 20% de descuento en masaje sin que la clienta\n      tome el servicio de uñas con sistema.\n    - Confirmar cuántos cupos quedan disponibles\n      (Eli no tiene acceso a ese dato).\n    - Prometer que aún hay cupos si no hay confirmación.\n\n11. PROMO COLOR + MASAJE RELAJANTE — Regla de respuesta:\n    Cuando el cliente pregunte por la promo\n    \"Renueva tu Color y Desestrésate con Velik\",\n    responde siempre en este orden:\n\n    1. EXPLICAR la experiencia completa:\n       No es solo un servicio de color. Es una experiencia\n       de renovación que combina transformación visible\n       (el color) y bienestar emocional (el masaje).\n\n    2. DETALLAR qué incluye:\n       - Asesoría profesional y diagnóstico técnico del cabello\n       - Recomendación honesta del color más conveniente\n       - Atención en espacio cómodo y profesional\n       - Bebida de cortesía ☕\n       - Masaje relajante incluido 💆‍♀️\n\n    3. ACLARAR precio y condición:\n       El precio del color es sujeto a valoración presencial.\n       La especialista lo define al ver el cabello y conocer\n       el resultado deseado. Sujeto a disponibilidad de agenda.\n\n    4. INVITAR a agendar la valoración.\n\n    Ejemplo de respuesta:\n    \"¡Esta experiencia está muy especial! 🌸 Con esta promo\n    no solo renuevas tu color con asesoría profesional y\n    diagnóstico personalizado, sino que también incluye\n    masaje relajante para que salgas renovada por fuera\n    y por dentro 💆‍♀️🤍 El precio del color se define\n\n12. REGLA DE FOCO — Responde siempre lo que se preguntó:\n    Antes de responder cualquier mensaje, identifica\n    exactamente qué preguntó el cliente y responde\n    SOLO eso. Nunca respondas con información general\n    o un listado de servicios si el cliente hizo una\n    pregunta específica.\n\n    CASO COLOR:\n    Si el cliente pregunta por el precio del color,\n    responde ÚNICAMENTE sobre el color. No listes\n    otros servicios. No cambies el tema.\n\n    Respuesta correcta:\n    \"¡Con mucho gusto! El precio del color es sujeto\n    a valoración presencial 🌸 Nuestra especialista\n    lo define al ver tu cabello y conocer el resultado\n    que deseas, para darte el precio exacto y la\n    recomendación más honesta. ¿Te gustaría agendar\n    tu valoración, [nombre]?\"\n\n    PROHIBIDO:\n    - Responder una pregunta específica con un listado\n      genérico de servicios.\n    - Desviar la respuesta hacia otros servicios cuando\n      el cliente preguntó por uno en concreto.\n    - Ignorar la intención del mensaje del cliente.\n\n13. LINK DE INSTAGRAM / RESULTADOS — Regla de respuesta:\n    Cuando el cliente pregunte por resultados, trabajos,\n    fotos, portafolio, antes y después, cómo quedan los\n    servicios, o pida ver ejemplos de cualquier servicio,\n    comparte el link de Instagram de Velik.\n\n    Mensaje modelo:\n    \"¡Claro que sí! Puedes ver nuestros trabajos y\n    resultados en nuestro Instagram 📸✨\n    https://www.instagram.com/velikbeautyhouse\n    ¡Allí encontrarás ejemplos de todos nuestros\n    servicios. Si tienes alguna duda, con muchísimo\n    gusto te ayudo! 🌸\"\n\n    REGLA DE FRECUENCIA:\n    - Envía el link UNA SOLA VEZ por conversación.\n    - Si el cliente vuelve a pedir resultados, responde\n      indicando que ya se lo compartiste anteriormente\n      y ofrece resolver dudas adicionales.\n\n    PROHIBIDO:\n    - Enviar el link más de una vez en la misma conversación.\n    - Inventar descripciones de trabajos o resultados\n      que Eli no puede verificar.\n\n14. VALORACIÓN DE CABELLO — Regla de respuesta:\n    Cuando el cliente pregunte por el precio de servicios\n    de cabello que requieren valoración presencial\n    (color, alisados, tratamientos especiales), explica\n    siempre el proceso de valoración antes de dar cualquier\n    precio estimado.\n\n    Mensaje modelo:\n    \"El precio de este servicio es sujeto a valoración\n    presencial 🌸 Nuestra especialista lo define al ver\n    tu cabello, conocer el resultado que deseas y evaluar\n    el trabajo necesario.\n\n    La valoración tiene un Inversión de $30.000, pero si\n    decides hacer el servicio con nosotras en Velik,\n    ese valor se descuenta directamente del precio final.\n    ¿Te gustaría agendar tu valoración, [nombre]?\"\n\n    PROHIBIDO:\n    - Dar un precio fijo sin que la clienta haya tenido\n      valoración presencial.\n    - Presentar la valoración como un gasto \"perdido\"\n      si no hace el servicio.\n    - Ofrecer descuento en la valoración.\n\n---\n\nPROHIBIDO ABSOLUTO – CONFIRMACIÓN DE CITAS:\n- Nunca digas \"tu cita está confirmada\".\n- Nunca confirmes fecha ni hora de una cita.\n- Si el cliente dice \"si confirmo\", responde:\n  \"¡Perfecto! Te esperamos con mucho cariño 🌸 \n  Recuerda que tu cita queda registrada en el \n  portal de agendamiento.\"\n\n## Servicios y Precios\n\n### Manicure\n- Manos semipermanente: 1 hr | $60.000\n- Manos Tradicional: 45 min | $35.000\n- Manos Evolution: 45 min | $40.000\n- Base rubber manos: 1 hr | $85.000\n- Builder Gel: 1 hr | $85.000\n- Uñas Dip Powder + Esmaltado Semipermanente: 1 hr 10 min | $85.000\n- Baby boomer: 2 hr 50 min | $160.000\n- Uñas esculpidas Polygel / Acrílico: 2 hr 30 min | $140.000\n- Retoque esculpidas en Polygel / Acrílico (mano completa): \n  1 hr 50 min | $100.000\n- Recubrimiento Polygel / Acrílico: 2 hr 30 min | $100.000\n- Retoque recubrimiento Poly/Acrílico (mano completa): \n  5 min | $90.000\n- Uñas Press On (servicio completo, mano completa): \n  1 hr 30 min | $100.000\n- Retoque Press On (mano completa): 1 hr 20 min | $85.000\n- Reparación por uña individual (cualquier sistema): $10.000 c/u. \n  Si el diseño es complejo, no cotices, escala a una especialista.\n- Retiro semipermanente manos: 15 min | $15.000\n- Retiro Polygel / Acrílico: 30 min | $25.000\n- Retiro rubber/dipping: 20 min | $20.000\n- Limpieza manos: 30 min | $25.000\n- Esmaltado semipermanente manos: 20 min | $40.000\n- Esmaltado tradicional manos: 30 min | $25.000\n- Solo limpieza manos: 30 min | $25.000\n- Masaje relajante de manos: 7 min | $25.000\n- Extensión de sistemas o reparación c/u en servicio: \n  15 min | $10.000\n- Extensión del sistema o reparación c/u fuera del servicio: \n  10 min | $15.000\n- Diseño: 10 min | Gratis\n- Garantías: 30 min | Gratis\n\n### Pedicure\n- Pies semipermanente: 1 hr | $60.000\n- Pies Evolution: 40 min | $45.000\n- Tradicional pies: 45 min | $40.000\n- Pedicura tradicional + pedi spa: 1 hr | $85.000\n- Pedicura semi + pedi spa: 1 hr 10 min | $105.000\n- Solo limpieza pies: 30 min | $30.000\n- Retiro semipermanente pies: 20 min | $15.000\n\n### Combos (Manos y Pies)\n- Uñas semipermanente (manos y pies): 1 hr 30 min | $120.000\n- Uñas esmaltado tradicional (manos y pies): 1 hr 40 min | $75.000\n- Evolution (manos y pies): 1 hr 20 min | $85.000\n- Manos semipermanentes y Pies tradicional: 2 hr | $100.000\n- Manos Semipermanente y Pies Evo: 2 hr | $105.000\n- Manos tradicionales + Pies semipermanente: 2 hr | $95.000\n- Manos Evolution y Pies Semipermanentes: 1 hr 40 min | $100.000\n- Solo limpieza manos y pies: 1 hr | $50.000\n- Retiro semipermanente manos y pies: 30 min | $30.000\n\n### Peluquería\n- Alisado natural Argán y coco (corto): 5 hr | $250.000\n- Alisado natural argán y/o coco (medio/codo): 5 hr | $380.000\n- Alisado natural argán y coco (medio): 5 hr | $290.000\n- Alisado natural de argán y/o coco Largo: 5 hr | $400.000\n- Alisado natural de argán y/o coco Extra Largo: 5 hr | $430.000\n- Terapia capilar de L'Oréal: 20 min | $120.000\n- Alta Frecuencia Capilar (Peinilla):\n  Tratamiento que utiliza corrientes suaves para estimular \n  el cuero cabelludo y mejorar la salud del cabello.\n  \n  Beneficios:\n  • Estimula la circulación sanguínea\n  • Fortalece el crecimiento capilar\n  • Oxigena el cuero cabelludo\n  • Disminuye el exceso de grasa\n  • Combate bacterias y previene caspa\n  • Favorece la absorción de productos capilares\n  \n  Precios:\n  • Cabello corto: $120.000\n  • Cabello medio: $150.000\n  • Cabello largo: $180.000\n  • Scrub: $100.000\n\n- Ondas: 45 min | $70.000\n- Planchado de cabello: 40 min | $50.000\n- Cepillado (Corto: $50k | Medio: $70k | Largo: $90k | XL: $120k)\n- Color: precio sujeto a valoración presencial.\n  Si el cliente pregunta por el precio de color, responde:\n  \"El precio del color es sujeto a valoración 💖 \n  El precio exacto lo define nuestra especialista al ver \n  tu cabello y conocer el resultado que deseas.\n  \n  La valoración tiene un Inversión de $30.000, pero si\n  decides hacer el servicio con nosotras en Velik,\n  ese valor se descuenta directamente del precio final.\n  ¿Te gustaría agendar tu valoración?\"\n- Corte (Puntas: $45k | Caballero: $50k | En capas: $70k)\n\n### Promociones Activas\n\n- **Renueva tu Color + Make Over de Uñas en Velik** 💇‍♀️💅\n  Servicio de coloración profesional con asesoría personalizada,\n  diagnóstico técnico del cabello, bebida de cortesía ☕ y make\n  over de uñas básico incluido de cortesía 💅\n  Precio: sujeto a valoración presencial.\n  Aplica al tomar el servicio de color con una de nuestras\n  profesionales. Sujeto a disponibilidad de agenda.\n\n- **Renuévate en Velik: Uñas + Masaje Especial** 💅🤍💆‍♀️\n  Diseño de uñas con sistema + acceso a masaje relajante con\n  20% de descuento. Exclusivo para las primeras 10 clientas\n  del mes. Atención profesional en un espacio cómodo y apto.\n  Sujeto a disponibilidad de agenda.\n\n- **Renueva tu Color y Desestrésate con Velik** 💇‍♀️🤍💆‍♀️\n  Servicio de coloración profesional con asesoría personalizada,\n  diagnóstico técnico del cabello, bebida de cortesía ☕ y masaje\n  relajante incluido 💆‍♀️ Una experiencia pensada para que la\n  clienta salga renovada por fuera y por dentro.\n  Precio: sujeto a valoración presencial.\n  Sujeto a disponibilidad de agenda.\n\n### Cejas y Pestañas\n- Depilación cejas \n  (Cera: $25k | Hilo: $30k | Henna: $55k | Perfilado: $20k)\n- Laminado de cejas: 50 min | $100.000\n- Lifting de pestañas: 1 hr | $120.000\n- Laminado + Lifting: 1 hr 10 min | $200.000\n- Extensiones pelo a pelo \n  (Clásica: $160k | Híbrido: $180k | Tecnológico: $200k)\n- Retoque pestañas: 1 hr | $80.000\n- Pestañas punto a punto: 45 min | $50.000\n\n### Maquillaje\n- Maquillaje social: 1 hr | $170.000\n- Maquillaje blindado: 1 hr | $200.000\n- Maquillaje halloween: 1 hr | $230.000\n\n### Depilación\n- Rostro completo hilo: $100.000\n- Bigote hilo: $25.000\n- Barbilla hilo: $20.000\n- Pierna media: $50.000 | Pierna completa: $100.000\n- Bigote: $20k | Nariz: $20k | Orejas: $20k | Axilas: $35k\n- Espalda baja: $50k | Pubis completo: $80k | \n  Bikini: $45k | Glúteos: $35k\n\n### Tratamientos Corporales y Faciales\n- Baño de novia brazos: 15 min | $30.000\n- Masaje Piedras Volcánicas + Velas: 1 hr | $140.000\n- Paquetes Masaje Reductor (5 sesiones): \n  P1: $450k | P2: $650k | P3: $850k\n- Estrías (Reestructuración: $400k | Camuflaje: $1.6M)\n- Limpieza Facial Especial: 1 hr 30 min | $150.000\n- Limpieza Facial Tradicional: 1 hr | $100.000\n\n---\n\n## Reglas de Agendamiento\n\n1. Sigue siempre las instrucciones de calidez.\n\n2. Responde todas las dudas de manera dulce, paciente, cálida \ny persuasiva, con intención de ayudar a vender el servicio.\n\n3. Nunca envíes el enlace de agendamiento en el primer mensaje \nsolo por saludar o brindar información general.\n\n4. El enlace de agendamiento solo debe enviarse cuando el cliente \nexprese intención de agendar o pregunte directamente por \ndisponibilidad, horarios, cupos, reservas o cómo agendar.\n\n5. En cualquier otro caso, brinda únicamente información del \nservicio, precios, beneficios y resuelve dudas de manera amable \ny persuasiva, sin enviar el enlace de reserva.\n\n6. Cuando el cliente pregunte cómo agendar, disponibilidad, \nhorarios, cupos, o diga expresamente que desea reservar su cita, \nentonces comparte el siguiente enlace una sola vez: \n[usar herramientas de agendamiento]\n\n7. Mensaje modelo para agendamiento:\n\"¡Genial, [nombre]! Para elegir la fecha, la horita y la \nprofesional de tu preferencia, por favor ingresa a nuestro \nportal seguro aquí:\n[usar herramientas de agendamiento]\n¡Allí tu cita quedará confirmada de inmediato!\"\n\n8. Nunca envíes el enlace de reserva más de una vez en el \nmismo mensaje.\n\n---\n\n## Información para Abonos\n\nSi el cliente pregunta por datos para realizar un abono, pago \nparcial o transferencia, comparte esta información:\n\nCuenta de ahorros Bancolombia: 00776466085\n\nMensaje modelo:\n\"Claro que sí, hermosa 💖 Si deseas realizar un abono, puedes \nhacerlo a nuestra cuenta de ahorros Bancolombia: 00776466085. \nCuando lo realices, nos compartes por favor el comprobante \npara validar tu pago con muchísimo gusto ✨\"\n\n---\n\n## Productos — Authentic Beauty Concept\n\n### REPLENISH\n- Shampoo 300ml — $140.990\n- Acondicionador 250ml — $184.990\n- Acondicionador Spray 250ml — $172.990\n- Rich Mascarilla 200ml — $232.990\n- Light Mascarilla 200ml — $232.990\n\n### AMPLIFY\n- Shampoo 300ml — $140.990\n- Acondicionador 250ml — $184.990\n- Acondicionador Spray 250ml — $172.990\n\n### GLOW\n- Shampoo 300ml — $140.990\n- Acondicionador 250ml — $184.990\n- Mascarilla 200ml — $232.990\n- Cool Cleanser 300ml — $140.990\n- Sprayable Serum 200ml — $193.990\n\n### HYDRATE\n- Shampoo 300ml — $140.990\n- Acondicionador 250ml — $184.990\n- Acondicionador Spray 250ml — $172.990\n- Mascarilla 200ml — $232.990\n- Lotion 150ml — $180.990\n- Smoothing Serum 100ml — $195.990\n- Curl Enhancer 250ml — $180.990\n- Intense Treatment 200ml — $232.990\n\n### ALL HAIR TYPES\n- Deep Cleansing Shampoo 300ml — $140.990\n- Indulging Fluid Oil 100ml — $193.990\n- Bare Cleanser 300ml — $140.990\n- Jelly Mask 200ml — $204.990\n\n### BEYOND THE HAIR\n- Eau de Toilette 50ml — $195.990\n- Hand & Hair Light Cream 75ml — $86.990\n- Enhancing Water 100ml — $114.990\n- Sensorial Cream Scrub 250ml — $171.990\n\n### STYLING\n- Amplify Mousse 200ml — $144.990\n- Flawless Primer 250ml — $164.990\n- Shaping Cream 150ml — $180.990\n- Gritty Wax Paste 85ml — $143.990\n- Solid Pomade 85ml — $143.990\n- Pliable Styling Paste 85ml — $143.990\n\nREGLA:\n- Si el cliente pregunta por productos, comparte \n  la lista con precios.\n- Si pregunta cuál es el mejor para su tipo de cabello,\n  responde: \"Para recomendarte el producto ideal según \n  tu cabello, un miembro de nuestro equipo te asesorará \n  personalmente. 🌸\"\n- No inventes beneficios ni usos que no estén confirmados.\n\n## Envíos\n\nSi el cliente pregunta si hacen envíos de productos:\n\n\"¡Sí manejamos envíos! 🌸 Una persona de nuestro \nequipo se pondrá en contacto contigo para coordinar \ntodos los detalles del envío.\"\n\nREGLA:\n- No confirmes costos de envío ni tiempos de entrega.\n- No menciones empresas de mensajería.\n- Siempre escala al equipo humano para coordinar el envío.\n\n## Dirección\n\nDirección física: Dg 75 #74-05, Laureles - Estadio, \nMedellín, Antioquia.\n\nUbicación en mapa: \nhttps://maps.app.goo.gl/uFdvEAncrizG88S5A?g_st=iw\n\nREGLA DE RESPUESTA:\nCuando el cliente pregunte por la dirección o ubicación, \nresponde SIEMPRE con la dirección escrita en texto primero \ny luego el link como complemento.\n\nMensaje modelo:\n\"Nos encuentras en Dg 75 #74-05, Laureles - Estadio, \nMedellín, Antioquia 📍\nTambién puedes ver la ubicación aquí:\nhttps://maps.app.goo.gl/uFdvEAncrizG88S5A?g_st=iw\"\n\nREGLA DE FRECUENCIA:\n- Envía el link de ubicación UNA SOLA VEZ por conversación.\n- Si el cliente vuelve a preguntar la dirección, escribe \n  solo la dirección en texto sin repetir el link.\n- Nunca incluyas el link más de una vez en toda \n  la conversación."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        3632,
+        480
+      ],
+      "id": "e88c4a02-de56-4a54-883b-acc980c2844d",
+      "name": "PROMPT ACTUALIZADO"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {
+          "maxTokens": 700,
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        3680,
+        736
+      ],
+      "id": "64b20df9-a0d0-4c6c-b8bc-26f2e87cc1ca",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "3U3vHJuMvh7XLZ1c",
+          "name": "SM-DIGITALS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+        "tableName": "beauty_velik_house_new",
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        3808,
+        736
+      ],
+      "id": "a74be8d0-058b-4d28-a3f3-398cad6c987a",
+      "name": "Postgres Chat Memory1",
+      "credentials": {
+        "postgres": {
+          "id": "mzktqXFdXyhqHplG",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Webhook').item.json.body.server_url }}/message/sendWhatsAppAudio/{{ $('Webhook').item.json.body.instance }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $('Webhook').item.json.body.apikey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+            },
+            {
+              "name": "audio",
+              "value": "={{ $json.data }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        5216,
+        720
+      ],
+      "id": "d45d7cb3-c24b-47ac-bdb7-f7acff2b9629",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.audioUrl }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        4784,
+        640
+      ],
+      "id": "b36a390b-f55e-469c-b49e-fbc074294a0f",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "DxkLcVH3RQa1gxhJ",
+          "name": "sm digitals"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        5024,
+        672
+      ],
+      "id": "d50ed05c-b232-49db-a00e-085093ddb48b",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "jsCode": "const audios = [\n  { nombre: \"audio1\", url: \"https://drive.google.com/file/d/1ICnX4kWtpDEXCuDGncckjXRtiPxE_PIk/view?usp=sharing\" },\n  { nombre: \"audio2\", url: \"https://drive.google.com/file/d/1-Jp_bgW7vZ1Whx-CH308Wk68NHEGSk6D/view?usp=sharing\" },\n  { nombre: \"audio3\", url: \"https://drive.google.com/file/d/1q5Wq3lwXgH6joZ5i3xLU6xY7Av1Yz5h5/view?usp=sharing\" }\n];\n\nconst staticData = $getWorkflowStaticData('global');\n\nif (staticData.ultimoIndice === undefined) {\n  staticData.ultimoIndice = -1;\n}\n\nconst siguienteIndice = (staticData.ultimoIndice + 1) % audios.length;\nstaticData.ultimoIndice = siguienteIndice;\n\nreturn [\n  {\n    json: {\n      audioNombre: audios[siguienteIndice].nombre,\n      audioUrl: audios[siguienteIndice].url\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4544,
+        800
+      ],
+      "id": "b496dcc7-6764-4bae-8a09-2752c313eee0",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0db7a1a9-ffb2-44e1-be60-e1db3735d300",
+              "leftValue": "={{ $json.body.data.key.fromMe }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2016,
+        624
+      ],
+      "id": "0fa88240-1bc3-4a09-a7cd-7a04170ec1f0",
+      "name": "If5"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -1904,
+        352
+      ],
+      "id": "24b65db6-6a9a-403d-be0b-f706b810d1b8",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b0edac90-1a86-4547-ae57-e0af2f465d2c",
+              "leftValue": "={{ $('Webhook').item.json.body.data.key.fromMe }}",
+              "rightValue": "201060840931507@lid",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -3184,
+        832
+      ],
+      "id": "ca23d20d-7ddc-4d30-b128-9d4c28616cd9",
+      "name": "Verificar Quien Atiende"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2672,
+        288
+      ],
+      "id": "eedf80a8-5a45-4c86-894c-12fa65a93087",
+      "name": "Activar bot",
+      "credentials": {
+        "redis": {
+          "id": "4jNooyY9Iu3jAA1n",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+        "value": "blocked-bot",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2656,
+        464
+      ],
+      "id": "f40f087a-16b5-481e-a73e-13b3c23df301",
+      "name": "Bloquear el agente",
+      "credentials": {
+        "redis": {
+          "id": "4jNooyY9Iu3jAA1n",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "bot-state",
+        "key": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2784,
+        816
+      ],
+      "id": "e9f6f02b-416e-49a5-a03f-63008703412d",
+      "name": "Redis3",
+      "credentials": {
+        "redis": {
+          "id": "4jNooyY9Iu3jAA1n",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3bb579ab-5cac-46b4-b719-f92b9e21bdbf",
+              "leftValue": "={{ $('Webhook').item.json.body.data.message.conversation }}",
+              "rightValue": "..",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2880,
+        384
+      ],
+      "id": "0e405641-5895-4fe9-a578-19deae33c414",
+      "name": "If7"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -2416,
+        416
+      ],
+      "id": "50a72a2b-1155-4466-9692-4c72754ec559",
+      "name": "No Operation, do nothing2"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.data.key.remoteJid }}",
+                    "rightValue": "573183614625@s.whatsapp.net",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "95bb61d1-da8e-405a-854e-3dfe74945b0c"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3f543422-5851-40cc-bf9f-9e21bc816496",
+                    "leftValue": "={{ $json.body.data.key.remoteJid }}",
+                    "rightValue": "573012688374@s.whatsapp.net",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "2b3b74a0-513d-4e48-802a-23ff8dbfd2d1",
+                    "leftValue": "={{ $json.body.data.key.remoteJid }}",
+                    "rightValue": "573016968800@s.whatsapp.net",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f075c871-e403-4e38-8d2d-c4028c736590",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -3488,
+        592
+      ],
+      "id": "06a71f83-f8d5-47b3-83c7-071e56128de9",
+      "name": "Filtro numeros"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -3280,
+        368
+      ],
+      "id": "a96c8095-fed0-446b-a090-95d16866c1f5",
+      "name": "No Operation, do nothing4"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\n\nfunction limpiarSaludoInicial(texto) {\n  const normalizado = String(texto ?? \"\")\n    .replace(/\\r/g, \"\")\n    .replace(/\\\\n/g, \"\\n\")\n    .replace(/\\n{2,}/g, \"\\n\\n\")\n    .trim();\n\n  const patronesSaludo = [\n    /^¡Hola,[\\s\\S]*?directora Luza:\\s*\\[Enlace\\]\\(https:\\/\\/drive\\.google\\.com\\/file\\/d\\/[^)]+\\)\\.\\s*/i,\n    /^¡Hola,[\\s\\S]*?directora Luza:\\s*\\[Enlace\\]\\.\\s*/i\n  ];\n\n  let textoLimpio = normalizado;\n  let encontroSaludo = false;\n\n  for (const regex of patronesSaludo) {\n    if (regex.test(textoLimpio)) {\n      textoLimpio = textoLimpio.replace(regex, \"\").trim();\n      encontroSaludo = true;\n      break;\n    }\n  }\n\n  return {\n    solo_saludo: encontroSaludo && textoLimpio.length === 0 ? 1 : 0,\n    texto: textoLimpio\n  };\n}\n\nfor (const item of $input.all()) {\n  const input = item.json.output || \"\";\n  const resultado = limpiarSaludoInicial(input);\n\n  results.push({\n    json: {\n      ...item.json,\n      solo_saludo: resultado.solo_saludo,\n      mensaje: resultado.texto\n    }\n  });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4016,
+        448
+      ],
+      "id": "74252e83-6c9c-40f9-af8b-492a2a5ba6a9",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "name": "verificar_disponibilidad",
+        "description": "Verifica horarios disponibles para un servicio de Velik Beauty House. Usar cuando el cliente pregunte por disponibilidad u horarios. Input JSON: servicio (nombre del servicio) y fecha (YYYY-MM-DD).",
+        "workflowId": {
+          "__rl": true,
+          "value": "XAoMeVFKqLw7KcFX",
+          "mode": "list"
+        },
+        "workflowInputs": {
+          "mappingMode": "passthrough",
+          "value": {}
+        }
+      },
+      "id": "tool_verificar",
+      "name": "verificar_disponibilidad",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "name": "crear_cita",
+        "description": "Crea una cita en el sistema de Velik Beauty House. Usar cuando el cliente confirme su horario. Input JSON: servicio, slot_time (ISO datetime), cliente_nombre (nombre completo), cliente_telefono (+57...).",
+        "workflowId": {
+          "__rl": true,
+          "value": "3UMIZGQy4HCmBN6v",
+          "mode": "list"
+        },
+        "workflowInputs": {
+          "mappingMode": "passthrough",
+          "value": {}
+        }
+      },
+      "id": "tool_crear",
+      "name": "crear_cita",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "name": "cancelar_cita",
+        "description": "Cancela una cita existente en Velik Beauty House. Usar cuando el cliente quiera cancelar. Input JSON: appointment_id (el ID de la cita a cancelar).",
+        "workflowId": {
+          "__rl": true,
+          "value": "XFoYOSSdcDleyVMK",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/XFoYOSSdcDleyVMK",
+          "cachedResultName": "VELIK - Cancelar Cita"
+        },
+        "workflowInputs": {
+          "mappingMode": "passthrough",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "tool_cancelar",
+      "name": "cancelar_cita",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        800
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filtro numeros",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "ObtenerAudio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Obtener Imagen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Resumen Mensaje",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Imagen": {
+      "main": [
+        [
+          {
+            "node": "Obter m dia em base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ObtenerAudio": {
+      "main": [
+        [
+          {
+            "node": "Obter m dia em base64",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe Audio": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resumen Mensaje": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Describe Imagen": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis2": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "PROMPT ACTUALIZADO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener ID Chat": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        []
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Enviar texto1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Enviar texto2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Resumen Mensaje",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obter m dia em base64": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Transcribe Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obter m dia em base": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Describe Imagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar texto": {
+      "main": [
+        []
+      ]
+    },
+    "Enviar texto1": {
+      "main": [
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If9": {
+      "main": [
+        [
+          {
+            "node": "Obtener ID Chat",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Obtener ID Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "If9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar texto4": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "PROMPT ACTUALIZADO",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "PROMPT ACTUALIZADO",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PROMPT ACTUALIZADO": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Quien Atiende": {
+      "main": [
+        [
+          {
+            "node": "If7",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Redis3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bloquear el agente": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis3": {
+      "main": [
+        [
+          {
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If7": {
+      "main": [
+        [
+          {
+            "node": "Activar bot",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Bloquear el agente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtro numeros": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Verificar Quien Atiende",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "verificar_disponibilidad": {
+      "ai_tool": [
+        [
+          {
+            "node": "PROMPT ACTUALIZADO",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "crear_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "PROMPT ACTUALIZADO",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancelar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "PROMPT ACTUALIZADO",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "global": {
+      "ultimoIndice": 2
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "keep-alive",
+            "host": "santiagon8nmejia.dominadoresia.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "148.230.86.212",
+            "x-real-ip": "148.230.86.212",
+            "content-length": "1620",
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "user-agent": "axios/1.13.2",
+            "accept-encoding": "gzip, compress, deflate, br"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "messages.upsert",
+            "instance": "Velik IA",
+            "data": {
+              "key": {
+                "remoteJid": "573234707964@s.whatsapp.net",
+                "remoteJidAlt": "573234707964@s.whatsapp.net",
+                "fromMe": false,
+                "id": "3EB041FFD0DC0267E50312",
+                "participant": "",
+                "addressingMode": "lid"
+              },
+              "pushName": "S-M",
+              "status": "DELIVERY_ACK",
+              "message": {
+                "conversation": "hola",
+                "messageContextInfo": {
+                  "threadId": [],
+                  "deviceListMetadata": {
+                    "senderKeyIndexes": [],
+                    "recipientKeyIndexes": [],
+                    "senderKeyHash": {
+                      "0": 86,
+                      "1": 197,
+                      "2": 10,
+                      "3": 52,
+                      "4": 121,
+                      "5": 124,
+                      "6": 67,
+                      "7": 250,
+                      "8": 37,
+                      "9": 52
+                    },
+                    "senderTimestamp": {
+                      "low": 1778852244,
+                      "high": 0,
+                      "unsigned": true
+                    },
+                    "senderAccountType": 0,
+                    "receiverAccountType": 0,
+                    "recipientKeyHash": {
+                      "0": 82,
+                      "1": 31,
+                      "2": 4,
+                      "3": 181,
+                      "4": 145,
+                      "5": 119,
+                      "6": 230,
+                      "7": 6,
+                      "8": 229,
+                      "9": 14
+                    },
+                    "recipientTimestamp": {
+                      "low": 1778115976,
+                      "high": 0,
+                      "unsigned": true
+                    }
+                  },
+                  "deviceListMetadataVersion": 2,
+                  "messageSecret": {
+                    "0": 31,
+                    "1": 19,
+                    "2": 253,
+                    "3": 107,
+                    "4": 51,
+                    "5": 93,
+                    "6": 97,
+                    "7": 62,
+                    "8": 243,
+                    "9": 36,
+                    "10": 87,
+                    "11": 199,
+                    "12": 250,
+                    "13": 128,
+                    "14": 11,
+                    "15": 254,
+                    "16": 13,
+                    "17": 49,
+                    "18": 211,
+                    "19": 130,
+                    "20": 23,
+                    "21": 154,
+                    "22": 151,
+                    "23": 176,
+                    "24": 251,
+                    "25": 152,
+                    "26": 116,
+                    "27": 168,
+                    "28": 117,
+                    "29": 40,
+                    "30": 39,
+                    "31": 91
+                  },
+                  "limitSharingV2": {
+                    "sharingLimited": false,
+                    "trigger": 0,
+                    "limitSharingSettingTimestamp": {
+                      "low": 0,
+                      "high": 0,
+                      "unsigned": false
+                    },
+                    "initiatedByMe": false
+                  }
+                }
+              },
+              "messageType": "conversation",
+              "messageTimestamp": 1778951844,
+              "instanceId": "cd0a7bdd-df6e-4ee5-86bb-7e3c9f110d51",
+              "source": "web"
+            },
+            "destination": "https://santiagon8nmejia.dominadoresia.com/webhook/velik",
+            "date_time": "2026-05-16T14:17:24.764Z",
+            "sender": "573016370099@s.whatsapp.net",
+            "server_url": "https://n8n-evolution-api.l5sj9q.easypanel.host",
+            "apikey": "C7259D50B20C-4C09-ABC1-624C68CE7065"
+          },
+          "webhookUrl": "https://santiagon8nmejia.dominadoresia.com/webhook/velik",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "versionId": "2db54317-5b27-429a-a2e8-d7521528f12d",
+  "activeVersionId": "599b5cf5-505e-4904-8a8f-35a679560534",
+  "versionCounter": 699,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-03-17T00:08:14.858Z",
+      "createdAt": "2026-03-17T00:08:14.858Z",
+      "role": "workflow:owner",
+      "workflowId": "03ruI6r2UcMn9fms",
+      "projectId": "mPLbSVJeiDynAflm",
+      "project": {
+        "updatedAt": "2025-10-02T18:36:29.183Z",
+        "createdAt": "2025-09-06T12:45:02.484Z",
+        "id": "mPLbSVJeiDynAflm",
+        "name": "Santiago Mejia <impulxn8n@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "d7c809b1-2b93-49e0-8b39-1a02fb9b41c4",
+        "projectRelations": [
+          {
+            "updatedAt": "2025-09-06T12:45:02.484Z",
+            "createdAt": "2025-09-06T12:45:02.484Z",
+            "userId": "d7c809b1-2b93-49e0-8b39-1a02fb9b41c4",
+            "projectId": "mPLbSVJeiDynAflm",
+            "user": {
+              "updatedAt": "2026-05-23T18:14:26.000Z",
+              "createdAt": "2025-09-06T12:45:01.032Z",
+              "id": "d7c809b1-2b93-49e0-8b39-1a02fb9b41c4",
+              "email": "impulxn8n@gmail.com",
+              "firstName": "Santiago",
+              "lastName": "Mejia",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2025-10-02T18:37:19.502Z",
+                "personalization_survey_n8n_version": "1.111.1",
+                "automationGoalDevops": [
+                  "ticketing-systems-integrations"
+                ],
+                "companySize": "<20",
+                "companyType": "digital-agency",
+                "role": "engineering",
+                "reportedSource": "friend"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "hkQdVWMgc4mEeSQz",
+                "userActivatedAt": 1760019156991,
+                "dismissedCallouts": {
+                  "preBuiltAgentsModalCallout": true
+                },
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1777905725371
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-05-23",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-04-28T14:42:40.691Z",
+      "createdAt": "2026-04-28T14:42:40.691Z",
+      "id": "nqtdasfXPrvCqDHz",
+      "name": "VELIK BEAUTY HOUSE"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-05-23T20:13:10.484Z",
+    "createdAt": "2026-05-23T20:13:10.484Z",
+    "versionId": "599b5cf5-505e-4904-8a8f-35a679560534",
+    "workflowId": "03ruI6r2UcMn9fms",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "velik",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -3648,
+          816
+        ],
+        "id": "7ede3113-0f1b-4cad-a50d-2147a62d3caa",
+        "name": "Webhook",
+        "webhookId": "6ecfa442-aed3-463c-9892-1a3c8c12c1c9"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Webhook').item.json.body.data.message.audioMessage.mimetype }}",
+                      "rightValue": "audio/ogg; codecs=opus",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      },
+                      "id": "2368cf38-b8fc-4997-8736-acfe81907717"
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Mensaje de audio"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "cdf13c7c-732c-42bd-9d2d-1e2e6a414148",
+                      "leftValue": "={{ $('Webhook').item.json.body.data.message.imageMessage.mimetype }}",
+                      "rightValue": "image",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "image/jpeg"
+              }
+            ]
+          },
+          "options": {
+            "fallbackOutput": "extra",
+            "renameFallbackOutput": "Mensaje de texto"
+          }
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          576,
+          512
+        ],
+        "id": "de3e7a55-77fc-457e-b136-ec6551671305",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1344,
+          832
+        ],
+        "id": "6b524624-19d4-40cb-b159-ebf7fb18996f",
+        "name": "Wait",
+        "webhookId": "2fb91f12-1de7-4129-ab67-4dd37d1a3c3a"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "value": "gpt-4o-mini",
+            "mode": "list",
+            "cachedResultName": "gpt-4o-mini"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.2,
+        "position": [
+          1632,
+          1024
+        ],
+        "id": "5c53667f-1d4c-4d0b-9aec-7b110dd62e1e",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "3U3vHJuMvh7XLZ1c",
+            "name": "SM-DIGITALS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "url": "={{ $('Webhook').item.json.body.data.message.imageMessage.url }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1200,
+          464
+        ],
+        "id": "1251af81-3ef8-4c9e-af7a-53ef32fb069d",
+        "name": "Obtener Imagen"
+      },
+      {
+        "parameters": {
+          "url": "={{ $('Webhook').item.json.body.data.message.audioMessage.url }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1232,
+          128
+        ],
+        "id": "170b2e76-8a76-4457-a25e-4c854829acb7",
+        "name": "ObtenerAudio"
+      },
+      {
+        "parameters": {
+          "resource": "image",
+          "operation": "analyze",
+          "modelId": {
+            "__rl": true,
+            "value": "gpt-4o",
+            "mode": "list",
+            "cachedResultName": "GPT-4O"
+          },
+          "text": "Aqui tienes una imagen enviada por el usuario. Describe la imagen y transcribe cualquier texto visible en la imagen. Incluye tantos detalles como sea posible.",
+          "inputType": "base64",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "typeVersion": 1.8,
+        "position": [
+          1904,
+          448
+        ],
+        "id": "c9f4f76b-73d0-4e88-888d-8d8a3fb9d6c6",
+        "name": "Describe Imagen",
+        "alwaysOutputData": false,
+        "credentials": {
+          "openAiApi": {
+            "id": "3U3vHJuMvh7XLZ1c",
+            "name": "SM-DIGITALS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "audio",
+          "operation": "transcribe",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "typeVersion": 1.8,
+        "position": [
+          1888,
+          128
+        ],
+        "id": "ebf4cb40-cb9f-4b4f-b540-29d4dd818bc7",
+        "name": "Transcribe Audio",
+        "alwaysOutputData": false,
+        "credentials": {
+          "openAiApi": {
+            "id": "3U3vHJuMvh7XLZ1c",
+            "name": "SM-DIGITALS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Resume el mensaje del usuario: \n\n\"{{ $json.cleanedResponse }}\n\"\nSi el mensaje es claro y corto, déjalo tal cual como lo recibes. Si son datos como nombre, email y teléfono. Entrégalos tal cual lo recibes \n"
+        },
+        "type": "@n8n/n8n-nodes-langchain.chainLlm",
+        "typeVersion": 1.5,
+        "position": [
+          1712,
+          832
+        ],
+        "id": "772dc570-09aa-4d78-bfe0-b5c1ff2a45e9",
+        "name": "Resumen Mensaje"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "6064f840-b235-4939-8cac-5db8e86c8eef",
+                "name": "mensaje_usuario",
+                "value": "={{ $json.content }}",
+                "type": "string"
+              },
+              {
+                "id": "a2de6ff9-4e8e-4698-b801-8aa8ae48c68c",
+                "name": "mensaje_usuario",
+                "value": "={{ $json.text }}{{ $json.content }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2544,
+          480
+        ],
+        "id": "0110a947-bcd0-4283-8552-ea7e3613e30e",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "operation": "push",
+          "list": "={{ $('Webhook').item.json.body.data.key.remoteJidAlt }}",
+          "messageData": "={{ $('Webhook').item.json.body.data.message.conversation || $('Webhook').item.json.body.data.message.audioMessage?.url || $('Webhook').item.json.body.data.message.imageMessage?.url || $('Webhook').item.json.body.data.message.documentMessage?.title }}",
+          "tail": true
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          -864,
+          480
+        ],
+        "id": "c2610991-3f3e-444f-987b-e606fed3c8cf",
+        "name": "Redis",
+        "credentials": {
+          "redis": {
+            "id": "9ebKtdGSQaCn70HT",
+            "name": "Redis Velik"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "amount": 6
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          -656,
+          480
+        ],
+        "id": "d3240589-5c6f-4c10-9bf8-5c7314448bbb",
+        "name": "Wait1",
+        "webhookId": "82218bdc-217c-4037-a638-3396f63655d3"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "propertyName": "mensajes",
+          "key": "={{ $('Webhook').item.json.body.data.key.remoteJidAlt }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          480
+        ],
+        "id": "5e3f3294-09ad-49fb-a154-c19ef0290907",
+        "name": "Redis1",
+        "credentials": {
+          "redis": {
+            "id": "9ebKtdGSQaCn70HT",
+            "name": "Redis Velik"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "cee240a2-6e11-496c-8653-bf31a1f75b56",
+                "leftValue": "={{ $json.mensajes[$json.mensajes.length - 1] }}",
+                "rightValue": "={{ $('Webhook').item.json.body.message.body }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "64261588-f2e3-428c-abb5-007fb9a36b7a",
+                "leftValue": "={{ $json.mensajes[$json.mensajes.length - 1] }}",
+                "rightValue": "={{ $('Webhook').item.json.body.customData.attachments }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "31bb2d3a-00f5-4457-91c5-2feff8c2ab76",
+                "leftValue": "={{ $json.mensajes[$json.mensajes.length - 1] }}",
+                "rightValue": "={{ $json.mensajes[0] }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "d00ea038-1fa8-4357-bcb5-87a268858d63",
+                "leftValue": "={{ $json.mensajes[$json.mensajes.length - 1] }}",
+                "rightValue": "={{ $('Webhook').item.json.body.data.message.imageMessage?.url }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "93d88f8a-a3f9-486c-9736-1496e6266d9c",
+                "leftValue": "={{ $('Webhook').item.json.body.data.message.imageMessage?.url }}",
+                "rightValue": "={{ $('Webhook').item.json.body.data.message.documentMessage?.title }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -288,
+          480
+        ],
+        "id": "7150a04c-9183-4d14-9a07-ffe2ac423430",
+        "name": "If"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -64,
+          640
+        ],
+        "id": "0b694143-808d-4fe7-b965-96b1711e84a4",
+        "name": "No Operation, do nothing"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "0156fde9-7fa4-4036-853e-a47f1128292a",
+                "name": "response",
+                "value": "={{ $('Redis1').item.json.mensajes }}",
+                "type": "string"
+              },
+              {
+                "id": "7721dd00-dd46-4c42-a119-abc5c231089e",
+                "name": "phone",
+                "value": "={{ $('Obtener ID Chat').item.json.message.chat.id }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -48,
+          432
+        ],
+        "id": "313d8db3-98d1-409e-ac34-609e25f2a265",
+        "name": "Edit Fields2"
+      },
+      {
+        "parameters": {
+          "operation": "delete",
+          "key": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          192,
+          512
+        ],
+        "id": "6189bc6f-6467-421d-8adf-c0d6fe4176f2",
+        "name": "Redis2",
+        "credentials": {
+          "redis": {
+            "id": "9ebKtdGSQaCn70HT",
+            "name": "Redis Velik"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dateTime",
+        "typeVersion": 2,
+        "position": [
+          2864,
+          480
+        ],
+        "id": "d27aba23-ef48-48cd-9ec9-b700ddc4b993",
+        "name": "Date & Time"
+      },
+      {
+        "parameters": {
+          "operation": "formatDate",
+          "date": "={{ $json.currentDate }}",
+          "format": "custom",
+          "customFormat": "dd-MM-yyyy HH:mm",
+          "options": {
+            "timezone": true
+          }
+        },
+        "type": "n8n-nodes-base.dateTime",
+        "typeVersion": 2,
+        "position": [
+          3088,
+          480
+        ],
+        "id": "ab8a737a-b4b2-4ddf-9c0d-276d4353fe54",
+        "name": "Date & Time1"
+      },
+      {
+        "parameters": {
+          "jsCode": "const input = $json.formattedDate; // \"02-04-2025 11:43\"\n\n// Separar la fecha y hora\nconst [datePart, timePart] = input.split(\" \");\nconst [day, month, year] = datePart.split(\"-\");\nconst [hour, minute] = timePart.split(\":\");\n\n// Crear objeto base (hora local)\nconst baseDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:00`);\n\n// Constante de un día en milisegundos\nconst oneDay = 24 * 60 * 60 * 1000;\n\n// Fechas desplazadas\nconst startDate = new Date(baseDate.getTime() + oneDay);     // +1 día\nconst endDate = new Date(baseDate.getTime() + 4 * oneDay);   // +4 días\n\n// Función para dar formato legible\nfunction formatDate(date) {\n  const dd = String(date.getDate()).padStart(2, '0');\n  const mm = String(date.getMonth() + 1).padStart(2, '0'); // Meses van de 0 a 11\n  const yyyy = date.getFullYear();\n  const hh = String(date.getHours()).padStart(2, '0');\n  const min = String(date.getMinutes()).padStart(2, '0');\n  return `${dd}-${mm}-${yyyy} ${hh}:${min}`;\n}\n\n// Construcción del resultado\nreturn [\n  {\n    json: {\n      startDateTime: startDate.getTime(),\n      endDateTime: endDate.getTime(),\n      startDateTime_legible: formatDate(startDate),\n      endDateTime_legible: formatDate(endDate)\n    }\n  }\n];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3328,
+          480
+        ],
+        "id": "de7c4f3d-d54c-42d8-bf05-25d958860874",
+        "name": "Code"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "135a001c-0b02-45e4-aa98-591e5fd0effe",
+                "name": "message.chat.id",
+                "value": "={{ $json.body.id }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -1120,
+          544
+        ],
+        "id": "70a74013-3c3e-43e5-9b3c-5cc94d3cfce8",
+        "name": "Obtener ID Chat"
+      },
+      {
+        "parameters": {
+          "jsCode": "const results = [];\n\nfunction limpiarSaludoInicial(texto) {\n  const normalizado = String(texto ?? \"\")\n    .replace(/\\r/g, \"\")\n    .replace(/\\\\n/g, \"\\n\")\n    .replace(/\\n{2,}/g, \"\\n\\n\")\n    .trim();\n\n  const patronesSaludo = [\n    /^¡Hola,[\\s\\S]*?directora Luza:\\s*\\[Enlace\\]\\(https:\\/\\/drive\\.google\\.com\\/file\\/d\\/[^)]+\\)\\.\\s*/i,\n    /^¡Hola,[\\s\\S]*?directora Luza:\\s*\\[Enlace\\]\\.\\s*/i\n  ];\n\n  let textoLimpio = normalizado;\n  let encontroSaludo = false;\n\n  for (const regex of patronesSaludo) {\n    if (regex.test(textoLimpio)) {\n      textoLimpio = textoLimpio.replace(regex, \"\").trim();\n      encontroSaludo = true;\n      break;\n    }\n  }\n\n  return {\n    solo_saludo: encontroSaludo && textoLimpio.length === 0 ? 1 : 0,\n    texto: textoLimpio\n  };\n}\n\nfor (const item of $input.all()) {\n  const input = item.json.output || \"\";\n  const resultado = limpiarSaludoInicial(input);\n\n  const instance =\n    item.json.body?.instance ??\n    item.json.body?.data?.instance ??\n    item.json.instance ??\n    \"\";\n\n  const remoteJid =\n    item.json.body?.data?.key?.remoteJid ??\n    item.json.data?.key?.remoteJid ??\n    item.json.remoteJid ??\n    \"\";\n\n  results.push({\n    json: {\n      ...item.json,\n      instance,\n      remoteJid,\n      solo_saludo: resultado.solo_saludo,\n      parte: 1,\n      total_partes: 1,\n      mensaje: resultado.texto\n    }\n  });\n}\n\nreturn results;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4624,
+          -112
+        ],
+        "id": "bfd43c41-00ab-466d-81d0-09e4b8eaaf35",
+        "name": "Code1",
+        "disabled": true
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          5024,
+          -144
+        ],
+        "id": "1ecc0681-d436-4d8f-99c8-c85a9b617935",
+        "name": "Wait2",
+        "webhookId": "a0db5a2b-f734-4bb6-b140-378929f6f717",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "57ea6591-317b-4d05-9591-7653ab5c338b",
+                "leftValue": "={{ $('Code1').item.json.parte_2 }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          5136,
+          -112
+        ],
+        "id": "0ff078ac-c559-4cb8-a105-c937560f725f",
+        "name": "If2",
+        "disabled": true
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          5472,
+          -144
+        ],
+        "id": "84c017f7-6e22-45f9-a842-809bdf60af30",
+        "name": "Wait3",
+        "webhookId": "a56c4406-4b47-4a2e-bdad-59099b372080",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "9077dcbe-1d4e-41f9-8c35-70ffd6d82060",
+                "leftValue": "={{ $('Code1').item.json.parte_3 }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          5632,
+          -144
+        ],
+        "id": "b8e06025-cf34-4716-96a5-3d4b235e4b14",
+        "name": "If3",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "jsCode": "// items es el array que recibe el nodo Code\nreturn items.map(item => {\n  // 1) Parsear la lista\n  const fragments = JSON.parse(item.json.response);\n\n  // 2) Limpiar cada fragmento\n  const cleaned = fragments\n    // Reemplaza cualquier aparición de [➡️ Received on 573234501828]\"]\n    .map(f => f.replace(/\\[➡️ Received on 573234501828\\]\"?\\]?/g, '').trim())\n    // Filtra fragmentos vacíos\n    .filter(f => f.length > 0);\n\n  // 3) Unirlos en una sola cadena\n  const cleanedResponse = cleaned.join('\\n');\n\n  // 4) Devolver el resultado limpio\n  return {\n    json: { cleanedResponse }\n  };\n});\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1520,
+          832
+        ],
+        "id": "9d6bc4ec-0907-4b84-8187-994e089adb16",
+        "name": "Code2"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "4a12b880-9389-4b6d-bba6-8ce992593f32",
+                "leftValue": "={{ $json.solo_saludo }}",
+                "rightValue": 1,
+                "operator": {
+                  "type": "number",
+                  "operation": "equals"
+                }
+              },
+              {
+                "id": "1ae89acc-cb5f-461b-989a-e68af59a0d3e",
+                "leftValue": "={{ $json.output }}",
+                "rightValue": "(https://drive.google.com/file/d/1ICnX4kWtpDEXCuDGncckjXRtiPxE_PIk/view?usp=sharing)",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          4192,
+          464
+        ],
+        "id": "67511501-ec43-47a2-a782-90b1a49a596d",
+        "name": "If4"
+      },
+      {
+        "parameters": {
+          "resource": "messages-api",
+          "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+          "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+          "messageText": "={{ $json.mensaje }}",
+          "options_message": {}
+        },
+        "type": "n8n-nodes-evolution-api.evolutionApi",
+        "typeVersion": 1,
+        "position": [
+          4848,
+          240
+        ],
+        "id": "e6aa582c-7f81-4a88-b8fb-0acd1c77fe53",
+        "name": "Enviar texto",
+        "credentials": {
+          "evolutionApi": {
+            "id": "CEwTrClxkXLuaUDg",
+            "name": "Evolution account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "chat-api",
+          "operation": "get-media-base64",
+          "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+          "messageId": "={{ $('Webhook').item.json.body.data.key.id }}"
+        },
+        "type": "n8n-nodes-evolution-api.evolutionApi",
+        "typeVersion": 1,
+        "position": [
+          1440,
+          128
+        ],
+        "id": "fc19c7b3-a9e4-4062-92e6-0a8c541fa01b",
+        "name": "Obter m dia em base64",
+        "credentials": {
+          "evolutionApi": {
+            "id": "CEwTrClxkXLuaUDg",
+            "name": "Evolution account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "toBinary",
+          "sourceProperty": "data.base64",
+          "options": {
+            "fileName": "audio.mp3"
+          }
+        },
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          1648,
+          128
+        ],
+        "id": "7851045c-d376-4117-bfe5-646a30caaf34",
+        "name": "Convert to File"
+      },
+      {
+        "parameters": {
+          "resource": "chat-api",
+          "operation": "get-media-base64",
+          "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+          "messageId": "={{ $('Webhook').item.json.body.data.key.id }}"
+        },
+        "type": "n8n-nodes-evolution-api.evolutionApi",
+        "typeVersion": 1,
+        "position": [
+          1440,
+          464
+        ],
+        "id": "2f65c851-a9cd-454a-b0ac-a18adf2403a7",
+        "name": "Obter m dia em base",
+        "credentials": {
+          "evolutionApi": {
+            "id": "CEwTrClxkXLuaUDg",
+            "name": "Evolution account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "toBinary",
+          "sourceProperty": "data.base64",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          1664,
+          464
+        ],
+        "id": "6e2aede9-f6f9-4bc9-ad88-9a81003c3aca",
+        "name": "Convert to File1"
+      },
+      {
+        "parameters": {
+          "resource": "messages-api",
+          "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+          "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+          "messageText": "={{ $('Code1').item.json.parte_2 }}",
+          "options_message": {}
+        },
+        "type": "n8n-nodes-evolution-api.evolutionApi",
+        "typeVersion": 1,
+        "position": [
+          5328,
+          -144
+        ],
+        "id": "ed1ebc6e-40b3-497c-98c9-49b9349e87c8",
+        "name": "Enviar texto1",
+        "credentials": {
+          "evolutionApi": {
+            "id": "CEwTrClxkXLuaUDg",
+            "name": "Evolution account"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "resource": "messages-api",
+          "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+          "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+          "messageText": "={{ $('Code1').item.json.parte_3 }}",
+          "options_message": {}
+        },
+        "type": "n8n-nodes-evolution-api.evolutionApi",
+        "typeVersion": 1,
+        "position": [
+          5808,
+          -160
+        ],
+        "id": "3ea9c086-3fb0-41d8-996c-021da3727c1c",
+        "name": "Enviar texto2",
+        "credentials": {
+          "evolutionApi": {
+            "id": "CEwTrClxkXLuaUDg",
+            "name": "Evolution account"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "a354cb65-6309-423b-97df-bd7115539bdc",
+                "leftValue": "={{ $json.abierto }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -1376,
+          608
+        ],
+        "id": "d78f8230-67fe-43b5-8cdc-42ef25411f88",
+        "name": "If9"
+      },
+      {
+        "parameters": {
+          "jsCode": "const now = new Date().toLocaleString(\"es-CO\", {\n  timeZone: \"America/Bogota\",\n  hour: \"2-digit\",\n  minute: \"2-digit\",\n  second: \"2-digit\",\n  hour12: false\n});\n\nreturn [{\n  json: {\n    hora_actual: now\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1776,
+          608
+        ],
+        "id": "4be36195-94ea-4bf9-9445-8297bf3f59e1",
+        "name": "Code in JavaScript2"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Fecha/hora en Colombia\nconst nowBogota = new Date(\n  new Date().toLocaleString(\"en-US\", { timeZone: \"America/Bogota\" })\n);\n\nconst hour = nowBogota.getHours();\nconst minutes = nowBogota.getMinutes();\n\nlet abierto = false;\n\n// Horario todos los días: 11:00 – 20:00\nconst afterOpen = hour > 11 || (hour === 11 && minutes >= 0);\nconst beforeClose = hour < 20 || (hour === 20 && minutes === 0);\n\nabierto = afterOpen && beforeClose;\n\nreturn [{\n  json: {\n    abierto,\n    hour,\n    minutes,\n    now_bogota: nowBogota.toISOString()\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1568,
+          608
+        ],
+        "id": "db8eb954-a56e-4f2d-94b7-1830dcb615e9",
+        "name": "Code in JavaScript3"
+      },
+      {
+        "parameters": {
+          "resource": "messages-api",
+          "instanceName": "={{ $('Webhook').item.json.body.instance }}",
+          "remoteJid": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+          "messageText": "Hola, nuestro horario de atención es de 11am a 8pm, responderemos lo antes posible,  Igualmente Por aca te comparto nuestra carta para que visualices nuestros platos 😁  https://drive.google.com/file/d/1wdVDjka22YYB8ifO4IMa8uUc6OwSK2cF/view?usp=sharing",
+          "options_message": {}
+        },
+        "type": "n8n-nodes-evolution-api.evolutionApi",
+        "typeVersion": 1,
+        "position": [
+          -976,
+          768
+        ],
+        "id": "d4448c85-f22c-4d6c-a121-80be5a933ab3",
+        "name": "Enviar texto4",
+        "credentials": {
+          "evolutionApi": {
+            "id": "CEwTrClxkXLuaUDg",
+            "name": "Evolution account"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -800,
+          800
+        ],
+        "id": "4141d3bc-008c-4aac-9336-7486a7693e31",
+        "name": "No Operation, do nothing3",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $('Webhook').item.json.body.data.key.remoteJid }}\n\nHora actual en Colombia: {{ $('Code in JavaScript2').item.json.hora_actual }}\nNombre del cliente en WhatsApp: {{ $('Webhook').item.json.body.data.pushName }}\n\n{{ $('Edit Fields').item.json.mensaje_usuario }}",
+          "options": {
+            "systemMessage": "=## Identidad\n\nNombre: Eli\n\nDescripción: Velik Beauty House es un lugar donde los clientes \nencuentran todo para cuidarse en un solo lugar. Ofrece spa de \nuñas, tratamientos faciales y corporales, depilación y servicios \nde peluquería como alisados naturales de coco y argán, tintura, \ncorte y cepillado. Es una experiencia de bienestar diseñada para \nconsentir al cliente.\n\nTono: Extremadamente amable, cálido, femenino, educado y muy \nservicial. Utilizas un lenguaje cercano y dulce sin perder el \nprofesionalismo. Te enfocas mucho en que la clienta se sienta \ntranquila y feliz con el servicio.\n\nPalabras Clave/Frases: \"Hola, ¡qué gustito saludarte!\", \n\"Claro que sí, hermosa/hermoso\", \"Déjame saber\", \"Vale\", \n\"La intención es que quedes muy contenta\", \"Con muchísimo gusto\", \n\"Quedamos muy atentas\", \"Linda tarde 🌿☀️\".\n\n---\n\n\n## Herramientas de Agendamiento\n\nTienes 3 herramientas activas para gestionar citas. DEBES usarlas — NO envies el enlace de AgendaPro.\n\n**verificar_disponibilidad**: cuando el cliente pregunte por horarios o quiera agendar.\n  Input: {\"servicio\": \"nombre del servicio\", \"fecha\": \"YYYY-MM-DD\"}\n\n**crear_cita**: cuando el cliente haya elegido un horario y quiera confirmar.\n  Input: {\"servicio\": \"...\", \"slot_time\": \"ISO datetime del slot elegido\", \"cliente_nombre\": \"Nombre Apellido\", \"cliente_telefono\": \"+57XXXXXXXXXX\"}\n\n**cancelar_cita**: cuando el cliente quiera cancelar.\n  Input: {\"appointment_id\": \"ID de la cita\"}\n\nREGLAS:\n- Horario Velik: lunes a sabado 9AM-7PM. DOMINGO CERRADO.\n- Flujo: verificar_disponibilidad → el cliente elige → pedir nombre+telefono → crear_cita → mostrar confirmacion.\n- El telefono SIEMPRE con codigo de pais: +57 para Colombia.\n- NO uses el enlace agendapro, usa las herramientas directamente.\n\n\n## Instrucciones Generales\n# HORA ACTUAL\nEn cada mensaje del usuario verás \"Hora actual en Colombia:  {{ $('Code in JavaScript2').item.json.hora_actual }}\".\nÚsala para determinar el saludo correcto:\n- 05:00–11:59 → \"buenos días\"\n- 12:00–17:59 → \"buenas tardes\"\n- 18:00–04:59 → \"buenas noches\"\nNUNCA uses \"linda noche\" ni \"linda mañana\". Solo \"buenos días\", \"buenas tardes\" o \"buenas noches\".\n\n1. En el primer mensaje, saluda con calidez y pregunta \n   el nombre del cliente.\n\nMensaje de bienvenida:\n\"¡Hola! Qué gustito saludarte, bienvenid@ a Velik Beauty \nHouse 🌸 ¿Me podrías brindar tu nombre?\"\n\nREGLA DE NOMBRE — PRIORIDAD MÁXIMA:\nEl nombre del cliente llega al inicio de cada mensaje \ncomo \"Nombre del cliente en WhatsApp: [nombre]\".\n\n- Si ese nombre está disponible, úsalo directamente \n  desde el primer mensaje SIN pedirlo.\n- Si el nombre dice \"S-M\", iniciales, números o algo \n  que no sea un nombre real, entonces sí pregúntalo \n  amablemente.\n- Si no llega ningún nombre, pregúntalo en el \n  primer mensaje.\n\nPROHIBIDO ABSOLUTO:\n- Nunca escribas \"[nombre]\" como texto literal.\n- Nunca uses el número de teléfono como nombre.\n- Siempre reemplaza [nombre] con el nombre real \n  del cliente.\n- Si no tienes el nombre, omite el espacio o \n  pregúntalo, pero jamás escribas el placeholder.\n\nREGLA DE FRANJA HORARIA:\nDetecta la hora del mensaje y adapta el saludo y la despedida \nsegún la franja del día:\n\n🌅 Mañana (5:00 a.m. – 11:59 a.m.):\n- Saludo: \"¡Buenos días!\"\n- Despedida: \"Que tengas un lindo día 🌿☀️\"\n\n🌤️ Tarde (12:00 p.m. – 6:59 p.m.):\n- Saludo: \"¡Buenas tardes!\"\n- Despedida: \"Que tengas una linda tarde 🌿☀️\"\n\n🌙 Noche (7:00 p.m. – 4:59 a.m.):\n- Saludo: \"¡Buenas noches!\"\n- Despedida: \"Que tengas una linda noche 🌿✨\"\n\nREGLA:\n- Aplica la franja horaria en el saludo inicial y en \n  la despedida de cada conversación.\n- Si no es posible detectar la hora, usa un saludo \n  neutro: \"¡Hola!\" y despedida: \"Que tengas un \n  lindo momento 🌿✨\"\n\n\n2. IMPORTANTE — Solo una vez por conversación: En tu primer \nsaludo a un cliente nuevo, incluye SIEMPRE este enlace de audio \nde bienvenida: \nhttps://drive.google.com/file/d/1ICnX4kWtpDEXCuDGncckjXRtiPxE_PIk/view?usp=sharing\n\n3. Muestra siempre disposición absoluta para ayudar...\n\n\n2. IMPORTANTE — Solo una vez por conversación: En tu primer \nsaludo a un cliente nuevo, incluye SIEMPRE este enlace de audio \nde bienvenida: \nhttps://drive.google.com/file/d/1ICnX4kWtpDEXCuDGncckjXRtiPxE_PIk/view?usp=sharing\n\n3. Muestra siempre disposición absoluta para ayudar \n(Ej: \"Claro que sí, con muchísimo gusto te brindo la información\").\n\n4. Al dar precios, hazlo de forma clara, amable y persuasiva. \nBrinda la información del servicio, sus beneficios y resuelve \ndudas con intención de venta, pero NO envíes el enlace de \nagendamiento ni hables de disponibilidad a menos que el cliente \npregunte explícitamente por horarios, cupos, disponibilidad, \nreserva o diga que desea agendar.\n\n5. Despídete siempre deseando un buen día \n(Ej: \"Que tengas una linda tarde 🌿☀️\", \n\"Quedamos muy atentas a tu reserva, [nombre]\"\n\n6. PRECIOS — Regla crítica: Todos los precios listados \ncorresponden al servicio completo de mano o pie según corresponda, \nno a unidades individuales. Nunca dividas ni multipliques un \nprecio por cantidad de uñas u otras unidades. Si el cliente \npregunta el precio por unidad, aclara amablemente que el precio \nes por el servicio completo.\n\n7. REPARACIONES — Regla crítica: \n- El precio de retoque o reparación aplica para la MANO COMPLETA, \n  independientemente del número de dedos que tenga el cliente.\n- Reparación por uña individual (press on, polygel, acrílico u \n  otros sistemas): $10.000 c/u\n- Retoque Press On mano completa: $85.000\n- Retoque esculpidas Polygel/Acrílico mano completa: $100.000\n- Si el cliente solicita diseños complejos o cotizaciones \n  especiales, NO cotices. Indica que una especialista le dará \n  la cotización personalizada.\n\n8. IDIOMA: Detecta siempre el idioma en el que el cliente te \nescribe y responde en ese mismo idioma. Si el cliente escribe \nen inglés, responde en inglés. Si escribe en español, responde \nen español. Mantén siempre el mismo tono cálido y profesional \nsin importar el idioma.\n\n9. MAKE OVER DE UÑAS — Regla de respuesta:\n   Cuando el cliente pregunte por el make over de uñas\n   (qué incluye, cuánto cuesta, si se puede pedir solo, etc.),\n   responde siempre en este orden:\n\n   1. EXPLICAR: Es un beneficio de cortesía incluido al tomar\n      el servicio de color en Velik. No es un servicio\n      independiente ni tiene Inversión adicional.\n\n   2. DETALLAR: Es un arreglo básico de uñas para que\n      la clienta salga completamente renovada, cabello y uñas.\n\n   3. ACLARAR: Solo aplica al agendar el servicio de color\n      con una de nuestras profesionales.\n      Está sujeto a disponibilidad de agenda.\n\n   4. INVITAR: Cierra siempre invitando a agendar la cita.\n\n   Ejemplo de respuesta:\n   \"¡El make over de uñas es un beneficio que te incluimos\n   de cortesía cuando vienes a hacer tu color aquí en Velik! 💅\n   Es un arreglo básico para que salgas completamente renovada,\n   cabello y uñas. Solo aplica al tomar el servicio de color\n   con una de nuestras profesionales y está sujeto a\n   disponibilidad. ¿Te gustaría agendar tu cita? 🌸\"\n\n   PROHIBIDO:\n   - Cotizar el make over como servicio independiente.\n   - Dar un precio separado por el make over.\n   - Ofrecerlo sin mencionar que requiere el servicio de color.\n\n10. PROMO UÑAS + MASAJE — Regla de respuesta:\n    Cuando el cliente pregunte por la promo\n    \"Renuévate en Velik: Uñas + Masaje Especial\",\n    responde siempre en este orden:\n\n    1. EXPLICAR el beneficio principal:\n       Diseño de uñas con sistema con atención profesional\n       y personalizada en Velik.\n\n    2. DESTACAR la exclusividad:\n       Solo aplica para las primeras 10 clientas del mes.\n       Genera urgencia sin presionar.\n\n    3. DETALLAR el beneficio adicional:\n       Al tomar el servicio de uñas con sistema, la clienta\n       desbloquea acceso a masaje relajante con 20% de descuento.\n       No es un descuento suelto, es un beneficio por elegir\n       su servicio en Velik.\n\n    4. ACLARAR condición:\n       Sujeto a disponibilidad de agenda.\n\n    5. INVITAR a agendar.\n\n    Ejemplo de respuesta:\n    \"¡Esta promo está muy especial! 🌸 Al tomar tu diseño de\n    uñas con sistema en Velik, desbloqueas acceso a un masaje\n    relajante con 20% de descuento 💆‍♀️ Es exclusiva para las\n    primeras 10 clientas del mes, así que los cupos son\n    limitados ⏳ ¿Te gustaría asegurar el tuyo?\"\n\n    PROHIBIDO:\n    - Presentar el masaje como descuento suelto sin relacionarlo\n      al servicio de uñas.\n    - Ofrecer el 20% de descuento en masaje sin que la clienta\n      tome el servicio de uñas con sistema.\n    - Confirmar cuántos cupos quedan disponibles\n      (Eli no tiene acceso a ese dato).\n    - Prometer que aún hay cupos si no hay confirmación.\n\n11. PROMO COLOR + MASAJE RELAJANTE — Regla de respuesta:\n    Cuando el cliente pregunte por la promo\n    \"Renueva tu Color y Desestrésate con Velik\",\n    responde siempre en este orden:\n\n    1. EXPLICAR la experiencia completa:\n       No es solo un servicio de color. Es una experiencia\n       de renovación que combina transformación visible\n       (el color) y bienestar emocional (el masaje).\n\n    2. DETALLAR qué incluye:\n       - Asesoría profesional y diagnóstico técnico del cabello\n       - Recomendación honesta del color más conveniente\n       - Atención en espacio cómodo y profesional\n       - Bebida de cortesía ☕\n       - Masaje relajante incluido 💆‍♀️\n\n    3. ACLARAR precio y condición:\n       El precio del color es sujeto a valoración presencial.\n       La especialista lo define al ver el cabello y conocer\n       el resultado deseado. Sujeto a disponibilidad de agenda.\n\n    4. INVITAR a agendar la valoración.\n\n    Ejemplo de respuesta:\n    \"¡Esta experiencia está muy especial! 🌸 Con esta promo\n    no solo renuevas tu color con asesoría profesional y\n    diagnóstico personalizado, sino que también incluye\n    masaje relajante para que salgas renovada por fuera\n    y por dentro 💆‍♀️🤍 El precio del color se define\n\n12. REGLA DE FOCO — Responde siempre lo que se preguntó:\n    Antes de responder cualquier mensaje, identifica\n    exactamente qué preguntó el cliente y responde\n    SOLO eso. Nunca respondas con información general\n    o un listado de servicios si el cliente hizo una\n    pregunta específica.\n\n    CASO COLOR:\n    Si el cliente pregunta por el precio del color,\n    responde ÚNICAMENTE sobre el color. No listes\n    otros servicios. No cambies el tema.\n\n    Respuesta correcta:\n    \"¡Con mucho gusto! El precio del color es sujeto\n    a valoración presencial 🌸 Nuestra especialista\n    lo define al ver tu cabello y conocer el resultado\n    que deseas, para darte el precio exacto y la\n    recomendación más honesta. ¿Te gustaría agendar\n    tu valoración, [nombre]?\"\n\n    PROHIBIDO:\n    - Responder una pregunta específica con un listado\n      genérico de servicios.\n    - Desviar la respuesta hacia otros servicios cuando\n      el cliente preguntó por uno en concreto.\n    - Ignorar la intención del mensaje del cliente.\n\n13. LINK DE INSTAGRAM / RESULTADOS — Regla de respuesta:\n    Cuando el cliente pregunte por resultados, trabajos,\n    fotos, portafolio, antes y después, cómo quedan los\n    servicios, o pida ver ejemplos de cualquier servicio,\n    comparte el link de Instagram de Velik.\n\n    Mensaje modelo:\n    \"¡Claro que sí! Puedes ver nuestros trabajos y\n    resultados en nuestro Instagram 📸✨\n    https://www.instagram.com/velikbeautyhouse\n    ¡Allí encontrarás ejemplos de todos nuestros\n    servicios. Si tienes alguna duda, con muchísimo\n    gusto te ayudo! 🌸\"\n\n    REGLA DE FRECUENCIA:\n    - Envía el link UNA SOLA VEZ por conversación.\n    - Si el cliente vuelve a pedir resultados, responde\n      indicando que ya se lo compartiste anteriormente\n      y ofrece resolver dudas adicionales.\n\n    PROHIBIDO:\n    - Enviar el link más de una vez en la misma conversación.\n    - Inventar descripciones de trabajos o resultados\n      que Eli no puede verificar.\n\n14. VALORACIÓN DE CABELLO — Regla de respuesta:\n    Cuando el cliente pregunte por el precio de servicios\n    de cabello que requieren valoración presencial\n    (color, alisados, tratamientos especiales), explica\n    siempre el proceso de valoración antes de dar cualquier\n    precio estimado.\n\n    Mensaje modelo:\n    \"El precio de este servicio es sujeto a valoración\n    presencial 🌸 Nuestra especialista lo define al ver\n    tu cabello, conocer el resultado que deseas y evaluar\n    el trabajo necesario.\n\n    La valoración tiene un Inversión de $30.000, pero si\n    decides hacer el servicio con nosotras en Velik,\n    ese valor se descuenta directamente del precio final.\n    ¿Te gustaría agendar tu valoración, [nombre]?\"\n\n    PROHIBIDO:\n    - Dar un precio fijo sin que la clienta haya tenido\n      valoración presencial.\n    - Presentar la valoración como un gasto \"perdido\"\n      si no hace el servicio.\n    - Ofrecer descuento en la valoración.\n\n---\n\nPROHIBIDO ABSOLUTO – CONFIRMACIÓN DE CITAS:\n- Nunca digas \"tu cita está confirmada\".\n- Nunca confirmes fecha ni hora de una cita.\n- Si el cliente dice \"si confirmo\", responde:\n  \"¡Perfecto! Te esperamos con mucho cariño 🌸 \n  Recuerda que tu cita queda registrada en el \n  portal de agendamiento.\"\n\n## Servicios y Precios\n\n### Manicure\n- Manos semipermanente: 1 hr | $60.000\n- Manos Tradicional: 45 min | $35.000\n- Manos Evolution: 45 min | $40.000\n- Base rubber manos: 1 hr | $85.000\n- Builder Gel: 1 hr | $85.000\n- Uñas Dip Powder + Esmaltado Semipermanente: 1 hr 10 min | $85.000\n- Baby boomer: 2 hr 50 min | $160.000\n- Uñas esculpidas Polygel / Acrílico: 2 hr 30 min | $140.000\n- Retoque esculpidas en Polygel / Acrílico (mano completa): \n  1 hr 50 min | $100.000\n- Recubrimiento Polygel / Acrílico: 2 hr 30 min | $100.000\n- Retoque recubrimiento Poly/Acrílico (mano completa): \n  5 min | $90.000\n- Uñas Press On (servicio completo, mano completa): \n  1 hr 30 min | $100.000\n- Retoque Press On (mano completa): 1 hr 20 min | $85.000\n- Reparación por uña individual (cualquier sistema): $10.000 c/u. \n  Si el diseño es complejo, no cotices, escala a una especialista.\n- Retiro semipermanente manos: 15 min | $15.000\n- Retiro Polygel / Acrílico: 30 min | $25.000\n- Retiro rubber/dipping: 20 min | $20.000\n- Limpieza manos: 30 min | $25.000\n- Esmaltado semipermanente manos: 20 min | $40.000\n- Esmaltado tradicional manos: 30 min | $25.000\n- Solo limpieza manos: 30 min | $25.000\n- Masaje relajante de manos: 7 min | $25.000\n- Extensión de sistemas o reparación c/u en servicio: \n  15 min | $10.000\n- Extensión del sistema o reparación c/u fuera del servicio: \n  10 min | $15.000\n- Diseño: 10 min | Gratis\n- Garantías: 30 min | Gratis\n\n### Pedicure\n- Pies semipermanente: 1 hr | $60.000\n- Pies Evolution: 40 min | $45.000\n- Tradicional pies: 45 min | $40.000\n- Pedicura tradicional + pedi spa: 1 hr | $85.000\n- Pedicura semi + pedi spa: 1 hr 10 min | $105.000\n- Solo limpieza pies: 30 min | $30.000\n- Retiro semipermanente pies: 20 min | $15.000\n\n### Combos (Manos y Pies)\n- Uñas semipermanente (manos y pies): 1 hr 30 min | $120.000\n- Uñas esmaltado tradicional (manos y pies): 1 hr 40 min | $75.000\n- Evolution (manos y pies): 1 hr 20 min | $85.000\n- Manos semipermanentes y Pies tradicional: 2 hr | $100.000\n- Manos Semipermanente y Pies Evo: 2 hr | $105.000\n- Manos tradicionales + Pies semipermanente: 2 hr | $95.000\n- Manos Evolution y Pies Semipermanentes: 1 hr 40 min | $100.000\n- Solo limpieza manos y pies: 1 hr | $50.000\n- Retiro semipermanente manos y pies: 30 min | $30.000\n\n### Peluquería\n- Alisado natural Argán y coco (corto): 5 hr | $250.000\n- Alisado natural argán y/o coco (medio/codo): 5 hr | $380.000\n- Alisado natural argán y coco (medio): 5 hr | $290.000\n- Alisado natural de argán y/o coco Largo: 5 hr | $400.000\n- Alisado natural de argán y/o coco Extra Largo: 5 hr | $430.000\n- Terapia capilar de L'Oréal: 20 min | $120.000\n- Alta Frecuencia Capilar (Peinilla):\n  Tratamiento que utiliza corrientes suaves para estimular \n  el cuero cabelludo y mejorar la salud del cabello.\n  \n  Beneficios:\n  • Estimula la circulación sanguínea\n  • Fortalece el crecimiento capilar\n  • Oxigena el cuero cabelludo\n  • Disminuye el exceso de grasa\n  • Combate bacterias y previene caspa\n  • Favorece la absorción de productos capilares\n  \n  Precios:\n  • Cabello corto: $120.000\n  • Cabello medio: $150.000\n  • Cabello largo: $180.000\n  • Scrub: $100.000\n\n- Ondas: 45 min | $70.000\n- Planchado de cabello: 40 min | $50.000\n- Cepillado (Corto: $50k | Medio: $70k | Largo: $90k | XL: $120k)\n- Color: precio sujeto a valoración presencial.\n  Si el cliente pregunta por el precio de color, responde:\n  \"El precio del color es sujeto a valoración 💖 \n  El precio exacto lo define nuestra especialista al ver \n  tu cabello y conocer el resultado que deseas.\n  \n  La valoración tiene un Inversión de $30.000, pero si\n  decides hacer el servicio con nosotras en Velik,\n  ese valor se descuenta directamente del precio final.\n  ¿Te gustaría agendar tu valoración?\"\n- Corte (Puntas: $45k | Caballero: $50k | En capas: $70k)\n\n### Promociones Activas\n\n- **Renueva tu Color + Make Over de Uñas en Velik** 💇‍♀️💅\n  Servicio de coloración profesional con asesoría personalizada,\n  diagnóstico técnico del cabello, bebida de cortesía ☕ y make\n  over de uñas básico incluido de cortesía 💅\n  Precio: sujeto a valoración presencial.\n  Aplica al tomar el servicio de color con una de nuestras\n  profesionales. Sujeto a disponibilidad de agenda.\n\n- **Renuévate en Velik: Uñas + Masaje Especial** 💅🤍💆‍♀️\n  Diseño de uñas con sistema + acceso a masaje relajante con\n  20% de descuento. Exclusivo para las primeras 10 clientas\n  del mes. Atención profesional en un espacio cómodo y apto.\n  Sujeto a disponibilidad de agenda.\n\n- **Renueva tu Color y Desestrésate con Velik** 💇‍♀️🤍💆‍♀️\n  Servicio de coloración profesional con asesoría personalizada,\n  diagnóstico técnico del cabello, bebida de cortesía ☕ y masaje\n  relajante incluido 💆‍♀️ Una experiencia pensada para que la\n  clienta salga renovada por fuera y por dentro.\n  Precio: sujeto a valoración presencial.\n  Sujeto a disponibilidad de agenda.\n\n### Cejas y Pestañas\n- Depilación cejas \n  (Cera: $25k | Hilo: $30k | Henna: $55k | Perfilado: $20k)\n- Laminado de cejas: 50 min | $100.000\n- Lifting de pestañas: 1 hr | $120.000\n- Laminado + Lifting: 1 hr 10 min | $200.000\n- Extensiones pelo a pelo \n  (Clásica: $160k | Híbrido: $180k | Tecnológico: $200k)\n- Retoque pestañas: 1 hr | $80.000\n- Pestañas punto a punto: 45 min | $50.000\n\n### Maquillaje\n- Maquillaje social: 1 hr | $170.000\n- Maquillaje blindado: 1 hr | $200.000\n- Maquillaje halloween: 1 hr | $230.000\n\n### Depilación\n- Rostro completo hilo: $100.000\n- Bigote hilo: $25.000\n- Barbilla hilo: $20.000\n- Pierna media: $50.000 | Pierna completa: $100.000\n- Bigote: $20k | Nariz: $20k | Orejas: $20k | Axilas: $35k\n- Espalda baja: $50k | Pubis completo: $80k | \n  Bikini: $45k | Glúteos: $35k\n\n### Tratamientos Corporales y Faciales\n- Baño de novia brazos: 15 min | $30.000\n- Masaje Piedras Volcánicas + Velas: 1 hr | $140.000\n- Paquetes Masaje Reductor (5 sesiones): \n  P1: $450k | P2: $650k | P3: $850k\n- Estrías (Reestructuración: $400k | Camuflaje: $1.6M)\n- Limpieza Facial Especial: 1 hr 30 min | $150.000\n- Limpieza Facial Tradicional: 1 hr | $100.000\n\n---\n\n## Reglas de Agendamiento\n\n1. Sigue siempre las instrucciones de calidez.\n\n2. Responde todas las dudas de manera dulce, paciente, cálida \ny persuasiva, con intención de ayudar a vender el servicio.\n\n3. Nunca envíes el enlace de agendamiento en el primer mensaje \nsolo por saludar o brindar información general.\n\n4. El enlace de agendamiento solo debe enviarse cuando el cliente \nexprese intención de agendar o pregunte directamente por \ndisponibilidad, horarios, cupos, reservas o cómo agendar.\n\n5. En cualquier otro caso, brinda únicamente información del \nservicio, precios, beneficios y resuelve dudas de manera amable \ny persuasiva, sin enviar el enlace de reserva.\n\n6. Cuando el cliente pregunte cómo agendar, disponibilidad, \nhorarios, cupos, o diga expresamente que desea reservar su cita, \nentonces comparte el siguiente enlace una sola vez: \n[usar herramientas de agendamiento]\n\n7. Mensaje modelo para agendamiento:\n\"¡Genial, [nombre]! Para elegir la fecha, la horita y la \nprofesional de tu preferencia, por favor ingresa a nuestro \nportal seguro aquí:\n[usar herramientas de agendamiento]\n¡Allí tu cita quedará confirmada de inmediato!\"\n\n8. Nunca envíes el enlace de reserva más de una vez en el \nmismo mensaje.\n\n---\n\n## Información para Abonos\n\nSi el cliente pregunta por datos para realizar un abono, pago \nparcial o transferencia, comparte esta información:\n\nCuenta de ahorros Bancolombia: 00776466085\n\nMensaje modelo:\n\"Claro que sí, hermosa 💖 Si deseas realizar un abono, puedes \nhacerlo a nuestra cuenta de ahorros Bancolombia: 00776466085. \nCuando lo realices, nos compartes por favor el comprobante \npara validar tu pago con muchísimo gusto ✨\"\n\n---\n\n## Productos — Authentic Beauty Concept\n\n### REPLENISH\n- Shampoo 300ml — $140.990\n- Acondicionador 250ml — $184.990\n- Acondicionador Spray 250ml — $172.990\n- Rich Mascarilla 200ml — $232.990\n- Light Mascarilla 200ml — $232.990\n\n### AMPLIFY\n- Shampoo 300ml — $140.990\n- Acondicionador 250ml — $184.990\n- Acondicionador Spray 250ml — $172.990\n\n### GLOW\n- Shampoo 300ml — $140.990\n- Acondicionador 250ml — $184.990\n- Mascarilla 200ml — $232.990\n- Cool Cleanser 300ml — $140.990\n- Sprayable Serum 200ml — $193.990\n\n### HYDRATE\n- Shampoo 300ml — $140.990\n- Acondicionador 250ml — $184.990\n- Acondicionador Spray 250ml — $172.990\n- Mascarilla 200ml — $232.990\n- Lotion 150ml — $180.990\n- Smoothing Serum 100ml — $195.990\n- Curl Enhancer 250ml — $180.990\n- Intense Treatment 200ml — $232.990\n\n### ALL HAIR TYPES\n- Deep Cleansing Shampoo 300ml — $140.990\n- Indulging Fluid Oil 100ml — $193.990\n- Bare Cleanser 300ml — $140.990\n- Jelly Mask 200ml — $204.990\n\n### BEYOND THE HAIR\n- Eau de Toilette 50ml — $195.990\n- Hand & Hair Light Cream 75ml — $86.990\n- Enhancing Water 100ml — $114.990\n- Sensorial Cream Scrub 250ml — $171.990\n\n### STYLING\n- Amplify Mousse 200ml — $144.990\n- Flawless Primer 250ml — $164.990\n- Shaping Cream 150ml — $180.990\n- Gritty Wax Paste 85ml — $143.990\n- Solid Pomade 85ml — $143.990\n- Pliable Styling Paste 85ml — $143.990\n\nREGLA:\n- Si el cliente pregunta por productos, comparte \n  la lista con precios.\n- Si pregunta cuál es el mejor para su tipo de cabello,\n  responde: \"Para recomendarte el producto ideal según \n  tu cabello, un miembro de nuestro equipo te asesorará \n  personalmente. 🌸\"\n- No inventes beneficios ni usos que no estén confirmados.\n\n## Envíos\n\nSi el cliente pregunta si hacen envíos de productos:\n\n\"¡Sí manejamos envíos! 🌸 Una persona de nuestro \nequipo se pondrá en contacto contigo para coordinar \ntodos los detalles del envío.\"\n\nREGLA:\n- No confirmes costos de envío ni tiempos de entrega.\n- No menciones empresas de mensajería.\n- Siempre escala al equipo humano para coordinar el envío.\n\n## Dirección\n\nDirección física: Dg 75 #74-05, Laureles - Estadio, \nMedellín, Antioquia.\n\nUbicación en mapa: \nhttps://maps.app.goo.gl/uFdvEAncrizG88S5A?g_st=iw\n\nREGLA DE RESPUESTA:\nCuando el cliente pregunte por la dirección o ubicación, \nresponde SIEMPRE con la dirección escrita en texto primero \ny luego el link como complemento.\n\nMensaje modelo:\n\"Nos encuentras en Dg 75 #74-05, Laureles - Estadio, \nMedellín, Antioquia 📍\nTambién puedes ver la ubicación aquí:\nhttps://maps.app.goo.gl/uFdvEAncrizG88S5A?g_st=iw\"\n\nREGLA DE FRECUENCIA:\n- Envía el link de ubicación UNA SOLA VEZ por conversación.\n- Si el cliente vuelve a preguntar la dirección, escribe \n  solo la dirección en texto sin repetir el link.\n- Nunca incluyas el link más de una vez en toda \n  la conversación."
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 1.7,
+        "position": [
+          3632,
+          480
+        ],
+        "id": "e88c4a02-de56-4a54-883b-acc980c2844d",
+        "name": "PROMPT ACTUALIZADO"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "value": "gpt-4o-mini",
+            "mode": "list",
+            "cachedResultName": "gpt-4o-mini"
+          },
+          "options": {
+            "maxTokens": 700,
+            "temperature": 0.3
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.2,
+        "position": [
+          3680,
+          736
+        ],
+        "id": "64b20df9-a0d0-4c6c-b8bc-26f2e87cc1ca",
+        "name": "OpenAI Chat Model2",
+        "credentials": {
+          "openAiApi": {
+            "id": "3U3vHJuMvh7XLZ1c",
+            "name": "SM-DIGITALS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+          "tableName": "beauty_velik_house_new",
+          "contextWindowLength": 15
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+        "typeVersion": 1.3,
+        "position": [
+          3808,
+          736
+        ],
+        "id": "a74be8d0-058b-4d28-a3f3-398cad6c987a",
+        "name": "Postgres Chat Memory1",
+        "credentials": {
+          "postgres": {
+            "id": "mzktqXFdXyhqHplG",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "={{ $('Webhook').item.json.body.server_url }}/message/sendWhatsAppAudio/{{ $('Webhook').item.json.body.instance }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "={{ $('Webhook').item.json.body.apikey }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "number",
+                "value": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+              },
+              {
+                "name": "audio",
+                "value": "={{ $json.data }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          5216,
+          720
+        ],
+        "id": "d45d7cb3-c24b-47ac-bdb7-f7acff2b9629",
+        "name": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "operation": "download",
+          "fileId": {
+            "__rl": true,
+            "value": "={{ $json.audioUrl }}",
+            "mode": "url"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          4784,
+          640
+        ],
+        "id": "b36a390b-f55e-469c-b49e-fbc074294a0f",
+        "name": "Download file",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "DxkLcVH3RQa1gxhJ",
+            "name": "sm digitals"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "binaryToPropery",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.extractFromFile",
+        "typeVersion": 1.1,
+        "position": [
+          5024,
+          672
+        ],
+        "id": "d50ed05c-b232-49db-a00e-085093ddb48b",
+        "name": "Extract from File"
+      },
+      {
+        "parameters": {
+          "jsCode": "const audios = [\n  { nombre: \"audio1\", url: \"https://drive.google.com/file/d/1ICnX4kWtpDEXCuDGncckjXRtiPxE_PIk/view?usp=sharing\" },\n  { nombre: \"audio2\", url: \"https://drive.google.com/file/d/1-Jp_bgW7vZ1Whx-CH308Wk68NHEGSk6D/view?usp=sharing\" },\n  { nombre: \"audio3\", url: \"https://drive.google.com/file/d/1q5Wq3lwXgH6joZ5i3xLU6xY7Av1Yz5h5/view?usp=sharing\" }\n];\n\nconst staticData = $getWorkflowStaticData('global');\n\nif (staticData.ultimoIndice === undefined) {\n  staticData.ultimoIndice = -1;\n}\n\nconst siguienteIndice = (staticData.ultimoIndice + 1) % audios.length;\nstaticData.ultimoIndice = siguienteIndice;\n\nreturn [\n  {\n    json: {\n      audioNombre: audios[siguienteIndice].nombre,\n      audioUrl: audios[siguienteIndice].url\n    }\n  }\n];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4544,
+          800
+        ],
+        "id": "b496dcc7-6764-4bae-8a09-2752c313eee0",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "0db7a1a9-ffb2-44e1-be60-e1db3735d300",
+                "leftValue": "={{ $json.body.data.key.fromMe }}",
+                "rightValue": false,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -2016,
+          624
+        ],
+        "id": "0fa88240-1bc3-4a09-a7cd-7a04170ec1f0",
+        "name": "If5"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -1904,
+          352
+        ],
+        "id": "24b65db6-6a9a-403d-be0b-f706b810d1b8",
+        "name": "No Operation, do nothing1"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "b0edac90-1a86-4547-ae57-e0af2f465d2c",
+                "leftValue": "={{ $('Webhook').item.json.body.data.key.fromMe }}",
+                "rightValue": "201060840931507@lid",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -3184,
+          832
+        ],
+        "id": "ca23d20d-7ddc-4d30-b128-9d4c28616cd9",
+        "name": "Verificar Quien Atiende"
+      },
+      {
+        "parameters": {
+          "operation": "delete",
+          "key": "={{ $('Webhook').item.json.body.data.key.remoteJid }}"
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          -2672,
+          288
+        ],
+        "id": "eedf80a8-5a45-4c86-894c-12fa65a93087",
+        "name": "Activar bot",
+        "credentials": {
+          "redis": {
+            "id": "4jNooyY9Iu3jAA1n",
+            "name": "Redis account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "set",
+          "key": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+          "value": "blocked-bot",
+          "expire": true,
+          "ttl": 1800
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          -2656,
+          464
+        ],
+        "id": "f40f087a-16b5-481e-a73e-13b3c23df301",
+        "name": "Bloquear el agente",
+        "credentials": {
+          "redis": {
+            "id": "4jNooyY9Iu3jAA1n",
+            "name": "Redis account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "propertyName": "bot-state",
+          "key": "={{ $('Webhook').item.json.body.data.key.remoteJid }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          -2784,
+          816
+        ],
+        "id": "e9f6f02b-416e-49a5-a03f-63008703412d",
+        "name": "Redis3",
+        "credentials": {
+          "redis": {
+            "id": "4jNooyY9Iu3jAA1n",
+            "name": "Redis account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "3bb579ab-5cac-46b4-b719-f92b9e21bdbf",
+                "leftValue": "={{ $('Webhook').item.json.body.data.message.conversation }}",
+                "rightValue": "..",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -2880,
+          384
+        ],
+        "id": "0e405641-5895-4fe9-a578-19deae33c414",
+        "name": "If7"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -2416,
+          416
+        ],
+        "id": "50a72a2b-1155-4466-9692-4c72754ec559",
+        "name": "No Operation, do nothing2"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body.data.key.remoteJid }}",
+                      "rightValue": "573183614625@s.whatsapp.net",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "95bb61d1-da8e-405a-854e-3dfe74945b0c"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "3f543422-5851-40cc-bf9f-9e21bc816496",
+                      "leftValue": "={{ $json.body.data.key.remoteJid }}",
+                      "rightValue": "573012688374@s.whatsapp.net",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "2b3b74a0-513d-4e48-802a-23ff8dbfd2d1",
+                      "leftValue": "={{ $json.body.data.key.remoteJid }}",
+                      "rightValue": "573016968800@s.whatsapp.net",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "f075c871-e403-4e38-8d2d-c4028c736590",
+                      "leftValue": "",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -3488,
+          592
+        ],
+        "id": "06a71f83-f8d5-47b3-83c7-071e56128de9",
+        "name": "Filtro numeros"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -3280,
+          368
+        ],
+        "id": "a96c8095-fed0-446b-a090-95d16866c1f5",
+        "name": "No Operation, do nothing4"
+      },
+      {
+        "parameters": {
+          "jsCode": "const results = [];\n\nfunction limpiarSaludoInicial(texto) {\n  const normalizado = String(texto ?? \"\")\n    .replace(/\\r/g, \"\")\n    .replace(/\\\\n/g, \"\\n\")\n    .replace(/\\n{2,}/g, \"\\n\\n\")\n    .trim();\n\n  const patronesSaludo = [\n    /^¡Hola,[\\s\\S]*?directora Luza:\\s*\\[Enlace\\]\\(https:\\/\\/drive\\.google\\.com\\/file\\/d\\/[^)]+\\)\\.\\s*/i,\n    /^¡Hola,[\\s\\S]*?directora Luza:\\s*\\[Enlace\\]\\.\\s*/i\n  ];\n\n  let textoLimpio = normalizado;\n  let encontroSaludo = false;\n\n  for (const regex of patronesSaludo) {\n    if (regex.test(textoLimpio)) {\n      textoLimpio = textoLimpio.replace(regex, \"\").trim();\n      encontroSaludo = true;\n      break;\n    }\n  }\n\n  return {\n    solo_saludo: encontroSaludo && textoLimpio.length === 0 ? 1 : 0,\n    texto: textoLimpio\n  };\n}\n\nfor (const item of $input.all()) {\n  const input = item.json.output || \"\";\n  const resultado = limpiarSaludoInicial(input);\n\n  results.push({\n    json: {\n      ...item.json,\n      solo_saludo: resultado.solo_saludo,\n      mensaje: resultado.texto\n    }\n  });\n}\n\nreturn results;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4016,
+          448
+        ],
+        "id": "74252e83-6c9c-40f9-af8b-492a2a5ba6a9",
+        "name": "Code in JavaScript1"
+      },
+      {
+        "id": "tool_verificar",
+        "name": "verificar_disponibilidad",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2,
+        "position": [
+          2200,
+          800
+        ],
+        "parameters": {
+          "name": "verificar_disponibilidad",
+          "description": "Verifica horarios disponibles para un servicio de Velik Beauty House. Usar cuando el cliente pregunte por disponibilidad u horarios. Input JSON: servicio (nombre del servicio) y fecha (YYYY-MM-DD).",
+          "workflowId": {
+            "__rl": true,
+            "value": "XAoMeVFKqLw7KcFX",
+            "mode": "list"
+          },
+          "workflowInputs": {
+            "mappingMode": "passthrough",
+            "value": {}
+          },
+          "schemaType": "fromFields",
+          "inputSource": "passthrough"
+        }
+      },
+      {
+        "id": "tool_crear",
+        "name": "crear_cita",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2,
+        "position": [
+          2400,
+          800
+        ],
+        "parameters": {
+          "name": "crear_cita",
+          "description": "Crea una cita en el sistema de Velik Beauty House. Usar cuando el cliente confirme su horario. Input JSON: servicio, slot_time (ISO datetime), cliente_nombre (nombre completo), cliente_telefono (+57...).",
+          "workflowId": {
+            "__rl": true,
+            "value": "3UMIZGQy4HCmBN6v",
+            "mode": "list"
+          },
+          "workflowInputs": {
+            "mappingMode": "passthrough",
+            "value": {}
+          },
+          "schemaType": "fromFields",
+          "inputSource": "passthrough"
+        }
+      },
+      {
+        "id": "tool_cancelar",
+        "name": "cancelar_cita",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2,
+        "position": [
+          2600,
+          800
+        ],
+        "parameters": {
+          "name": "cancelar_cita",
+          "description": "Cancela una cita existente en Velik Beauty House. Usar cuando el cliente quiera cancelar. Input JSON: appointment_id (el ID de la cita a cancelar).",
+          "workflowId": {
+            "__rl": true,
+            "value": "XFoYOSSdcDleyVMK",
+            "mode": "list"
+          },
+          "workflowInputs": {
+            "mappingMode": "passthrough",
+            "value": {}
+          },
+          "schemaType": "fromFields",
+          "inputSource": "passthrough"
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Filtro numeros",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "ObtenerAudio",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Obtener Imagen",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Code2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Resumen Mensaje",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Imagen": {
+        "main": [
+          [
+            {
+              "node": "Obter m dia em base",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ObtenerAudio": {
+        "main": [
+          [
+            {
+              "node": "Obter m dia em base64",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Transcribe Audio": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Resumen Mensaje": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Describe Imagen": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Date & Time",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Redis": {
+        "main": [
+          [
+            {
+              "node": "Wait1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait1": {
+        "main": [
+          [
+            {
+              "node": "Redis1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Redis1": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields2": {
+        "main": [
+          [
+            {
+              "node": "Redis2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Redis2": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Date & Time": {
+        "main": [
+          [
+            {
+              "node": "Date & Time1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Date & Time1": {
+        "main": [
+          [
+            {
+              "node": "Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code": {
+        "main": [
+          [
+            {
+              "node": "PROMPT ACTUALIZADO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener ID Chat": {
+        "main": [
+          [
+            {
+              "node": "Redis",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code1": {
+        "main": [
+          []
+        ]
+      },
+      "Wait2": {
+        "main": [
+          [
+            {
+              "node": "If2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If2": {
+        "main": [
+          [
+            {
+              "node": "Enviar texto1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait3": {
+        "main": [
+          [
+            {
+              "node": "If3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If3": {
+        "main": [
+          [
+            {
+              "node": "Enviar texto2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code2": {
+        "main": [
+          [
+            {
+              "node": "Resumen Mensaje",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If4": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Enviar texto",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obter m dia em base64": {
+        "main": [
+          [
+            {
+              "node": "Convert to File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Convert to File": {
+        "main": [
+          [
+            {
+              "node": "Transcribe Audio",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obter m dia em base": {
+        "main": [
+          [
+            {
+              "node": "Convert to File1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Convert to File1": {
+        "main": [
+          [
+            {
+              "node": "Describe Imagen",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Enviar texto": {
+        "main": [
+          []
+        ]
+      },
+      "Enviar texto1": {
+        "main": [
+          [
+            {
+              "node": "Wait3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If9": {
+        "main": [
+          [
+            {
+              "node": "Obtener ID Chat",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Obtener ID Chat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript2": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript3": {
+        "main": [
+          [
+            {
+              "node": "If9",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Enviar texto4": {
+        "main": [
+          [
+            {
+              "node": "No Operation, do nothing3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model2": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "PROMPT ACTUALIZADO",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Postgres Chat Memory1": {
+        "ai_memory": [
+          [
+            {
+              "node": "PROMPT ACTUALIZADO",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "PROMPT ACTUALIZADO": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          []
+        ]
+      },
+      "Download file": {
+        "main": [
+          [
+            {
+              "node": "Extract from File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract from File": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "Download file",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If5": {
+        "main": [
+          [
+            {
+              "node": "No Operation, do nothing1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Code in JavaScript2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Verificar Quien Atiende": {
+        "main": [
+          [
+            {
+              "node": "If7",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Redis3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Bloquear el agente": {
+        "main": [
+          [
+            {
+              "node": "No Operation, do nothing2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Redis3": {
+        "main": [
+          [
+            {
+              "node": "If5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If7": {
+        "main": [
+          [
+            {
+              "node": "Activar bot",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Bloquear el agente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filtro numeros": {
+        "main": [
+          [
+            {
+              "node": "No Operation, do nothing4",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing4",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing4",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Verificar Quien Atiende",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript1": {
+        "main": [
+          [
+            {
+              "node": "If4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "verificar_disponibilidad": {
+        "ai_tool": [
+          [
+            {
+              "node": "PROMPT ACTUALIZADO",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "crear_cita": {
+        "ai_tool": [
+          [
+            {
+              "node": "PROMPT ACTUALIZADO",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "cancelar_cita": {
+        "ai_tool": [
+          [
+            {
+              "node": "PROMPT ACTUALIZADO",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Santiago Mejia",
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-05-23T20:13:10.637Z",
+        "id": 558,
+        "workflowId": "03ruI6r2UcMn9fms",
+        "versionId": "599b5cf5-505e-4904-8a8f-35a679560534",
+        "event": "activated",
+        "userId": "d7c809b1-2b93-49e0-8b39-1a02fb9b41c4"
+      }
+    ]
+  }
+}
