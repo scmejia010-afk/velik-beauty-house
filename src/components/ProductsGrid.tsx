@@ -545,9 +545,10 @@ export function ProductsGrid() {
     setCheckoutStep("cart")
   }
 
-  const filteredProducts = selectedCategory === "Todas" 
-    ? products 
-    : products.filter(p => p.category === selectedCategory)
+  // Determine which categories to display based on the selected filter
+  const displayCategories = selectedCategory === "Todas" 
+    ? categories.filter(c => c !== "Todas")
+    : [selectedCategory];
 
   return (
     <section id="products" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-brand-white">
@@ -565,69 +566,91 @@ export function ProductsGrid() {
         </p>
       </div>
 
-      {/* Filters & Counter */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-12 gap-6">
-        <div className="flex flex-wrap gap-3">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 font-sans ${
-                selectedCategory === cat 
-                  ? "bg-brand-dark text-brand-nude shadow-xl scale-105" 
-                  : "bg-brand-light text-brand-dark hover:bg-[#DCC7B2]/30"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        <div className="text-sm font-sans text-brand-dark/60 italic">
-          Mostrando <strong className="text-brand-dark">{filteredProducts.length}</strong> productos en {selectedCategory}
+      {/* Filters (Sticky & Horizontally Scrollable) */}
+      <div className="sticky top-0 md:top-[80px] z-30 bg-brand-white/95 backdrop-blur-md py-4 mb-12 border-b border-brand-light">
+        <div className="flex items-center justify-between gap-6">
+          <div className="flex overflow-x-auto gap-3 pb-2 w-full" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`whitespace-nowrap px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 font-sans shrink-0 ${
+                  selectedCategory === cat 
+                    ? "bg-brand-dark text-brand-nude shadow-xl scale-105" 
+                    : "bg-brand-light text-brand-dark hover:bg-[#DCC7B2]/30"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {filteredProducts.map((product, i) => (
-          <div
-            key={product.title + i}
-            className="group relative flex flex-col cursor-pointer animate-in fade-in zoom-in-95 duration-500"
-            style={{ animationDelay: `${(i % 12) * 50}ms` }}
-            onClick={() => handleBuyClick(product)}
-          >
-            <div className="aspect-[4/5] overflow-hidden rounded-[40px] relative bg-brand-light">
-              {/* Default Image */}
-              <img
-                src={product.image}
-                alt={product.title}
-                className="absolute inset-0 w-full h-full object-contain object-center p-6 bg-white transition-transform duration-700 ease-out group-hover:scale-110"
-              />
-              
-              <div className="absolute inset-0 bg-brand-dark/5 group-hover:bg-transparent transition-colors duration-500" />
-              
-              {/* Sizes Label (Top Left) */}
-              {product.sizes && product.sizes.length > 0 && (
-                <div className="absolute top-6 left-6 bg-brand-white/90 backdrop-blur text-brand-dark rounded-full px-3 py-1 shadow-sm z-10 transition-transform duration-500 group-hover:scale-110">
-                  <span className="text-[10px] font-bold uppercase tracking-widest font-sans">
-                    {product.sizes.length > 1 ? "Varios Tamaños" : product.sizes[0].size}
-                  </span>
+      {/* Grouped Product Grid */}
+      <div className="space-y-20">
+        {displayCategories.map(categoryName => {
+          const catProducts = products.filter(p => p.category === categoryName);
+          if (catProducts.length === 0) return null;
+
+          return (
+            <div key={categoryName} className="animate-in fade-in duration-500">
+              {selectedCategory === "Todas" && (
+                <div className="mb-8 border-b border-brand-light pb-4">
+                  <h3 className="text-3xl font-serif text-brand-dark">{categoryName}</h3>
+                  <p className="text-sm font-sans text-brand-dark/60 mt-1">{catProducts.length} productos</p>
                 </div>
               )}
-            </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                {catProducts.map((product, i) => (
+                  <div
+                    key={product.title + i}
+                    className="group relative flex flex-col cursor-pointer bg-brand-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transition-all duration-500 border border-brand-light"
+                    onClick={() => handleBuyClick(product)}
+                  >
+                    <div className="aspect-square overflow-hidden rounded-2xl relative bg-brand-light mb-6">
+                      {/* Default Image */}
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="absolute inset-0 w-full h-full object-contain object-center p-6 bg-white transition-transform duration-700 ease-out group-hover:scale-110"
+                      />
+                      
+                      <div className="absolute inset-0 bg-brand-dark/5 group-hover:bg-transparent transition-colors duration-500" />
+                      
+                      {/* Sizes Label */}
+                      {product.sizes && product.sizes.length > 0 && (
+                        <div className="absolute top-4 left-4 bg-brand-white/90 backdrop-blur text-brand-dark rounded-full px-3 py-1 shadow-sm z-10 transition-transform duration-500 group-hover:scale-105">
+                          <span className="text-[10px] font-bold uppercase tracking-widest font-sans">
+                            {product.sizes.length > 1 ? "Varios Tamaños" : product.sizes[0].size}
+                          </span>
+                        </div>
+                      )}
+                    </div>
 
-            <div className="mt-8 space-y-2 px-4">
-              <p className="text-[10px] text-brand-gold uppercase tracking-[0.2em] font-accent">{product.category}</p>
-              <div className="flex items-center justify-between">
-                <h3 className="text-2xl font-serif tracking-tight transition-colors duration-300 group-hover:text-brand-gold line-clamp-1">{product.title}</h3>
-                <button className="w-10 h-10 rounded-full bg-brand-dark flex items-center justify-center transition-all duration-300 shadow-sm group-hover:shadow-xl group-hover:scale-110 group-hover:bg-brand-gold shrink-0 ml-4">
-                  <ShoppingBag className="w-4 h-4 text-brand-white" />
-                </button>
+                    <div className="flex-1 flex flex-col">
+                      <p className="text-[10px] text-brand-gold uppercase tracking-[0.2em] font-accent mb-2">{product.category}</p>
+                      <h3 className="text-2xl font-serif tracking-tight text-brand-dark transition-colors duration-300 group-hover:text-brand-gold line-clamp-1">{product.title}</h3>
+                      <p className="text-xl font-sans font-semibold text-brand-dark mt-2 mb-4">
+                        {product.sizes[0]?.price} {product.sizes.length > 1 && <span className="text-sm font-normal text-brand-dark/60 italic font-serif">desde</span>}
+                      </p>
+                      
+                      {/* Gradient Border Button */}
+                      <div className="mt-auto pt-4">
+                        <div className="relative p-[2px] rounded-full overflow-hidden group/btn bg-gradient-to-r from-[#DCC7B2] via-[#E6D5C3] to-[#DCC7B2] bg-[length:200%_auto] bg-[0%] hover:bg-[100%] transition-all duration-700">
+                          <div className="relative bg-brand-white rounded-full py-3 px-6 flex items-center justify-center gap-2 group-hover/btn:bg-brand-light transition-colors">
+                            <ShoppingBag className="w-4 h-4 text-brand-dark" />
+                            <span className="text-xs font-bold uppercase tracking-widest text-brand-dark font-sans">Añadir al Carrito</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <p className="text-brand-dark/60 text-sm leading-relaxed transition-opacity duration-300 line-clamp-2 font-sans">{product.desc}</p>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Checkout Modal Overlay */}
@@ -649,7 +672,7 @@ export function ProductsGrid() {
                 <div className="p-6 space-y-8">
                   {/* Product Summary */}
                   <div className="flex gap-4 items-center bg-brand-light p-4 rounded-3xl">
-                    <img src={checkoutProduct.image} alt={checkoutProduct.title} className="w-20 h-20 object-cover rounded-2xl" />
+                    <img src={checkoutProduct.image} alt={checkoutProduct.title} className="w-20 h-20 object-cover rounded-2xl bg-white" />
                     <div>
                       <p className="text-[10px] font-accent text-brand-gold uppercase tracking-widest">{checkoutProduct.category}</p>
                       <p className="font-serif text-xl text-brand-dark line-clamp-1">{checkoutProduct.title}</p>
