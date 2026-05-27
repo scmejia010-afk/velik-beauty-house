@@ -606,7 +606,7 @@ export function ProductsGrid() {
                 {catProducts.map((product, i) => (
                   <div
                     key={product.title + i}
-                    className="group relative flex flex-col cursor-pointer bg-brand-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 border border-brand-dark/5"
+                    className="group relative flex flex-col cursor-pointer bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 border border-brand-dark/5"
                     onClick={() => handleBuyClick(product)}
                   >
                     <div className="aspect-square overflow-hidden rounded-2xl relative bg-transparent mb-6 flex items-center justify-center p-4">
@@ -614,7 +614,7 @@ export function ProductsGrid() {
                       <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-full object-contain object-center mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-110"
+                        className="w-full h-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-110"
                       />
                       
                       {/* Sizes Label */}
