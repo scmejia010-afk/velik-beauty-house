@@ -614,7 +614,7 @@ export function ProductsGrid() {
                       <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-110"
+                        className="w-full h-full object-contain object-center mix-blend-multiply contrast-125 brightness-110 transition-transform duration-700 ease-out group-hover:scale-110"
                       />
                       
                       {/* Sizes Label */}

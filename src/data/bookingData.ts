@@ -10,6 +10,7 @@ export interface Profesional {
   userId: string
   especialidad: string
   iniciales: string
+  foto?: string
 }
 
 export const CATEGORIAS = [
@@ -134,7 +135,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
 }
 
 export const PROFESIONALES: Profesional[] = [
-  { nombre: "Carolina Paz", userId: "Bn1QrO4ITpYI7wSohG9r", especialidad: "Uñas & Manicure", iniciales: "CP" },
+  { nombre: "Carolina Paz", userId: "Bn1QrO4ITpYI7wSohG9r", especialidad: "Uñas & Manicure", iniciales: "CP", foto: "/fotos/carolina.jpg" },
   { nombre: "Laura Vanessa", userId: "DEeqUttYKgjjsfNaS1XY", especialidad: "Cabello & Pestañas", iniciales: "LV" },
   { nombre: "Luz Aida", userId: "UzLj5T8ZOrJ8reSig5os", especialidad: "Depilación & Corporal", iniciales: "LA" },
 ]
