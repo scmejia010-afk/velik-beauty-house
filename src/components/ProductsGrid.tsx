@@ -551,7 +551,8 @@ export function ProductsGrid() {
     : [selectedCategory];
 
   return (
-    <section id="products" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-brand-white">
+    <section id="products" className="w-full bg-brand-white">
+      <div className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div className="space-y-4">
@@ -745,6 +746,7 @@ export function ProductsGrid() {
           </div>
         </div>
       )}
+      </div>
     </section>
   )
 }
