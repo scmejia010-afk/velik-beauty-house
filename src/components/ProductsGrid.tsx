@@ -606,22 +606,20 @@ export function ProductsGrid() {
                 {catProducts.map((product, i) => (
                   <div
                     key={product.title + i}
-                    className="group relative flex flex-col cursor-pointer bg-brand-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transition-all duration-500 border border-brand-light"
+                    className="group relative flex flex-col cursor-pointer bg-brand-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 border border-brand-dark/5"
                     onClick={() => handleBuyClick(product)}
                   >
-                    <div className="aspect-square overflow-hidden rounded-2xl relative bg-brand-light mb-6">
+                    <div className="aspect-square overflow-hidden rounded-2xl relative bg-transparent mb-6 flex items-center justify-center p-4">
                       {/* Default Image */}
                       <img
                         src={product.image}
                         alt={product.title}
-                        className="absolute inset-0 w-full h-full object-contain object-center p-6 bg-white transition-transform duration-700 ease-out group-hover:scale-110"
+                        className="w-full h-full object-contain object-center mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-110"
                       />
-                      
-                      <div className="absolute inset-0 bg-brand-dark/5 group-hover:bg-transparent transition-colors duration-500" />
                       
                       {/* Sizes Label */}
                       {product.sizes && product.sizes.length > 0 && (
-                        <div className="absolute top-4 left-4 bg-brand-white/90 backdrop-blur text-brand-dark rounded-full px-3 py-1 shadow-sm z-10 transition-transform duration-500 group-hover:scale-105">
+                        <div className="absolute top-2 left-2 bg-brand-white/90 backdrop-blur text-brand-dark rounded-full px-3 py-1 shadow-sm z-10 transition-transform duration-500 group-hover:scale-105">
                           <span className="text-[10px] font-bold uppercase tracking-widest font-sans">
                             {product.sizes.length > 1 ? "Varios Tamaños" : product.sizes[0].size}
                           </span>
