@@ -181,10 +181,12 @@ function Step4({ servicio, profesional, onSelect }: { servicio: Servicio; profes
     const url = `${SLOTS_URL}?calendarId=${servicio.calendarId}&startDate=${start.getTime()}&endDate=${end.getTime()}&userId=${profesional.userId}`
     try {
       const r = await fetch(url)
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
       const data = await r.json()
       setSlots(data.slots || [])
-    } catch {
-      setError("No se pudo cargar la disponibilidad. Intenta de nuevo.")
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e)
+      setError(`Error: ${msg}`)
     } finally {
       setLoading(false)
     }
