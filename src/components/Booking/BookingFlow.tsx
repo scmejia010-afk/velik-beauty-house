@@ -80,8 +80,15 @@ const CAT_ICONS: Record<string, string> = {
 function Step1({ onSelect }: { onSelect: (cat: string) => void }) {
   return (
     <div className="animate-fade-in">
-      <h2 className="font-serif text-3xl sm:text-4xl text-[#DCC7B2] text-center mb-2">Elige una Categoría</h2>
-      <p className="text-center text-sm mb-10 tracking-widest uppercase" style={{ color: "rgba(220,199,178,0.4)", fontFamily: "Poppins, sans-serif", fontSize: "11px" }}>¿Qué servicio estás buscando hoy?</p>
+      <div className="text-center mb-10">
+        <p style={{ fontFamily: "Poppins, sans-serif", fontSize: "11px", letterSpacing: "0.2em", color: "rgba(220,199,178,0.45)", textTransform: "uppercase", marginBottom: "0.75rem" }}>
+          Reserva tu cita
+        </p>
+        <h2 className="font-serif text-3xl sm:text-4xl text-[#DCC7B2]" style={{ fontFamily: "Cormorant Garamond, serif" }}>
+          ¿Qué servicio estás buscando?
+        </h2>
+        <div style={{ width: "40px", height: "1px", background: "rgba(220,199,178,0.4)", margin: "1rem auto 0" }} />
+      </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {CATEGORIAS.map((cat) => (
           <button
