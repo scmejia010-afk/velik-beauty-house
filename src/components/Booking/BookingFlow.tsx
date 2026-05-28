@@ -66,22 +66,52 @@ function Stepper({ step }: { step: number }) {
 
 // ── Step 1: Categoría ────────────────────────────────────────────────────────
 
+const CAT_ICONS: Record<string, string> = {
+  "Manicure": "💅",
+  "Pedicure": "🦶",
+  "Manicura y Pedicura": "✨",
+  "Cabello": "💇",
+  "Cejas y Pestañas": "👁️",
+  "Depilación": "🪶",
+  "Maquillaje Profesional": "💄",
+  "Corporal": "🌸",
+}
+
 function Step1({ onSelect }: { onSelect: (cat: string) => void }) {
   return (
     <div className="animate-fade-in">
       <h2 className="font-serif text-3xl sm:text-4xl text-[#DCC7B2] text-center mb-2">Elige una Categoría</h2>
-      <p className="text-white/40 text-center text-sm mb-10 tracking-wide">¿Qué servicio estás buscando hoy?</p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <p className="text-center text-sm mb-10 tracking-widest uppercase" style={{ color: "rgba(220,199,178,0.4)", fontFamily: "Poppins, sans-serif", fontSize: "11px" }}>¿Qué servicio estás buscando hoy?</p>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {CATEGORIAS.map((cat) => (
           <button
             key={cat}
             onClick={() => onSelect(cat)}
-            className="group relative border border-[#DCC7B2]/30 hover:border-[#DCC7B2] rounded-2xl p-7 text-left transition-all duration-300 hover:scale-[1.03]"
-            style={{ background: "linear-gradient(135deg, rgba(220,199,178,0.08) 0%, rgba(220,199,178,0.03) 100%)" }}
+            className="group relative flex flex-col items-center justify-center text-center rounded-2xl transition-all duration-400 hover:-translate-y-1"
+            style={{
+              padding: "2rem 1rem",
+              border: "1px solid rgba(220,199,178,0.2)",
+              background: "linear-gradient(160deg, rgba(220,199,178,0.06) 0%, rgba(220,199,178,0.02) 100%)",
+              boxShadow: "0 1px 0 rgba(220,199,178,0.06)"
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.border = "1px solid rgba(220,199,178,0.7)"
+              ;(e.currentTarget as HTMLElement).style.background = "linear-gradient(160deg, rgba(220,199,178,0.12) 0%, rgba(220,199,178,0.05) 100%)"
+              ;(e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(220,199,178,0.12), 0 1px 0 rgba(220,199,178,0.2)"
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.border = "1px solid rgba(220,199,178,0.2)"
+              ;(e.currentTarget as HTMLElement).style.background = "linear-gradient(160deg, rgba(220,199,178,0.06) 0%, rgba(220,199,178,0.02) 100%)"
+              ;(e.currentTarget as HTMLElement).style.boxShadow = "0 1px 0 rgba(220,199,178,0.06)"
+            }}
           >
-            <span className="block text-base font-semibold text-[#DCC7B2]/80 group-hover:text-[#DCC7B2] transition-colors duration-300 leading-tight">{cat}</span>
-            <span className="block text-xs text-[#DCC7B2]/40 mt-2">{SERVICIOS[cat]?.length || 0} servicios</span>
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: "inset 0 0 0 1px rgba(220,199,178,0.5), 0 4px 24px rgba(220,199,178,0.08)" }} />
+            <span className="text-3xl mb-3 transition-transform duration-300 group-hover:scale-110 block">{CAT_ICONS[cat]}</span>
+            <span className="font-serif text-base leading-snug transition-colors duration-300 block mb-2" style={{ color: "rgba(220,199,178,0.85)", fontFamily: "Cormorant Garamond, serif", fontSize: "1.05rem" }}>
+              {cat}
+            </span>
+            <span className="block transition-colors duration-300" style={{ fontFamily: "Poppins, sans-serif", fontSize: "10px", letterSpacing: "0.12em", color: "rgba(220,199,178,0.35)", textTransform: "uppercase" }}>
+              {SERVICIOS[cat]?.length || 0} servicios
+            </span>
           </button>
         ))}
       </div>
