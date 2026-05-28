@@ -71,16 +71,17 @@ function Step1({ onSelect }: { onSelect: (cat: string) => void }) {
     <div className="animate-fade-in">
       <h2 className="font-serif text-3xl sm:text-4xl text-[#DCC7B2] text-center mb-2">Elige una Categoría</h2>
       <p className="text-white/40 text-center text-sm mb-10 tracking-wide">¿Qué servicio estás buscando hoy?</p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {CATEGORIAS.map((cat) => (
           <button
             key={cat}
             onClick={() => onSelect(cat)}
-            className="group relative border border-white/10 hover:border-[#DCC7B2]/60 bg-white/3 hover:bg-[#DCC7B2]/5 rounded-xl p-5 text-left transition-all duration-300 hover:scale-[1.02]"
+            className="group relative border border-[#DCC7B2]/30 hover:border-[#DCC7B2] rounded-2xl p-7 text-left transition-all duration-300 hover:scale-[1.03]"
+            style={{ background: "linear-gradient(135deg, rgba(220,199,178,0.08) 0%, rgba(220,199,178,0.03) 100%)" }}
           >
-            <span className="block text-sm font-medium text-white/80 group-hover:text-[#DCC7B2] transition-colors duration-300 leading-tight">{cat}</span>
-            <span className="block text-xs text-white/30 mt-1">{SERVICIOS[cat]?.length || 0} servicios</span>
-            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: "inset 0 0 0 1px rgba(220,199,178,0.3)" }} />
+            <span className="block text-base font-semibold text-[#DCC7B2]/80 group-hover:text-[#DCC7B2] transition-colors duration-300 leading-tight">{cat}</span>
+            <span className="block text-xs text-[#DCC7B2]/40 mt-2">{SERVICIOS[cat]?.length || 0} servicios</span>
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: "inset 0 0 0 1px rgba(220,199,178,0.5), 0 4px 24px rgba(220,199,178,0.08)" }} />
           </button>
         ))}
       </div>
