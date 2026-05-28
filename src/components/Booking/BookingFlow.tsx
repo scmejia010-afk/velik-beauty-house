@@ -119,14 +119,17 @@ function Step2({ categoria, onSelect }: { categoria: string; onSelect: (s: Servi
 
 // ── Step 3: Profesional ──────────────────────────────────────────────────────
 
-function Step3({ onSelect }: { onSelect: (p: Profesional) => void }) {
+function Step3({ servicio, onSelect }: { servicio: Servicio; onSelect: (p: Profesional) => void }) {
   const [selected, setSelected] = useState<string | null>(null)
+  const disponibles = servicio.profesionales
+    ? PROFESIONALES.filter(p => servicio.profesionales!.includes(p.userId))
+    : PROFESIONALES
   return (
     <div className="animate-fade-in">
       <h2 className="font-serif text-3xl sm:text-4xl text-[#DCC7B2] text-center mb-2">Elige tu Profesional</h2>
       <p className="text-white/40 text-center text-sm mb-10 tracking-wide">¿Con quién te gustaría ser atendida?</p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
-        {PROFESIONALES.map((p) => {
+        {disponibles.map((p) => {
           const isSelected = selected === p.userId
           return (
             <button
@@ -177,7 +180,7 @@ function Step4({ servicio, profesional, onSelect }: { servicio: Servicio; profes
     setLoading(true); setError("")
     const now = new Date()
     const start = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-    const end = new Date(start); end.setDate(end.getDate() + 60)
+    const end = new Date(start); end.setDate(end.getDate() + 30)
     const url = `${SLOTS_URL}?calendarId=${servicio.calendarId}&startDate=${start.getTime()}&endDate=${end.getTime()}&userId=${profesional.userId}`
     try {
       const r = await fetch(url)
@@ -434,7 +437,7 @@ export function BookingFlow() {
         }),
       })
       const data = await r.json()
-      if (data.ok) setSubmitSuccess(true)
+      if (data.ok || data.id || data.status === 'booked') setSubmitSuccess(true)
       else setSubmitError("No se pudo crear la cita. Intenta de nuevo.")
     } catch {
       setSubmitError("Error de conexión. Intenta de nuevo.")
@@ -467,8 +470,8 @@ export function BookingFlow() {
         {state.step === 2 && state.categoria && (
           <Step2 categoria={state.categoria} onSelect={s => set({ servicio: s, step: 3 })} />
         )}
-        {state.step === 3 && (
-          <Step3 onSelect={p => set({ profesional: p, step: 4 })} />
+        {state.step === 3 && state.servicio && (
+          <Step3 servicio={state.servicio} onSelect={p => set({ profesional: p, step: 4 })} />
         )}
         {state.step === 4 && state.servicio && state.profesional && (
           <Step4
