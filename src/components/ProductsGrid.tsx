@@ -21,7 +21,7 @@ const products: Product[] = [
     "title": "Replenish Shampoo",
     "category": "Replenish",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "/productos/replenish-shampoo.jpg",
+    "image": "/productos/replenish-shampoo.png",
     "sizes": [
       {
         "size": "300ml",
@@ -33,7 +33,7 @@ const products: Product[] = [
     "title": "Replenish Acondicionador",
     "category": "Replenish",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "/productos/replenish-acondicionador.jpg",
+    "image": "/productos/replenish-acondicionador.png",
     "sizes": [
       {
         "size": "250ml",
@@ -45,7 +45,7 @@ const products: Product[] = [
     "title": "Replenish Acondicionador Spray",
     "category": "Replenish",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "/productos/replenish-acondicionador-spray.jpg",
+    "image": "/productos/replenish-acondicionador-spray.png",
     "sizes": [
       {
         "size": "250ml",
@@ -57,7 +57,7 @@ const products: Product[] = [
     "title": "Replenish Rich Mascarilla",
     "category": "Replenish",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "/productos/replenish-rich-mascarilla.jpg",
+    "image": "/productos/replenish-rich-mascarilla.png",
     "sizes": [
       {
         "size": "200ml",
@@ -69,7 +69,7 @@ const products: Product[] = [
     "title": "Replenish Light Mascarilla",
     "category": "Replenish",
     "desc": "Producto de la línea Replenish de Authentic Beauty Concept.",
-    "image": "/productos/replenish-light-mascarilla.jpg",
+    "image": "/productos/replenish-light-mascarilla.png",
     "sizes": [
       {
         "size": "200ml",
@@ -81,7 +81,7 @@ const products: Product[] = [
     "title": "Amplify Shampoo",
     "category": "Amplify",
     "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
-    "image": "/productos/amplify-shampoo.jpg",
+    "image": "/productos/amplify-shampoo.png",
     "sizes": [
       {
         "size": "300ml",
@@ -93,7 +93,7 @@ const products: Product[] = [
     "title": "Amplify Acondicionador",
     "category": "Amplify",
     "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
-    "image": "/productos/amplify-acondicionador.jpg",
+    "image": "/productos/amplify-acondicionador.png",
     "sizes": [
       {
         "size": "250ml",
@@ -105,7 +105,7 @@ const products: Product[] = [
     "title": "Amplify Acondicionador Spray",
     "category": "Amplify",
     "desc": "Producto de la línea Amplify de Authentic Beauty Concept.",
-    "image": "/productos/amplify-acondicionador-spray.jpg",
+    "image": "/productos/amplify-acondicionador-spray.png",
     "sizes": [
       {
         "size": "250ml",
@@ -117,7 +117,7 @@ const products: Product[] = [
     "title": "Glow Shampoo",
     "category": "Glow",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "/productos/glow-shampoo.jpg",
+    "image": "/productos/glow-shampoo.png",
     "sizes": [
       {
         "size": "300ml",
@@ -129,7 +129,7 @@ const products: Product[] = [
     "title": "Glow Acondicionador",
     "category": "Glow",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "/productos/glow-acondicionador.jpg",
+    "image": "/productos/glow-acondicionador.png",
     "sizes": [
       {
         "size": "250ml",
@@ -141,7 +141,7 @@ const products: Product[] = [
     "title": "Glow Mascarilla",
     "category": "Glow",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "/productos/glow-mascarilla.jpg",
+    "image": "/productos/glow-mascarilla.png",
     "sizes": [
       {
         "size": "200ml",
@@ -153,7 +153,7 @@ const products: Product[] = [
     "title": "Glow Cool Cleanser",
     "category": "Glow",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "/productos/glow-cool-cleanser.jpg",
+    "image": "/productos/glow-cool-cleanser.png",
     "sizes": [
       {
         "size": "300ml",
@@ -165,7 +165,7 @@ const products: Product[] = [
     "title": "Glow Sprayable Serum",
     "category": "Glow",
     "desc": "Producto de la línea Glow de Authentic Beauty Concept.",
-    "image": "/productos/glow-sprayable-serum.jpg",
+    "image": "/productos/glow-sprayable-serum.png",
     "sizes": [
       {
         "size": "200ml",
@@ -273,7 +273,7 @@ const products: Product[] = [
     "title": "Deep Cleansing Shampoo",
     "category": "All Hair Types",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/deep-cleansing-shampoo.jpg",
+    "image": "/productos/deep-cleansing-shampoo.png",
     "sizes": [
       {
         "size": "300ml",
@@ -285,7 +285,7 @@ const products: Product[] = [
     "title": "Indulging Fluid Oil",
     "category": "All Hair Types",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/indulging-fluid-oil.jpg",
+    "image": "/productos/indulging-fluid-oil.png",
     "sizes": [
       {
         "size": "100ml",
@@ -297,7 +297,7 @@ const products: Product[] = [
     "title": "Bare Cleanser",
     "category": "All Hair Types",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/bare-cleanser.jpg",
+    "image": "/productos/bare-cleanser.png",
     "sizes": [
       {
         "size": "300ml",
@@ -309,7 +309,7 @@ const products: Product[] = [
     "title": "Jelly Mask",
     "category": "All Hair Types",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/jelly-mask.jpg",
+    "image": "/productos/jelly-mask.png",
     "sizes": [
       {
         "size": "200ml",
@@ -321,7 +321,7 @@ const products: Product[] = [
     "title": "Eau de Toilette",
     "category": "Beyond The Hair",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/eau-de-toilette.jpg",
+    "image": "/productos/eau-de-toilette.png",
     "sizes": [
       {
         "size": "50ml",
@@ -333,7 +333,7 @@ const products: Product[] = [
     "title": "Hand & Hair Light Cream",
     "category": "Beyond The Hair",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/hand-hair-light-cream.jpg",
+    "image": "/productos/hand-hair-light-cream.png",
     "sizes": [
       {
         "size": "75ml",
@@ -345,7 +345,7 @@ const products: Product[] = [
     "title": "Enhancing Water",
     "category": "Beyond The Hair",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/enhancing-water.jpg",
+    "image": "/productos/enhancing-water.png",
     "sizes": [
       {
         "size": "100ml",
@@ -357,7 +357,7 @@ const products: Product[] = [
     "title": "Sensorial Cream Scrub",
     "category": "Beyond The Hair",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/sensorial-cream-scrub.jpg",
+    "image": "/productos/sensorial-cream-scrub.png",
     "sizes": [
       {
         "size": "250ml",
@@ -369,7 +369,7 @@ const products: Product[] = [
     "title": "Amplify Mousse",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/amplify-mousse.jpg",
+    "image": "/productos/amplify-mousse.png",
     "sizes": [
       {
         "size": "200ml",
@@ -381,7 +381,7 @@ const products: Product[] = [
     "title": "Flawless Primer",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/flawless-primer.jpg",
+    "image": "/productos/flawless-primer.png",
     "sizes": [
       {
         "size": "250ml",
@@ -393,7 +393,7 @@ const products: Product[] = [
     "title": "Shaping Cream",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/shaping-cream.jpg",
+    "image": "/productos/shaping-cream.png",
     "sizes": [
       {
         "size": "150ml",
@@ -405,7 +405,7 @@ const products: Product[] = [
     "title": "Gritty Wax Paste",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/gritty-wax-paste.jpg",
+    "image": "/productos/gritty-wax-paste.png",
     "sizes": [
       {
         "size": "85ml",
@@ -417,7 +417,7 @@ const products: Product[] = [
     "title": "Solid Pomade",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/solid-pomade.jpg",
+    "image": "/productos/solid-pomade.png",
     "sizes": [
       {
         "size": "85ml",
@@ -429,7 +429,7 @@ const products: Product[] = [
     "title": "Pliable Styling Paste",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/pliable-styling-paste.jpg",
+    "image": "/productos/pliable-styling-paste.png",
     "sizes": [
       {
         "size": "85ml",
@@ -441,7 +441,7 @@ const products: Product[] = [
     "title": "Working HairSpray",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/working-hairspray.jpg",
+    "image": "/productos/working-hairspray.png",
     "sizes": [
       {
         "size": "300ml",
@@ -453,7 +453,7 @@ const products: Product[] = [
     "title": "Strong Hold Spray",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/strong-hold-spray.jpg",
+    "image": "/productos/strong-hold-spray.png",
     "sizes": [
       {
         "size": "100ml",
@@ -469,7 +469,7 @@ const products: Product[] = [
     "title": "Airy Texture Spray",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/airy-texture-spray.jpg",
+    "image": "/productos/airy-texture-spray.png",
     "sizes": [
       {
         "size": "300ml",
@@ -481,7 +481,7 @@ const products: Product[] = [
     "title": "Dry Shampoo",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/dry-shampoo.jpg",
+    "image": "/productos/dry-shampoo.png",
     "sizes": [
       {
         "size": "100ml",
@@ -497,7 +497,7 @@ const products: Product[] = [
     "title": "Nude Powder SPR",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/nude-powder-spr.jpg",
+    "image": "/productos/nude-powder-spr.png",
     "sizes": [
       {
         "size": "12g",
@@ -509,7 +509,7 @@ const products: Product[] = [
     "title": "Nymph Salt Spray",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/nymph-salt-spray.jpg",
+    "image": "/productos/nymph-salt-spray.png",
     "sizes": [
       {
         "size": "250ml",
@@ -521,7 +521,7 @@ const products: Product[] = [
     "title": "Cosmic Blow-Dry Jelly",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/cosmic-blow-dry-jelly.jpg",
+    "image": "/productos/cosmic-blow-dry-jelly.png",
     "sizes": [
       {
         "size": "150ml",
