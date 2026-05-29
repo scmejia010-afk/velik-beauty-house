@@ -273,7 +273,7 @@ const products: Product[] = [
     "title": "Deep Cleansing Shampoo",
     "category": "All Hair Types",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/deep-cleansing-shampoo.png",
+    "image": "/productos/all-hair-deep-cleansing.png",
     "sizes": [
       {
         "size": "300ml",
@@ -321,7 +321,7 @@ const products: Product[] = [
     "title": "Eau de Toilette",
     "category": "Beyond The Hair",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/eau-de-toilette.png",
+    "image": "/productos/beyond-eau-de-toilette.png",
     "sizes": [
       {
         "size": "50ml",
@@ -333,7 +333,7 @@ const products: Product[] = [
     "title": "Hand & Hair Light Cream",
     "category": "Beyond The Hair",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/hand-hair-light-cream.png",
+    "image": "/productos/beyond-hand-cream.png",
     "sizes": [
       {
         "size": "75ml",
@@ -345,7 +345,7 @@ const products: Product[] = [
     "title": "Enhancing Water",
     "category": "Beyond The Hair",
     "desc": "Producto de Authentic Beauty Concept.",
-    "image": "/productos/enhancing-water.png",
+    "image": "/productos/beyond-enhancing-water.png",
     "sizes": [
       {
         "size": "100ml",
@@ -381,7 +381,7 @@ const products: Product[] = [
     "title": "Flawless Primer",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/flawless-primer.png",
+    "image": "/productos/all-hair-flawless-primer.png",
     "sizes": [
       {
         "size": "250ml",
@@ -417,7 +417,7 @@ const products: Product[] = [
     "title": "Solid Pomade",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/solid-pomade.png",
+    "image": "/productos/all-hair-solid-pomade.png",
     "sizes": [
       {
         "size": "85ml",
@@ -441,7 +441,7 @@ const products: Product[] = [
     "title": "Working HairSpray",
     "category": "Styling",
     "desc": "Producto de la línea Styling de Authentic Beauty Concept.",
-    "image": "/productos/working-hairspray.png",
+    "image": "/productos/all-hair-working-hairspray.png",
     "sizes": [
       {
         "size": "300ml",
@@ -609,12 +609,12 @@ export function ProductsGrid() {
                     className="group relative flex flex-col cursor-pointer bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 border border-brand-dark/5"
                     onClick={() => handleBuyClick(product)}
                   >
-                    <div className="aspect-square overflow-hidden rounded-2xl relative bg-transparent mb-6 flex items-center justify-center p-4">
+                    <div className="aspect-square overflow-hidden rounded-2xl relative bg-brand-light/40 mb-6 flex items-center justify-center p-4">
                       {/* Default Image */}
                       <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-full object-contain object-center mix-blend-multiply contrast-125 brightness-110 transition-transform duration-700 ease-out group-hover:scale-110"
+                        className="w-full h-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-md"
                       />
                       
                       {/* Sizes Label */}
