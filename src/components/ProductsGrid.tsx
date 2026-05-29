@@ -25,7 +25,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 140.990"
+        "price": "$ 145.990"
       }
     ]
   },
@@ -37,7 +37,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 184.990"
+        "price": "$ 191.990"
       }
     ]
   },
@@ -49,7 +49,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 172.990"
+        "price": "$ 178.990"
       }
     ]
   },
@@ -61,7 +61,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "200ml",
-        "price": "$ 232.990"
+        "price": "$ 240.990"
       }
     ]
   },
@@ -73,7 +73,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "200ml",
-        "price": "$ 232.990"
+        "price": "$ 240.990"
       }
     ]
   },
@@ -85,7 +85,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 140.990"
+        "price": "$ 145.990"
       }
     ]
   },
@@ -97,7 +97,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 184.990"
+        "price": "$ 191.990"
       }
     ]
   },
@@ -109,7 +109,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 172.990"
+        "price": "$ 178.990"
       }
     ]
   },
@@ -121,7 +121,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 140.990"
+        "price": "$ 145.990"
       }
     ]
   },
@@ -133,7 +133,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 184.990"
+        "price": "$ 191.990"
       }
     ]
   },
@@ -145,7 +145,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "200ml",
-        "price": "$ 232.990"
+        "price": "$ 240.990"
       }
     ]
   },
@@ -157,7 +157,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 140.990"
+        "price": "$ 145.990"
       }
     ]
   },
@@ -169,7 +169,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "200ml",
-        "price": "$ 193.990"
+        "price": "$ 200.990"
       }
     ]
   },
@@ -181,7 +181,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 140.990"
+        "price": "$ 145.990"
       }
     ]
   },
@@ -193,7 +193,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 184.990"
+        "price": "$ 191.990"
       }
     ]
   },
@@ -205,7 +205,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 172.990"
+        "price": "$ 178.990"
       }
     ]
   },
@@ -217,7 +217,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "200ml",
-        "price": "$ 232.990"
+        "price": "$ 240.990"
       }
     ]
   },
@@ -229,7 +229,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "150ml",
-        "price": "$ 180.990"
+        "price": "$ 187.990"
       }
     ]
   },
@@ -241,7 +241,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "100ml",
-        "price": "$ 195.990"
+        "price": "$ 202.990"
       }
     ]
   },
@@ -253,7 +253,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 180.990"
+        "price": "$ 187.990"
       }
     ]
   },
@@ -265,7 +265,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "200ml",
-        "price": "$ 232.990"
+        "price": "$ 240.990"
       }
     ]
   },
@@ -277,7 +277,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 140.990"
+        "price": "$ 145.990"
       }
     ]
   },
@@ -289,7 +289,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "100ml",
-        "price": "$ 193.990"
+        "price": "$ 200.990"
       }
     ]
   },
@@ -301,7 +301,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 140.990"
+        "price": "$ 145.990"
       }
     ]
   },
@@ -313,7 +313,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "200ml",
-        "price": "$ 204.990"
+        "price": "$ 212.990"
       }
     ]
   },
@@ -325,7 +325,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "50ml",
-        "price": "$ 195.990"
+        "price": "$ 202.990"
       }
     ]
   },
@@ -337,7 +337,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "75ml",
-        "price": "$ 86.990"
+        "price": "$ 90.990"
       }
     ]
   },
@@ -349,7 +349,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "100ml",
-        "price": "$ 114.990"
+        "price": "$ 119.990"
       }
     ]
   },
@@ -361,7 +361,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 171.990"
+        "price": "$ 177.990"
       }
     ]
   },
@@ -373,7 +373,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "200ml",
-        "price": "$ 144.990"
+        "price": "$ 150.990"
       }
     ]
   },
@@ -385,7 +385,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 164.990"
+        "price": "$ 170.990"
       }
     ]
   },
@@ -397,7 +397,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "150ml",
-        "price": "$ 180.990"
+        "price": "$ 187.990"
       }
     ]
   },
@@ -409,7 +409,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "85ml",
-        "price": "$ 143.990"
+        "price": "$ 149.990"
       }
     ]
   },
@@ -421,7 +421,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "85ml",
-        "price": "$ 143.990"
+        "price": "$ 149.990"
       }
     ]
   },
@@ -433,7 +433,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "85ml",
-        "price": "$ 143.990"
+        "price": "$ 149.990"
       }
     ]
   },
@@ -445,7 +445,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 125.990"
+        "price": "$ 130.990"
       }
     ]
   },
@@ -457,11 +457,11 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "100ml",
-        "price": "$ 51.990"
+        "price": "$ 54.990"
       },
       {
         "size": "300ml",
-        "price": "$ 125.990"
+        "price": "$ 130.990"
       }
     ]
   },
@@ -473,7 +473,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "300ml",
-        "price": "$ 125.990"
+        "price": "$ 130.990"
       }
     ]
   },
@@ -485,11 +485,11 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "100ml",
-        "price": "$ 51.990"
+        "price": "$ 54.990"
       },
       {
         "size": "250ml",
-        "price": "$ 129.990"
+        "price": "$ 134.990"
       }
     ]
   },
@@ -501,7 +501,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "12g",
-        "price": "$ 166.990"
+        "price": "$ 172.990"
       }
     ]
   },
@@ -513,7 +513,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "250ml",
-        "price": "$ 164.990"
+        "price": "$ 170.990"
       }
     ]
   },
@@ -525,7 +525,7 @@ const products: Product[] = [
     "sizes": [
       {
         "size": "150ml",
-        "price": "$ 180.990"
+        "price": "$ 187.990"
       }
     ]
   }
