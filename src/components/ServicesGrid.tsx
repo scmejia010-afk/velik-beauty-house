@@ -72,13 +72,13 @@ export function ServicesGrid() {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="w-full h-full object-cover grayscale-0 md:grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
               ) : (
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="w-full h-full object-cover grayscale-0 md:grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
               )}
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
