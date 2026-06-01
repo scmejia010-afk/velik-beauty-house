@@ -471,6 +471,7 @@ export function BookingFlow() {
           email: state.email,
           servicio: state.servicio.nombre,
           duracion: state.servicio.duracion,
+          precio: state.servicio.precio || '',
           userId: state.profesional.userId,
         }),
       })
