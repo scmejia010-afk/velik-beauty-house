@@ -5,6 +5,7 @@ import { ProductsGrid } from "@/components/ProductsGrid"
 import { Philosophy } from "@/components/Philosophy"
 import { FAQ } from "@/components/FAQ"
 import { Reviews } from "@/components/Reviews"
+import { LocationMap } from "@/components/LocationMap"
 import { Footer } from "@/components/Footer"
 import { BookingFlow } from "@/components/Booking/BookingFlow"
 import { ServicesGrid } from "@/components/ServicesGrid"
@@ -19,6 +20,7 @@ function MainSite() {
         <ServicesGrid />
         <Philosophy />
         <FAQ />
+        <LocationMap />
         <Reviews />
       </main>
       <Footer />
