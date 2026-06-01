@@ -614,7 +614,17 @@ export function ProductsGrid() {
                       <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-md"
+                        className={`w-full h-full object-contain object-center transition-transform duration-700 ease-out drop-shadow-md group-hover:scale-110 ${
+                          product.image.includes('mascarilla') || 
+                          product.image.includes('tratamiento') || 
+                          product.image.includes('intensivo') || 
+                          product.image.includes('mask') || 
+                          product.image.includes('cream') || 
+                          product.image.includes('pomade') || 
+                          product.image.includes('paste') 
+                            ? 'translate-x-2 md:translate-x-3 scale-[1.15] group-hover:scale-[1.25]' 
+                            : ''
+                        }`}
                       />
                       
                       {/* Sizes Label */}
