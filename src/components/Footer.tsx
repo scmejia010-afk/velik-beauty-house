@@ -76,7 +76,7 @@ export function Footer() {
               <li className="flex gap-4">
                 <Instagram className="w-5 h-5 text-gray-400 shrink-0" />
                 <a
-                  href="https://www.instagram.com/velikbeautyhouse"
+                  href="https://www.instagram.com/velikbeautyhouse?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm font-medium text-gray-500 hover:text-black transition-colors"

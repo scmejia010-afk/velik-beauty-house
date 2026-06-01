@@ -18,8 +18,8 @@ export function LocationMap() {
             
             <div className="space-y-6 pt-6 border-t border-gray-100">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-black" />
+                <div className="w-12 h-12 rounded-full bg-[#1E1E1E] flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-[#DCC7B2]" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold uppercase tracking-widest mb-1">Nuestra Ubicación</h3>
@@ -28,16 +28,16 @@ export function LocationMap() {
               </div>
               
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center shrink-0">
-                  <Instagram className="w-5 h-5 text-black" />
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ background: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)" }}>
+                  <Instagram className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold uppercase tracking-widest mb-1">Instagram</h3>
                   <a 
-                    href="https://www.instagram.com/velikbeautyhouse" 
+                    href="https://www.instagram.com/velikbeautyhouse?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 text-sm hover:text-black transition-colors"
+                    className="text-gray-500 text-sm hover:text-[#bc1888] transition-colors"
                   >
                     @velikbeautyhouse
                   </a>
@@ -46,10 +46,11 @@ export function LocationMap() {
             </div>
 
             <a 
-              href="https://www.instagram.com/velikbeautyhouse" 
+              href="https://www.instagram.com/velikbeautyhouse?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white text-xs font-black uppercase tracking-widest rounded-full hover:scale-105 active:scale-95 transition-all mt-4"
+              className="inline-flex items-center gap-2 px-8 py-4 text-white text-xs font-black uppercase tracking-widest rounded-full hover:scale-105 active:scale-95 transition-all mt-4 shadow-lg shadow-pink-500/20"
+              style={{ background: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)" }}
             >
               <Instagram className="w-4 h-4" /> Seguir en Instagram
             </a>
