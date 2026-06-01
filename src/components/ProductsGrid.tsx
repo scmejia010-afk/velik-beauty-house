@@ -602,14 +602,14 @@ export function ProductsGrid() {
                   <p className="text-sm font-sans text-brand-dark/60 mt-1">{catProducts.length} productos</p>
                 </div>
               )}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-10">
                 {catProducts.map((product, i) => (
                   <div
                     key={product.title + i}
-                    className="group relative flex flex-col cursor-pointer bg-white rounded-3xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 border border-brand-dark/5"
+                    className="group relative flex flex-col cursor-pointer bg-white rounded-[20px] md:rounded-3xl p-3 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 border border-brand-dark/5"
                     onClick={() => handleBuyClick(product)}
                   >
-                    <div className="aspect-square overflow-hidden rounded-2xl relative bg-brand-light/40 mb-6 flex items-center justify-center p-4">
+                    <div className="aspect-square overflow-hidden rounded-xl md:rounded-2xl relative bg-brand-light/40 mb-3 md:mb-6 flex items-center justify-center p-2 md:p-4">
                       {/* Default Image */}
                       <img
                         src={product.image}
@@ -619,7 +619,7 @@ export function ProductsGrid() {
                       
                       {/* Sizes Label */}
                       {product.sizes && product.sizes.length > 0 && (
-                        <div className="absolute top-2 left-2 bg-brand-white/90 backdrop-blur text-brand-dark rounded-full px-3 py-1 shadow-sm z-10 transition-transform duration-500 group-hover:scale-105">
+                        <div className="absolute top-2 left-2 bg-brand-white/90 backdrop-blur text-brand-dark rounded-full px-2 py-0.5 md:px-3 md:py-1 shadow-sm z-10 transition-transform duration-500 group-hover:scale-105 hidden md:block">
                           <span className="text-[10px] font-bold uppercase tracking-widest font-sans">
                             {product.sizes.length > 1 ? "Varios Tamaños" : product.sizes[0].size}
                           </span>
@@ -628,18 +628,18 @@ export function ProductsGrid() {
                     </div>
 
                     <div className="flex-1 flex flex-col">
-                      <p className="text-[10px] text-brand-gold uppercase tracking-[0.2em] font-accent mb-2">{product.category}</p>
-                      <h3 className="text-2xl font-serif tracking-tight text-brand-dark transition-colors duration-300 group-hover:text-brand-gold line-clamp-1">{product.title}</h3>
-                      <p className="text-xl font-sans font-semibold text-brand-dark mt-2 mb-4">
-                        {product.sizes[0]?.price} {product.sizes.length > 1 && <span className="text-sm font-normal text-brand-dark/60 italic font-serif">desde</span>}
+                      <p className="text-[8px] md:text-[10px] text-brand-gold uppercase tracking-[0.2em] font-accent mb-1 md:mb-2 line-clamp-1">{product.category}</p>
+                      <h3 className="text-sm md:text-2xl font-serif tracking-tight text-brand-dark transition-colors duration-300 group-hover:text-brand-gold line-clamp-2 md:line-clamp-1 leading-tight">{product.title}</h3>
+                      <p className="text-xs md:text-xl font-sans font-semibold text-brand-dark mt-1 md:mt-2 mb-2 md:mb-4">
+                        {product.sizes[0]?.price} {product.sizes.length > 1 && <span className="text-[10px] md:text-sm font-normal text-brand-dark/60 italic font-serif">desde</span>}
                       </p>
                       
                       {/* Gradient Border Button */}
-                      <div className="mt-auto pt-4">
+                      <div className="mt-auto pt-2 md:pt-4">
                         <div className="relative p-[2px] rounded-full overflow-hidden group/btn bg-gradient-to-r from-[#DCC7B2] via-[#E6D5C3] to-[#DCC7B2] bg-[length:200%_auto] bg-[0%] hover:bg-[100%] transition-all duration-700">
-                          <div className="relative bg-brand-white rounded-full py-3 px-6 flex items-center justify-center gap-2 group-hover/btn:bg-brand-light transition-colors">
-                            <ShoppingBag className="w-4 h-4 text-brand-dark" />
-                            <span className="text-xs font-bold uppercase tracking-widest text-brand-dark font-sans">Añadir al Carrito</span>
+                          <div className="relative bg-brand-white rounded-full py-1.5 px-2 md:py-3 md:px-6 flex items-center justify-center gap-1 md:gap-2 group-hover/btn:bg-brand-light transition-colors">
+                            <ShoppingBag className="w-3 h-3 md:w-4 md:h-4 text-brand-dark" />
+                            <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest text-brand-dark font-sans">Comprar</span>
                           </div>
                         </div>
                       </div>

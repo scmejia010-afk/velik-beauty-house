@@ -17,8 +17,8 @@ function MainSite() {
       <Navbar />
       <main>
         <Hero />
-        <ServicesGrid />
         <ProductsGrid />
+        <ServicesGrid />
         <Membership />
         <GalleryCarousel />
         <Philosophy />
