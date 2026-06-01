@@ -122,10 +122,10 @@ function GlassPanel() {
         ref={panelRef}
         className="w-full max-w-[1250px] h-[900px] max-h-[85vh] flex flex-col justify-between rounded-3xl relative overflow-hidden"
         style={{
-          backgroundColor: "rgba(30, 30, 30, 0.4)",
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
           backdropFilter: "blur(40px)",
           WebkitBackdropFilter: "blur(40px)",
-          border: "1px solid rgba(220, 199, 178, 0.2)", // Borde color Nude transparente
+          border: "1px solid rgba(220, 199, 178, 0.5)", // Borde color Nude
           transformStyle: "preserve-3d",
           willChange: "transform",
         }}
@@ -135,7 +135,7 @@ function GlassPanel() {
           <p className="font-accent text-brand-gold tracking-[0.3em] uppercase text-xs md:text-sm mb-6">
             Experiencia Velik
           </p>
-          <h2 className="font-serif text-white text-4xl md:text-6xl lg:text-[80px] leading-[1.1] tracking-tight w-full max-w-[1000px] mx-auto">
+          <h2 className="font-serif text-brand-dark text-4xl md:text-6xl lg:text-[80px] leading-[1.1] tracking-tight w-full max-w-[1000px] mx-auto">
             Transformamos el cuidado diario en un <span className="italic text-brand-gold">ritual de sanación</span>. Descubre la línea premium para revitalizar tu esencia.
           </h2>
         </div>
@@ -148,7 +148,7 @@ function GlassPanel() {
                 {marqueeBrands.map((brand) => (
                   <span
                     key={brand}
-                    className="text-brand-white opacity-40 hover:opacity-100 transition-opacity duration-300 uppercase font-sans font-semibold text-sm tracking-[0.3em]"
+                    className="text-brand-dark opacity-30 hover:opacity-100 transition-opacity duration-300 uppercase font-sans font-semibold text-sm tracking-[0.3em]"
                   >
                     {brand}
                   </span>
