@@ -49,29 +49,29 @@ export function Philosophy() {
           </div>
 
           {/* Visual */}
-          <div className="lg:col-span-5 relative flex gap-4 sm:gap-6 items-start">
-            <div className="w-1/2 aspect-[4/6] rounded-[40px] sm:rounded-[60px] overflow-hidden border-4 sm:border-8 border-white shadow-2xl mt-16 relative -rotate-3 hover:rotate-0 transition-transform duration-700">
-              <img
-                src="/fotos/laura.jpg"
-                alt="Laura Vanessa"
-                className="w-full h-full object-cover"
-              />
+          <div className="lg:col-span-5 relative flex gap-3 sm:gap-4 items-center mt-12 lg:mt-0">
+            {/* Image 1: Carolina */}
+            <div className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative -rotate-6 hover:rotate-0 transition-transform duration-700">
+              <img src="/fotos/carolina.jpg" alt="Carolina Paz" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/5" />
             </div>
             
-            <div className="w-1/2 aspect-[4/6] rounded-[40px] sm:rounded-[60px] overflow-hidden border-4 sm:border-8 border-white shadow-2xl relative rotate-3 hover:rotate-0 transition-transform duration-700">
-              <img
-                src="/fotos/luz.jpg"
-                alt="Luz Aida"
-                className="w-full h-full object-cover object-center"
-              />
+            {/* Image 2: Laura (center, higher) */}
+            <div className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative -translate-y-8 hover:-translate-y-12 transition-transform duration-700 z-10">
+              <img src="/fotos/laura.jpg" alt="Laura Vanessa" className="w-full h-full object-cover object-center" />
+              <div className="absolute inset-0 bg-black/5" />
+            </div>
+
+            {/* Image 3: Luz */}
+            <div className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative rotate-6 hover:rotate-0 transition-transform duration-700">
+              <img src="/fotos/luz.jpg" alt="Luz Aida" className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-black/5" />
             </div>
 
             {/* Floating Detail */}
-            <div className="absolute -bottom-10 -left-6 sm:-left-10 bg-black text-white p-6 sm:p-8 rounded-[30px] sm:rounded-[40px] shadow-2xl animate-float z-10">
-              <p className="text-xl sm:text-3xl font-black tracking-tighter italic mb-1 sm:mb-2">Nuestro Equipo</p>
-              <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Artistas Especializadas</p>
+            <div className="absolute -bottom-8 -left-4 sm:-left-8 bg-black text-white p-5 sm:p-6 rounded-[25px] sm:rounded-[30px] shadow-2xl animate-float z-20">
+              <p className="text-lg sm:text-2xl font-black tracking-tighter italic mb-1">Nuestro Equipo</p>
+              <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400">Artistas Especializadas</p>
             </div>
           </div>
         </div>
