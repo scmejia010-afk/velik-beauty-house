@@ -40,7 +40,7 @@ export function Reviews() {
               ))}
             </div>
             <div className="flex items-center justify-end gap-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-brand-white/80">
-              5 Estrellas en Google Maps
+              5 Estrellas en Google Maps <span className="text-brand-gold">(+50 Reseñas)</span>
               <div className="w-8 md:w-12 h-px bg-brand-gold/50" />
             </div>
           </div>
