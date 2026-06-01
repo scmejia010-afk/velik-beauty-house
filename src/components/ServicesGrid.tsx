@@ -25,6 +25,18 @@ const services = [
     desc: "Limpiezas faciales, masajes relajantes, piedras volcánicas, tratamiento de estrías y más.",
     video: "/fotos/masajesvideos.MOV",
   },
+  {
+    title: "Maquillaje",
+    price: "Desde $170.000",
+    desc: "Maquillaje social, blindado y artístico aplicado por profesionales con productos de alta gama.",
+    image: "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=600&fit=crop",
+  },
+  {
+    title: "Depilación",
+    price: "Desde $20.000",
+    desc: "Depilación con hilo, cera y técnicas especiales para rostro, cuerpo y zonas íntimas.",
+    image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&h=600&fit=crop",
+  },
 ]
 
 export function ServicesGrid() {
