@@ -75,15 +75,14 @@ export function Reviews() {
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <div className="mt-20 text-center">
           <a
-            href="https://g.page/r/velikbeauty" 
+            href="https://www.google.com/search?sca_esv=163269b9f9bc3142&rlz=1C1CHZN_enCO1099CO1099&sxsrf=ANbL-n4W1YQ9YFzkb0-02VyqSJ1T5sRKwQ:1780337330129&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOV_-gipb0kxNjnha5gm8YQiGAB4VSkkUUDNMUEo89VQmdl4odMdEPokAJkev8xwbyDfrw2BRctSrx2hFN_AuGS8D5wxfhsN7T6MjSY6Ngm6jg3cZ7A%3D%3D&q=Velik+Beauty+House+Opiniones&sa=X&ved=2ahUKEwiw6JGx0eaUAxU7TTABHYq9Bi4Q0bkNegQIJhAF&biw=1920&bih=889&dpr=1" 
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-12 py-5 rounded-full bg-brand-gold text-brand-dark text-xs font-bold uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-all font-sans"
           >
-            Dejar una reseña →
+            Ver más reseñas →
           </a>
         </div>
       </div>
