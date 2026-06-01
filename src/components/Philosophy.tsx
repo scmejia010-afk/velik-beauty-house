@@ -49,20 +49,29 @@ export function Philosophy() {
           </div>
 
           {/* Visual */}
-          <div className="lg:col-span-5 relative">
-            <div className="aspect-[4/6] rounded-[100px] overflow-hidden border-8 border-white shadow-2xl relative rotate-3 hover:rotate-0 transition-transform duration-700">
+          <div className="lg:col-span-5 relative flex gap-4 sm:gap-6 items-start">
+            <div className="w-1/2 aspect-[4/6] rounded-[40px] sm:rounded-[60px] overflow-hidden border-4 sm:border-8 border-white shadow-2xl mt-16 relative -rotate-3 hover:rotate-0 transition-transform duration-700">
               <img
-                src="https://images.unsplash.com/photo-1629190785520-ff3d112922ce?w=800&h=1200&fit=crop"
-                alt="Velik Beauty House"
+                src="/fotos/laura.jpg"
+                alt="Laura Vanessa"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/10" />
+              <div className="absolute inset-0 bg-black/5" />
+            </div>
+            
+            <div className="w-1/2 aspect-[4/6] rounded-[40px] sm:rounded-[60px] overflow-hidden border-4 sm:border-8 border-white shadow-2xl relative rotate-3 hover:rotate-0 transition-transform duration-700">
+              <img
+                src="/fotos/luz.jpg"
+                alt="Luz Aida"
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-black/5" />
             </div>
 
             {/* Floating Detail */}
-            <div className="absolute -bottom-10 -left-10 bg-black text-white p-10 rounded-[40px] shadow-2xl max-w-xs animate-float">
-              <p className="text-3xl font-black tracking-tighter italic mb-2">Laureles</p>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Dg 75 #74-05, Medellín</p>
+            <div className="absolute -bottom-10 -left-6 sm:-left-10 bg-black text-white p-6 sm:p-8 rounded-[30px] sm:rounded-[40px] shadow-2xl animate-float z-10">
+              <p className="text-xl sm:text-3xl font-black tracking-tighter italic mb-1 sm:mb-2">Nuestro Equipo</p>
+              <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Artistas Especializadas</p>
             </div>
           </div>
         </div>
