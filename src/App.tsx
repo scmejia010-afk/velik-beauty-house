@@ -9,6 +9,7 @@ import { FAQ } from "@/components/FAQ"
 import { NailCareGuide } from "@/components/NailCareGuide"
 import { Footer } from "@/components/Footer"
 import { BookingFlow } from "@/components/Booking/BookingFlow"
+import { ServicesGrid } from "@/components/ServicesGrid"
 
 function MainSite() {
   return (
@@ -16,6 +17,7 @@ function MainSite() {
       <Navbar />
       <main>
         <Hero />
+        <ServicesGrid />
         <ProductsGrid />
         <Membership />
         <GalleryCarousel />
