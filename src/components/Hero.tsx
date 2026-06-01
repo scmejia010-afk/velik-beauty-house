@@ -135,7 +135,7 @@ function GlassPanel() {
           <p className="font-accent text-brand-gold tracking-[0.3em] uppercase text-xs md:text-sm mb-6">
             Experiencia Velik
           </p>
-          <h2 className="font-serif text-brand-white text-4xl md:text-6xl lg:text-[80px] leading-[1.1] tracking-tight w-full max-w-[1000px] mx-auto">
+          <h2 className="font-serif text-white text-4xl md:text-6xl lg:text-[80px] leading-[1.1] tracking-tight w-full max-w-[1000px] mx-auto">
             Transformamos el cuidado diario en un <span className="italic text-brand-gold">ritual de sanación</span>. Descubre la línea premium para revitalizar tu esencia.
           </h2>
         </div>
