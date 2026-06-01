@@ -25,7 +25,6 @@ const services = [
     desc: "Limpiezas faciales, masajes relajantes, piedras volcánicas, tratamiento de estrías y más.",
     video: "/fotos/masajesvideos.MOV",
   },
-  },
 ]
 
 export function ServicesGrid() {
