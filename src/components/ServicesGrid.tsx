@@ -5,13 +5,13 @@ const services = [
     title: "Spa de Uñas",
     price: "Desde $35.000",
     desc: "Semipermanente, acrílico, polygel, press on, baby boomer y más. Arte y precisión en cada detalle.",
-    image: "https://images.unsplash.com/photo-1604654894610-df490998570e?w=600&h=600&fit=crop",
+    image: "/fotos/uñas.jpg",
   },
   {
     title: "Peluquería",
     price: "Desde $45.000",
     desc: "Alisados naturales de coco y argán, tinturas, cortes, cepillados y tratamientos capilares premium.",
-    image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=600&fit=crop",
+    video: "/fotos/pelovideo.MOV",
   },
   {
     title: "Cejas & Pestañas",
@@ -20,10 +20,10 @@ const services = [
     image: "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop",
   },
   {
-    title: "Faciales & Corporales",
+    title: "Masajes & Faciales",
     price: "Desde $100.000",
     desc: "Limpiezas faciales, masajes relajantes, piedras volcánicas, tratamiento de estrías y más.",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=600&fit=crop",
+    video: "/fotos/masajesvideos.MOV",
   },
   {
     title: "Maquillaje",
@@ -65,11 +65,22 @@ export function ServicesGrid() {
             style={{ animationDelay: `${i * 100}ms` }}
           >
             <div className="aspect-[4/5] overflow-hidden rounded-[40px] relative">
-              <img
-                src={service.image}
-                alt={service.title}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-              />
+              {service.video ? (
+                <video
+                  src={service.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                />
+              ) : (
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                />
+              )}
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
               {/* Floating Price */}
               <div className="absolute top-6 right-6 bg-white rounded-full px-4 py-2 shadow-xl">
