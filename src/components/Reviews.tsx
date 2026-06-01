@@ -33,9 +33,16 @@ export function Reviews() {
               <span className="italic text-brand-gold">Reseñas.</span>
             </h2>
           </div>
-          <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-brand-white/60">
-            En Google Maps
-            <div className="w-12 h-px bg-brand-light/20" />
+          <div className="flex flex-col items-end gap-3 text-right">
+            <div className="flex gap-1 text-brand-gold">
+              {[...Array(5)].map((_, idx) => (
+                <Star key={idx} className="w-5 h-5 md:w-6 md:h-6 fill-current" />
+              ))}
+            </div>
+            <div className="flex items-center justify-end gap-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-brand-white/80">
+              5 Estrellas en Google Maps
+              <div className="w-8 md:w-12 h-px bg-brand-gold/50" />
+            </div>
           </div>
         </div>
 
