@@ -4,7 +4,7 @@ import { Hero } from "@/components/Hero"
 import { ProductsGrid } from "@/components/ProductsGrid"
 import { Philosophy } from "@/components/Philosophy"
 import { FAQ } from "@/components/FAQ"
-import { NailCareGuide } from "@/components/NailCareGuide"
+import { Reviews } from "@/components/Reviews"
 import { Footer } from "@/components/Footer"
 import { BookingFlow } from "@/components/Booking/BookingFlow"
 import { ServicesGrid } from "@/components/ServicesGrid"
@@ -19,7 +19,7 @@ function MainSite() {
         <ServicesGrid />
         <Philosophy />
         <FAQ />
-        <NailCareGuide />
+        <Reviews />
       </main>
       <Footer />
     </>
