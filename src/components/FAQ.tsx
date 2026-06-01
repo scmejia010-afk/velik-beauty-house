@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "¿Cómo agendo mi cita?",
-    a: "Puedes agendar directamente en nuestro portal en línea: velik.site.agendapro.com — Allí eliges la fecha, la hora y la profesional de tu preferencia. También puedes escribirnos por WhatsApp y con muchísimo gusto te ayudamos.",
+    a: "Puedes agendar directamente en nuestro portal en línea: velik-beauty-house-xi.vercel.app/agendar — Allí eliges la fecha, la hora y la profesional de tu preferencia. También puedes escribirnos por WhatsApp y con muchísimo gusto te ayudamos.",
   },
 ]
 

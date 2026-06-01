@@ -74,7 +74,7 @@ export function NailCareGuide() {
         {/* Bottom CTA */}
         <div className="mt-20 text-center">
           <a
-            href="https://velik.site.agendapro.com/co/sucursal/297109"
+            href="/agendar"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-12 py-5 rounded-full bg-white text-black text-xs font-black uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-all"

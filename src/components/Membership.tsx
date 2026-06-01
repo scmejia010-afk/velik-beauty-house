@@ -46,7 +46,7 @@ export function Membership() {
 
             <div className="flex flex-wrap gap-4 pt-6">
               <a
-                href="https://velik.site.agendapro.com/co/sucursal/297109"
+                href="/agendar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-10 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-full bg-white text-black hover:bg-gray-100 transition-all duration-300 hover:scale-105 active:scale-95"

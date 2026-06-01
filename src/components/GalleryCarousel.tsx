@@ -48,7 +48,7 @@ function GalleryCard({ item }: { item: typeof galleryItems[0] }) {
         </div>
         <div className="pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <a
-            href="https://velik.site.agendapro.com/co/sucursal/297109"
+            href="/agendar"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 rounded-full bg-white text-black text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"

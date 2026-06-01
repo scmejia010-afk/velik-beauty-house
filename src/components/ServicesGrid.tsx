@@ -91,7 +91,7 @@ export function ServicesGrid() {
 
       <div className="mt-20 text-center">
         <a
-          href="https://velik.site.agendapro.com/co/sucursal/297109"
+          href="/agendar"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block px-10 py-5 rounded-full bg-black text-white text-sm uppercase tracking-[0.2em] font-black hover:scale-105 active:scale-95 transition-all duration-300"

@@ -1,4 +1,5 @@
-import { Check } from "lucide-react"
+import { Check, X } from "lucide-react"
+import { useState } from "react"
 
 const pillars = [
   {
@@ -16,6 +17,8 @@ const pillars = [
 ]
 
 export function Philosophy() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
   return (
     <section id="philosophy" className="py-24 lg:py-32 bg-zinc-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,19 +54,28 @@ export function Philosophy() {
           {/* Visual */}
           <div className="lg:col-span-5 relative flex gap-3 sm:gap-4 items-center mt-12 lg:mt-0">
             {/* Image 1: Carolina */}
-            <div className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative -rotate-6 hover:rotate-0 transition-transform duration-700">
+            <div 
+              className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative -rotate-6 hover:rotate-0 transition-transform duration-700 cursor-pointer"
+              onClick={() => setSelectedImage("/fotos/carolina.jpg")}
+            >
               <img src="/fotos/carolina.jpg" alt="Carolina Paz" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/5" />
             </div>
             
             {/* Image 2: Laura (center, higher) */}
-            <div className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative -translate-y-8 hover:-translate-y-12 transition-transform duration-700 z-10">
+            <div 
+              className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative -translate-y-8 hover:-translate-y-12 transition-transform duration-700 z-10 cursor-pointer"
+              onClick={() => setSelectedImage("/fotos/laura.jpg")}
+            >
               <img src="/fotos/laura.jpg" alt="Laura Vanessa" className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-black/5" />
             </div>
 
             {/* Image 3: Luz */}
-            <div className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative rotate-6 hover:rotate-0 transition-transform duration-700">
+            <div 
+              className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative rotate-6 hover:rotate-0 transition-transform duration-700 cursor-pointer"
+              onClick={() => setSelectedImage("/fotos/luz.jpg")}
+            >
               <img src="/fotos/luz.jpg" alt="Luz Aida" className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-black/5" />
             </div>
@@ -76,6 +88,24 @@ export function Philosophy() {
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 cursor-pointer animate-fade-in backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors">
+            <X className="w-8 h-8" />
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="Profesional" 
+            className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl" 
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   )
 }
