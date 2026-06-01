@@ -614,7 +614,7 @@ export function ProductsGrid() {
                       <img
                         src={product.image}
                         alt={product.title}
-                        className={`w-full h-full object-contain object-center transition-transform duration-700 ease-out drop-shadow-md group-hover:scale-110 ${
+                        className={`w-full h-full object-contain object-center transition-transform duration-700 ease-out drop-shadow-md mix-blend-multiply group-hover:scale-110 ${
                           product.image.includes('mascarilla') || 
                           product.image.includes('tratamiento') || 
                           product.image.includes('intensivo') || 
