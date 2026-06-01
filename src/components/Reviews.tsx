@@ -2,22 +2,22 @@ import { Star, MessageSquareQuote } from "lucide-react"
 
 const reviews = [
   {
-    name: "Carolina Giraldo",
-    text: "Excelente servicio, la mejor peluquería en Laureles. El trato de las chicas es espectacular y quedé enamorada de mi balayage.",
+    name: "Yegnive Valero",
+    text: "En Velik encontrarás belleza, muy buena atención y Laura realiza unas uñitas espectaculares a mi me fascinaron y por lo general conozco muchos lugares pero acá me quedo! Luz Ramírez te atiende con los brazos abiertos y súper responsable !",
     rating: 5,
-    date: "Hace 2 semanas"
+    date: "Hace 3 semanas"
   },
   {
-    name: "Valentina Mesa",
-    text: "Me hice las uñas y el cabello el mismo día. Todo súper lindo, la atención es increíble, te ofrecen café o mimosa mientras te consienten.",
+    name: "Liliana Paola Perez",
+    text: "Amé mil! Son muy organizados, la atención es excelente y el ambiente es muy agradable! La manicurista muy pulida y amable, el masaje de los pies fue muy relajante, yo disfruté mucho de mi cita de manos y pies. Los recomiendo!",
     rating: 5,
-    date: "Hace 1 mes"
+    date: "Hace 4 meses"
   },
   {
-    name: "Mariana Jaramillo",
-    text: "¡Me encantó! El ambiente es súper relajante. Se nota que usan productos de altísima calidad. Definitivamente vuelvo.",
+    name: "Nani L",
+    text: "Para sentirse como una reina hay que visitar a Velik studios en Medellin. Servicios: Cortes de cabello, Pedicura y Manicura.",
     rating: 5,
-    date: "Hace 2 meses"
+    date: "Hace un mes"
   },
 ]
 
