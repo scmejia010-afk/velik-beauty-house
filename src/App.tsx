@@ -19,8 +19,6 @@ function MainSite() {
         <Hero />
         <ProductsGrid />
         <ServicesGrid />
-        <Membership />
-        <GalleryCarousel />
         <Philosophy />
         <FAQ />
         <NailCareGuide />
