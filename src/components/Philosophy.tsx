@@ -69,7 +69,7 @@ export function Philosophy() {
             </div>
 
             {/* Floating Detail */}
-            <div className="absolute -bottom-8 -left-4 sm:-left-8 bg-black text-white p-5 sm:p-6 rounded-[25px] sm:rounded-[30px] shadow-2xl animate-float z-20">
+            <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 bg-black text-white p-5 sm:p-6 rounded-[25px] sm:rounded-[30px] shadow-2xl animate-float z-20 w-max text-center">
               <p className="text-lg sm:text-2xl font-black tracking-tighter italic mb-1">Nuestro Equipo</p>
               <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400">Artistas Especializadas</p>
             </div>
