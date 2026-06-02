@@ -5,7 +5,7 @@ const services = [
     title: "Spa de Uñas",
     price: "Desde $35.000",
     desc: "Semipermanente, acrílico, polygel, press on, baby boomer y más. Arte y precisión en cada detalle.",
-    image: "/fotos/uñas.jpg",
+    video: "/fotos/masajesvideos.MOV",
   },
   {
     title: "Peluquería",
