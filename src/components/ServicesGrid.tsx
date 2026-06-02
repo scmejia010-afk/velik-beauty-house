@@ -5,7 +5,7 @@ const services = [
     title: "Spa de Uñas",
     price: "Desde $35.000",
     desc: "Semipermanente, acrílico, polygel, press on, baby boomer y más. Arte y precisión en cada detalle.",
-    video: "/fotos/masajesvideos.MOV",
+    video: "/fotos/spadeuñas.MOV",
   },
   {
     title: "Peluquería",
@@ -23,7 +23,7 @@ const services = [
     title: "Masajes & Faciales",
     price: "Desde $100.000",
     desc: "Limpiezas faciales, masajes relajantes, piedras volcánicas, tratamiento de estrías y más.",
-    video: "/fotos/masajesvideos.MOV",
+    video: "/fotos/masaje.mp4",
   },
 ]
 
