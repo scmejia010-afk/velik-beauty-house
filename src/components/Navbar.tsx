@@ -46,10 +46,10 @@ export function Navbar() {
 
         {/* CTA */}
         <a
-          href="#products"
+          href="/agendar"
           className="hidden md:inline-flex px-7 py-3 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
         >
-          Comprar
+          Reservar Cita
         </a>
 
         {/* Mobile Menu */}
@@ -76,11 +76,11 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="#products"
+            href="/agendar"
             onClick={() => setOpen(false)}
             className="block mt-6 px-8 py-4 rounded-full bg-white text-black text-center text-xs font-black uppercase tracking-widest"
           >
-            Comprar Ahora
+            Reservar Cita
           </a>
         </div>
       )}
