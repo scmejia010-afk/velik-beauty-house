@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import { ChevronLeft, Clock, CheckCircle, Loader2, ChevronRight, Sparkles, Scissors, Eye, Feather, Gem, Paintbrush, Flower2, Footprints, type LucideIcon } from "lucide-react"
 import { CATEGORIAS, SERVICIOS, PROFESIONALES, SLOTS_URL, CREAR_URL } from "@/data/bookingData"
 import type { Servicio, Profesional } from "@/data/bookingData"
@@ -64,6 +64,69 @@ function Stepper({ step }: { step: number }) {
   )
 }
 
+// ── Category card ────────────────────────────────────────────────────────────
+
+const CARD_BASE: React.CSSProperties = {
+  padding: "2rem 1rem 1.75rem",
+  border: "1px solid rgba(220,199,178,0.15)",
+  background: "linear-gradient(160deg, rgba(220,199,178,0.05) 0%, rgba(220,199,178,0.01) 100%)",
+  boxShadow: "0 1px 0 rgba(220,199,178,0.05), inset 0 1px 0 rgba(220,199,178,0.04)",
+  borderRadius: "1rem",
+  display: "flex",
+  flexDirection: "column" as const,
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center" as const,
+  cursor: "pointer",
+  transition: "all 0.25s ease",
+  outline: "none",
+}
+const CARD_HOVER: React.CSSProperties = {
+  border: "1px solid rgba(220,199,178,0.5)",
+  background: "linear-gradient(160deg, rgba(220,199,178,0.10) 0%, rgba(220,199,178,0.04) 100%)",
+  boxShadow: "0 12px 40px rgba(220,199,178,0.13), 0 2px 8px rgba(220,199,178,0.07), inset 0 1px 0 rgba(220,199,178,0.1)",
+  transform: "translateY(-5px)",
+}
+
+function CatCard({ cat, Icon, onSelect }: { cat: string; Icon: LucideIcon; onSelect: (c: string) => void }) {
+  const [hovered, setHovered] = React.useState(false)
+  const cardStyle = hovered ? { ...CARD_BASE, ...CARD_HOVER } : CARD_BASE
+  const ringStyle: React.CSSProperties = {
+    width: "56px", height: "56px",
+    borderRadius: "50%",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    background: hovered ? "rgba(220,199,178,0.12)" : "rgba(220,199,178,0.07)",
+    border: hovered ? "1px solid rgba(220,199,178,0.35)" : "1px solid rgba(220,199,178,0.12)",
+    boxShadow: hovered ? "0 0 18px rgba(220,199,178,0.18), inset 0 1px 0 rgba(220,199,178,0.15)" : "inset 0 1px 0 rgba(220,199,178,0.1)",
+    transform: hovered ? "scale(1.1)" : "scale(1)",
+    transition: "all 0.25s ease",
+    marginBottom: "1rem",
+  }
+  const iconStyle: React.CSSProperties = {
+    color: hovered ? "rgba(220,199,178,1)" : "rgba(220,199,178,0.75)",
+    filter: hovered ? "drop-shadow(0 0 6px rgba(220,199,178,0.65))" : "none",
+    transition: "all 0.25s ease",
+  }
+  return (
+    <button
+      onClick={() => onSelect(cat)}
+      style={cardStyle}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div style={ringStyle}>
+        <Icon size={26} strokeWidth={1.4} style={iconStyle} />
+      </div>
+      <span style={{ color: hovered ? "rgba(220,199,178,1)" : "rgba(220,199,178,0.75)", fontFamily: "Cormorant Garamond, serif", fontSize: "1.05rem", lineHeight: 1.3, display: "block", marginBottom: "0.4rem", transition: "color 0.25s" }}>
+        {cat}
+      </span>
+      <span style={{ fontFamily: "Poppins, sans-serif", fontSize: "9.5px", letterSpacing: "0.15em", color: "rgba(220,199,178,0.3)", textTransform: "uppercase" }}>
+        {SERVICIOS[cat]?.length || 0} servicios
+      </span>
+    </button>
+  )
+}
+
 // ── Step 1: Categoría ────────────────────────────────────────────────────────
 
 const CAT_ICONS: Record<string, LucideIcon> = {
@@ -92,75 +155,9 @@ function Step1({ onSelect }: { onSelect: (cat: string) => void }) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {CATEGORIAS.map((cat) => {
           const Icon = CAT_ICONS[cat]
+          if (!Icon) return null
           return (
-            <button
-              key={cat}
-              onClick={() => onSelect(cat)}
-              className="group relative flex flex-col items-center justify-center text-center rounded-2xl transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.97]"
-              style={{
-                padding: "2rem 1rem 1.75rem",
-                border: "1px solid rgba(220,199,178,0.15)",
-                background: "linear-gradient(160deg, rgba(220,199,178,0.05) 0%, rgba(220,199,178,0.01) 100%)",
-                boxShadow: "0 1px 0 rgba(220,199,178,0.05), inset 0 1px 0 rgba(220,199,178,0.04)"
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.border = "1px solid rgba(220,199,178,0.55)"
-                el.style.background = "linear-gradient(160deg, rgba(220,199,178,0.10) 0%, rgba(220,199,178,0.04) 100%)"
-                el.style.boxShadow = "0 12px 40px rgba(220,199,178,0.14), 0 2px 8px rgba(220,199,178,0.08), inset 0 1px 0 rgba(220,199,178,0.12)"
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.border = "1px solid rgba(220,199,178,0.15)"
-                el.style.background = "linear-gradient(160deg, rgba(220,199,178,0.05) 0%, rgba(220,199,178,0.01) 100%)"
-                el.style.boxShadow = "0 1px 0 rgba(220,199,178,0.05), inset 0 1px 0 rgba(220,199,178,0.04)"
-              }}
-            >
-              {/* Halo glow behind icon */}
-              <div
-                className="relative mb-4 transition-all duration-300"
-                style={{ filter: "drop-shadow(0 0 0px rgba(220,199,178,0))" }}
-              >
-                <div
-                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{
-                    background: "radial-gradient(circle, rgba(220,199,178,0.18) 0%, transparent 70%)",
-                    transform: "scale(2.2)",
-                    pointerEvents: "none"
-                  }}
-                />
-                <div
-                  className="relative flex items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
-                  style={{
-                    width: "56px",
-                    height: "56px",
-                    background: "rgba(220,199,178,0.07)",
-                    border: "1px solid rgba(220,199,178,0.12)",
-                    boxShadow: "inset 0 1px 0 rgba(220,199,178,0.1)"
-                  }}
-                >
-                  <Icon
-                    size={26}
-                    strokeWidth={1.4}
-                    style={{ color: "rgba(220,199,178,0.85)", transition: "color 0.3s, filter 0.3s" }}
-                    className="group-hover:drop-shadow-[0_0_8px_rgba(220,199,178,0.7)]"
-                  />
-                </div>
-              </div>
-
-              <span
-                className="font-serif leading-snug block mb-1.5 transition-colors duration-300 group-hover:text-[#DCC7B2]"
-                style={{ color: "rgba(220,199,178,0.75)", fontFamily: "Cormorant Garamond, serif", fontSize: "1.05rem" }}
-              >
-                {cat}
-              </span>
-              <span
-                className="block transition-colors duration-300"
-                style={{ fontFamily: "Poppins, sans-serif", fontSize: "9.5px", letterSpacing: "0.15em", color: "rgba(220,199,178,0.3)", textTransform: "uppercase" }}
-              >
-                {SERVICIOS[cat]?.length || 0} servicios
-              </span>
-            </button>
+            <CatCard key={cat} cat={cat} Icon={Icon} onSelect={onSelect} />
           )
         })}
       </div>
