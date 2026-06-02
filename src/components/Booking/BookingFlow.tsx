@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, type JSX } from "react"
-import { ChevronLeft, Clock, CheckCircle, Loader2, ChevronRight } from "lucide-react"
+import { useState, useEffect, useCallback } from "react"
+import { ChevronLeft, Clock, CheckCircle, Loader2, ChevronRight, Sparkles, Scissors, Eye, Feather, Gem, Paintbrush, Flower2, Footprints, type LucideIcon } from "lucide-react"
 import { CATEGORIAS, SERVICIOS, PROFESIONALES, SLOTS_URL, CREAR_URL } from "@/data/bookingData"
 import type { Servicio, Profesional } from "@/data/bookingData"
 
@@ -66,91 +66,15 @@ function Stepper({ step }: { step: number }) {
 
 // ── Step 1: Categoría ────────────────────────────────────────────────────────
 
-const C = "rgba(220,199,178,0.9)"
-
-const CAT_ICONS: Record<string, JSX.Element> = {
-  "Manicure": (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Hand with polished nails */}
-      <path d="M10 28 Q10 24 12 22 L12 12 Q12 10 14 10 Q16 10 16 12 L16 14 Q16 12 18 12 Q20 12 20 14 L20 15 Q20 13 22 13 Q24 13 24 15 L24 16 Q24 14.5 25.5 14.5 Q27 14.5 27 16 L27 24 Q27 28 23 30 L14 30 Q10 30 10 28 Z" stroke={C} strokeWidth="1.4" fill="none" strokeLinejoin="round"/>
-      <rect x="12.5" y="9" width="3" height="4" rx="1.5" fill={C} opacity="0.7"/>
-      <rect x="16.5" y="11" width="3" height="3.5" rx="1.5" fill={C} opacity="0.7"/>
-      <rect x="20.5" y="12" width="3" height="3.5" rx="1.5" fill={C} opacity="0.7"/>
-      <rect x="24.3" y="13.5" width="2.5" height="3" rx="1.25" fill={C} opacity="0.7"/>
-    </svg>
-  ),
-  "Pedicure": (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Foot */}
-      <path d="M8 20 Q8 14 14 14 L22 14 Q26 14 26 18 Q26 20 24 20 L22 20 Q24 20 24 22 Q24 24 22 24 L20 24 Q21 24 21 26 Q21 28 19 28 L14 28 Q10 28 8 24 Z" stroke={C} strokeWidth="1.4" fill="none" strokeLinejoin="round"/>
-      <circle cx="13" cy="11" r="2" fill={C} opacity="0.7"/>
-      <circle cx="17.5" cy="10" r="2" fill={C} opacity="0.7"/>
-      <circle cx="22" cy="11" r="2" fill={C} opacity="0.7"/>
-    </svg>
-  ),
-  "Manicura y Pedicura": (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Two hands / diamond */}
-      <path d="M18 6 L22 14 L30 14 L24 19 L26 27 L18 22 L10 27 L12 19 L6 14 L14 14 Z" stroke={C} strokeWidth="1.4" fill="none" strokeLinejoin="round"/>
-      <circle cx="18" cy="18" r="2.5" fill={C} opacity="0.5"/>
-    </svg>
-  ),
-  "Cabello": (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Hair / scissors */}
-      <path d="M10 8 Q14 12 18 18 Q22 24 26 28" stroke={C} strokeWidth="1.8" strokeLinecap="round"/>
-      <path d="M12 8 Q16 13 18 18 Q20 23 24 28" stroke={C} strokeWidth="1.2" strokeLinecap="round" opacity="0.5"/>
-      <path d="M8 10 Q12 14 18 18 Q24 22 28 26" stroke={C} strokeWidth="1.2" strokeLinecap="round" opacity="0.5"/>
-      <circle cx="9" cy="29" r="3" stroke={C} strokeWidth="1.3" fill="none"/>
-      <circle cx="27" cy="29" r="3" stroke={C} strokeWidth="1.3" fill="none"/>
-      <path d="M10.5 27 L26.5 11" stroke={C} strokeWidth="1.3" strokeLinecap="round" opacity="0.6"/>
-    </svg>
-  ),
-  "Cejas y Pestañas": (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Eye with lashes */}
-      <path d="M6 18 Q12 10 18 10 Q24 10 30 18 Q24 26 18 26 Q12 26 6 18 Z" stroke={C} strokeWidth="1.4" fill="none"/>
-      <circle cx="18" cy="18" r="4.5" stroke={C} strokeWidth="1.4" fill="none"/>
-      <circle cx="18" cy="18" r="2" fill={C} opacity="0.6"/>
-      {/* lashes */}
-      <path d="M14 10 L13 7" stroke={C} strokeWidth="1.3" strokeLinecap="round"/>
-      <path d="M18 9 L18 6" stroke={C} strokeWidth="1.3" strokeLinecap="round"/>
-      <path d="M22 10 L23 7" stroke={C} strokeWidth="1.3" strokeLinecap="round"/>
-      {/* brow */}
-      <path d="M9 13 Q18 9 27 13" stroke={C} strokeWidth="1.6" strokeLinecap="round" fill="none"/>
-    </svg>
-  ),
-  "Depilación": (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Feather/wax strip */}
-      <path d="M18 30 Q10 22 10 14 Q10 7 18 7 Q26 7 26 14 Q26 22 18 30 Z" stroke={C} strokeWidth="1.4" fill="none" strokeLinejoin="round"/>
-      <path d="M18 7 L18 30" stroke={C} strokeWidth="1" strokeDasharray="2 2" opacity="0.5"/>
-      <path d="M12 13 Q18 11 24 13" stroke={C} strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.7"/>
-      <path d="M11 17 Q18 15 25 17" stroke={C} strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.7"/>
-      <path d="M12 21 Q18 19 24 21" stroke={C} strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.7"/>
-    </svg>
-  ),
-  "Maquillaje Profesional": (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Lipstick */}
-      <rect x="14" y="8" width="8" height="13" rx="2" stroke={C} strokeWidth="1.4" fill="none"/>
-      <path d="M14 12 Q18 9 22 12" stroke={C} strokeWidth="1.2" fill="none"/>
-      <rect x="13" y="21" width="10" height="4" rx="1" stroke={C} strokeWidth="1.3" fill="none"/>
-      <rect x="12" y="25" width="12" height="4" rx="1.5" stroke={C} strokeWidth="1.3" fill="none"/>
-      <path d="M14 8 L16 4 L20 4 L22 8" stroke={C} strokeWidth="1.2" fill="none" strokeLinejoin="round" opacity="0.7"/>
-      <path d="M16 4 Q18 2 20 4" stroke={C} strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-    </svg>
-  ),
-  "Corporal": (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      {/* Body / lotus */}
-      <ellipse cx="18" cy="22" rx="8" ry="10" stroke={C} strokeWidth="1.4" fill="none"/>
-      <path d="M18 12 Q12 8 10 12 Q12 16 18 14 Q24 16 26 12 Q24 8 18 12 Z" stroke={C} strokeWidth="1.3" fill="none" strokeLinejoin="round"/>
-      <path d="M18 12 L18 22" stroke={C} strokeWidth="1" opacity="0.4"/>
-      <path d="M15 17 Q18 15 21 17" stroke={C} strokeWidth="1.1" strokeLinecap="round" fill="none" opacity="0.6"/>
-      <path d="M14 21 Q18 19 22 21" stroke={C} strokeWidth="1.1" strokeLinecap="round" fill="none" opacity="0.6"/>
-    </svg>
-  ),
+const CAT_ICONS: Record<string, LucideIcon> = {
+  "Manicure":              Sparkles,
+  "Pedicure":              Footprints,
+  "Manicura y Pedicura":   Gem,
+  "Cabello":               Scissors,
+  "Cejas y Pestañas":      Eye,
+  "Depilación":            Feather,
+  "Maquillaje Profesional": Paintbrush,
+  "Corporal":              Flower2,
 }
 
 function Step1({ onSelect }: { onSelect: (cat: string) => void }) {
@@ -166,37 +90,79 @@ function Step1({ onSelect }: { onSelect: (cat: string) => void }) {
         <div style={{ width: "40px", height: "1px", background: "rgba(220,199,178,0.4)", margin: "1rem auto 0" }} />
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {CATEGORIAS.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => onSelect(cat)}
-            className="group relative flex flex-col items-center justify-center text-center rounded-2xl transition-all duration-400 hover:-translate-y-1"
-            style={{
-              padding: "2rem 1rem",
-              border: "1px solid rgba(220,199,178,0.2)",
-              background: "linear-gradient(160deg, rgba(220,199,178,0.06) 0%, rgba(220,199,178,0.02) 100%)",
-              boxShadow: "0 1px 0 rgba(220,199,178,0.06)"
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.border = "1px solid rgba(220,199,178,0.7)"
-              ;(e.currentTarget as HTMLElement).style.background = "linear-gradient(160deg, rgba(220,199,178,0.12) 0%, rgba(220,199,178,0.05) 100%)"
-              ;(e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(220,199,178,0.12), 0 1px 0 rgba(220,199,178,0.2)"
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.border = "1px solid rgba(220,199,178,0.2)"
-              ;(e.currentTarget as HTMLElement).style.background = "linear-gradient(160deg, rgba(220,199,178,0.06) 0%, rgba(220,199,178,0.02) 100%)"
-              ;(e.currentTarget as HTMLElement).style.boxShadow = "0 1px 0 rgba(220,199,178,0.06)"
-            }}
-          >
-            <span className="mb-3 transition-transform duration-300 group-hover:scale-110 block">{CAT_ICONS[cat]}</span>
-            <span className="font-serif text-base leading-snug transition-colors duration-300 block mb-2" style={{ color: "rgba(220,199,178,0.85)", fontFamily: "Cormorant Garamond, serif", fontSize: "1.05rem" }}>
-              {cat}
-            </span>
-            <span className="block transition-colors duration-300" style={{ fontFamily: "Poppins, sans-serif", fontSize: "10px", letterSpacing: "0.12em", color: "rgba(220,199,178,0.35)", textTransform: "uppercase" }}>
-              {SERVICIOS[cat]?.length || 0} servicios
-            </span>
-          </button>
-        ))}
+        {CATEGORIAS.map((cat) => {
+          const Icon = CAT_ICONS[cat]
+          return (
+            <button
+              key={cat}
+              onClick={() => onSelect(cat)}
+              className="group relative flex flex-col items-center justify-center text-center rounded-2xl transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.97]"
+              style={{
+                padding: "2rem 1rem 1.75rem",
+                border: "1px solid rgba(220,199,178,0.15)",
+                background: "linear-gradient(160deg, rgba(220,199,178,0.05) 0%, rgba(220,199,178,0.01) 100%)",
+                boxShadow: "0 1px 0 rgba(220,199,178,0.05), inset 0 1px 0 rgba(220,199,178,0.04)"
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.border = "1px solid rgba(220,199,178,0.55)"
+                el.style.background = "linear-gradient(160deg, rgba(220,199,178,0.10) 0%, rgba(220,199,178,0.04) 100%)"
+                el.style.boxShadow = "0 12px 40px rgba(220,199,178,0.14), 0 2px 8px rgba(220,199,178,0.08), inset 0 1px 0 rgba(220,199,178,0.12)"
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.border = "1px solid rgba(220,199,178,0.15)"
+                el.style.background = "linear-gradient(160deg, rgba(220,199,178,0.05) 0%, rgba(220,199,178,0.01) 100%)"
+                el.style.boxShadow = "0 1px 0 rgba(220,199,178,0.05), inset 0 1px 0 rgba(220,199,178,0.04)"
+              }}
+            >
+              {/* Halo glow behind icon */}
+              <div
+                className="relative mb-4 transition-all duration-300"
+                style={{ filter: "drop-shadow(0 0 0px rgba(220,199,178,0))" }}
+              >
+                <div
+                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: "radial-gradient(circle, rgba(220,199,178,0.18) 0%, transparent 70%)",
+                    transform: "scale(2.2)",
+                    pointerEvents: "none"
+                  }}
+                />
+                <div
+                  className="relative flex items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    background: "rgba(220,199,178,0.07)",
+                    border: "1px solid rgba(220,199,178,0.12)",
+                    boxShadow: "inset 0 1px 0 rgba(220,199,178,0.1)"
+                  }}
+                >
+                  <Icon
+                    size={26}
+                    strokeWidth={1.4}
+                    style={{ color: "rgba(220,199,178,0.85)", transition: "color 0.3s, filter 0.3s" }}
+                    className="group-hover:drop-shadow-[0_0_8px_rgba(220,199,178,0.7)]"
+                  />
+                </div>
+              </div>
+
+              <span
+                className="font-serif leading-snug block mb-1.5 transition-colors duration-300 group-hover:text-[#DCC7B2]"
+                style={{ color: "rgba(220,199,178,0.75)", fontFamily: "Cormorant Garamond, serif", fontSize: "1.05rem" }}
+              >
+                {cat}
+              </span>
+              <span
+                className="block transition-colors duration-300"
+                style={{ fontFamily: "Poppins, sans-serif", fontSize: "9.5px", letterSpacing: "0.15em", color: "rgba(220,199,178,0.3)", textTransform: "uppercase" }}
+              >
+                {SERVICIOS[cat]?.length || 0} servicios
+              </span>
+            </button>
+          )
+        })}
       </div>
     </div>
   )
