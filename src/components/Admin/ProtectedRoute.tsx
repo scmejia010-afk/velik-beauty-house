@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
-import { User } from "@supabase/supabase-js";
+import type { User } from "@supabase/supabase-js";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);

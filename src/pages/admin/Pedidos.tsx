@@ -23,7 +23,7 @@ export function Pedidos() {
   const [loading, setLoading] = useState(true);
 
   const fetchPedidos = async () => {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('pedidos')
       .select('*')
       .order('creado_el', { ascending: false });

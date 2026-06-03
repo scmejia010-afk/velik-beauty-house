@@ -15,7 +15,7 @@ export function Inventario() {
   const [savingId, setSavingId] = useState<string | null>(null);
 
   const fetchInventario = async () => {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('inventario')
       .select('*')
       .order('producto_nombre', { ascending: true });
