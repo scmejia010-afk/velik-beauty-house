@@ -549,7 +549,10 @@ export function ProductsGrid() {
   const [customerName, setCustomerName] = useState("")
   const [customerEmail, setCustomerEmail] = useState("")
   const [customerPhone, setCustomerPhone] = useState("")
+  const [customerDept, setCustomerDept] = useState("")
+  const [customerCity, setCustomerCity] = useState("")
   const [customerAddress, setCustomerAddress] = useState("")
+  const [customerApt, setCustomerApt] = useState("")
 
   const handleBuyClick = (product: Product) => {
     setCheckoutProduct(product)
@@ -558,8 +561,8 @@ export function ProductsGrid() {
   }
 
   const handlePayment = () => {
-    if (!customerName || !customerEmail || !customerPhone || !customerAddress || !checkoutProduct || !selectedSize) {
-      alert("Por favor, llena todos los campos");
+    if (!customerName || !customerEmail || !customerPhone || !customerDept || !customerCity || !customerAddress || !checkoutProduct || !selectedSize) {
+      alert("Por favor, llena todos los campos obligatorios");
       return;
     }
 
@@ -583,7 +586,10 @@ export function ProductsGrid() {
             nombre: customerName,
             correo: customerEmail,
             celular: customerPhone,
+            departamento: customerDept,
+            ciudad: customerCity,
             direccion: customerAddress,
+            apartamento: customerApt,
             producto: checkoutProduct.title,
             talla: selectedSize.size,
             precio: selectedSize.price,
@@ -771,12 +777,26 @@ export function ProductsGrid() {
                       <input type="email" value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} placeholder="Ej. ana@email.com" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Celular</label>
+                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Celular *</label>
                       <input type="tel" value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} placeholder="Ej. 3001234567" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
                     </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Departamento *</label>
+                        <input type="text" value={customerDept} onChange={e => setCustomerDept(e.target.value)} placeholder="Ej. Antioquia" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Ciudad *</label>
+                        <input type="text" value={customerCity} onChange={e => setCustomerCity(e.target.value)} placeholder="Ej. Medellín" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
+                      </div>
+                    </div>
                     <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Dirección de Envío</label>
+                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Dirección de Envío *</label>
                       <input type="text" value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} placeholder="Ej. Calle 123 #45-67" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Barrio / Apto / Unidad (Opcional)</label>
+                      <input type="text" value={customerApt} onChange={e => setCustomerApt(e.target.value)} placeholder="Ej. Apto 402, Edificio Luz" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
                     </div>
                   </div>
 
