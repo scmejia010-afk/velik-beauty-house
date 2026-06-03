@@ -1,5 +1,12 @@
 import { useState } from "react"
 import { X, ShoppingBag } from "lucide-react"
+import { supabase } from "../lib/supabase"
+
+declare global {
+  interface Window {
+    WidgetCheckout: any;
+  }
+}
 
 export type ProductCategory = "Hydrate" | "Glow" | "Amplify" | "Replenish" | "All Hair Types" | "Beyond The Hair" | "Styling";
 
@@ -538,11 +545,61 @@ export function ProductsGrid() {
   const [checkoutProduct, setCheckoutProduct] = useState<Product | null>(null)
   const [selectedSize, setSelectedSize] = useState<ProductSize | null>(null)
   const [checkoutStep, setCheckoutStep] = useState<"cart" | "success">("cart")
+  
+  const [customerName, setCustomerName] = useState("")
+  const [customerEmail, setCustomerEmail] = useState("")
+  const [customerPhone, setCustomerPhone] = useState("")
+  const [customerAddress, setCustomerAddress] = useState("")
 
   const handleBuyClick = (product: Product) => {
     setCheckoutProduct(product)
     setSelectedSize(product.sizes[0] || null)
     setCheckoutStep("cart")
+  }
+
+  const handlePayment = () => {
+    if (!customerName || !customerEmail || !customerPhone || !customerAddress || !checkoutProduct || !selectedSize) {
+      alert("Por favor, llena todos los campos");
+      return;
+    }
+
+    const numericPrice = selectedSize.price.replace(/[^0-9]/g, '');
+    const amountInCents = parseInt(numericPrice, 10) * 100;
+    const reference = `VELIK-${Date.now()}`;
+
+    // @ts-ignore
+    const checkout = new window.WidgetCheckout({
+      currency: 'COP',
+      amountInCents: amountInCents,
+      reference: reference,
+      publicKey: import.meta.env.VITE_WOMPI_PUBLIC_KEY,
+    });
+
+    checkout.open(async function (result: any) {
+      const transaction = result.transaction;
+      if (transaction.status === 'APPROVED') {
+        const { error } = await supabase.from('pedidos').insert([
+          {
+            nombre: customerName,
+            correo: customerEmail,
+            celular: customerPhone,
+            direccion: customerAddress,
+            producto: checkoutProduct.title,
+            talla: selectedSize.size,
+            precio: selectedSize.price,
+            referencia_wompi: transaction.id
+          }
+        ]);
+
+        if (error) {
+          console.error("Error guardando pedido:", error);
+        }
+
+        setCheckoutStep("success");
+      } else {
+        alert("El pago no fue aprobado. Estado: " + transaction.status);
+      }
+    });
   }
 
   // Determine which categories to display based on the selected filter
@@ -707,25 +764,25 @@ export function ProductsGrid() {
                     )}
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Nombre Completo</label>
-                      <input type="text" placeholder="Ej. Ana García" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
+                      <input type="text" value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder="Ej. Ana García" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Correo Electrónico</label>
+                      <input type="email" value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} placeholder="Ej. ana@email.com" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Celular</label>
+                      <input type="tel" value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} placeholder="Ej. 3001234567" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Dirección de Envío</label>
-                      <input type="text" placeholder="Ej. Calle 123 #45-67" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-dark/60 mb-2 font-sans">Método de Pago</label>
-                      <select className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans">
-                        <option>Tarjeta de Crédito / Débito</option>
-                        <option>PSE</option>
-                        <option>Nequi / Daviplata</option>
-                      </select>
+                      <input type="text" value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} placeholder="Ej. Calle 123 #45-67" className="w-full bg-brand-light border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none font-sans" />
                     </div>
                   </div>
 
                   {/* Submit */}
                   <button 
-                    onClick={() => setCheckoutStep("success")}
+                    onClick={handlePayment}
                     className="w-full py-4 bg-brand-dark text-brand-nude rounded-full font-bold uppercase tracking-widest text-sm hover:bg-[#000] transition-colors font-sans"
                   >
                     Pagar {selectedSize?.price || "Por definir"}

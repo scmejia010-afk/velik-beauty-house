@@ -66,7 +66,8 @@
       "Bash(curl -s -X PUT \"https://services.leadconnectorhq.com/locations/0zeAaf3V1WrlkbyD4tJo\" -H \"Authorization: Bearer pit-f7e40478-4e4d-4427-a5d6-7c2ccd453f8e\" -H \"Content-Type: application/json\" -H \"Version: 2021-04-15\" -d \"{\\\\\"logoUrl\\\\\": \\\\\"https://assets.cdn.filesafe.space/0zeAaf3V1WrlkbyD4tJo/media/6a10d23ddf1cb25b0624eb32.png\\\\\"}\")",
       "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); loc=d.get\\('location',{}\\); print\\('logoUrl:', loc.get\\('logoUrl',''\\)\\)\")",
       "Bash(curl -s -X PUT \"https://services.leadconnectorhq.com/calendars/EDiqwAb54xY6nID5yzB8\" -H \"Authorization: Bearer pit-f7e40478-4e4d-4427-a5d6-7c2ccd453f8e\" -H \"Content-Type: application/json\" -H \"Version: 2021-04-15\" -d \"{\\\\\"appearance\\\\\": {\\\\\"primaryColor\\\\\": \\\\\"#BFA15A\\\\\"}}\")",
-      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d, indent=2\\)\\)\")"
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d, indent=2\\)\\)\")",
+      "Bash(curl -s -X POST https://services.leadconnectorhq.com/users/ -H 'Authorization: Bearer pit-8372873c-1348-4b71-948e-80b860032966' -H 'Version: 2021-07-28' -H 'Content-Type: application/json' -d '{ *)"
     ]
   }
 }
