@@ -821,9 +821,10 @@ export function ProductsGrid() {
                   {/* Submit */}
                   <button 
                     onClick={handlePayment}
-                    className="w-full py-4 bg-brand-dark text-brand-nude rounded-full font-bold uppercase tracking-widest text-sm hover:bg-[#000] transition-colors font-sans"
+                    disabled={selectedSize ? getStock(checkoutProduct.title, selectedSize.size) <= 0 : false}
+                    className="w-full py-4 bg-brand-dark text-brand-nude rounded-full font-bold uppercase tracking-widest text-sm hover:bg-[#000] transition-colors font-sans disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Pagar {selectedSize?.price || "Por definir"}
+                    {selectedSize && getStock(checkoutProduct.title, selectedSize.size) <= 0 ? "Producto Agotado" : `Pagar ${selectedSize?.price || "Por definir"}`}
                   </button>
                 </div>
               ) : (
