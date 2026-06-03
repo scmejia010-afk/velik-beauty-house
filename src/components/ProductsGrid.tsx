@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { X, ShoppingBag } from "lucide-react"
 import { supabase } from "../lib/supabase"
 
@@ -545,6 +545,18 @@ export function ProductsGrid() {
   const [checkoutProduct, setCheckoutProduct] = useState<Product | null>(null)
   const [selectedSize, setSelectedSize] = useState<ProductSize | null>(null)
   const [checkoutStep, setCheckoutStep] = useState<"cart" | "success">("cart")
+  const [inventario, setInventario] = useState<any[]>([])
+  
+  useEffect(() => {
+    supabase.from('inventario').select('*').then(({ data }) => {
+      if (data) setInventario(data);
+    });
+  }, [])
+
+  const getStock = (productTitle: string, sizeName: string) => {
+    const item = inventario.find(i => i.producto_nombre === productTitle && i.talla === sizeName);
+    return item ? item.stock : 0;
+  }
   
   const [customerName, setCustomerName] = useState("")
   const [customerEmail, setCustomerEmail] = useState("")
@@ -596,6 +608,12 @@ export function ProductsGrid() {
             referencia_wompi: transaction.id
           }
         ]);
+
+        // Decrement stock using an RPC call (or fallback if it fails)
+        await supabase.rpc('decrementar_stock', { 
+          p_nombre: checkoutProduct.title, 
+          p_talla: selectedSize.size 
+        });
 
         if (error) {
           console.error("Error guardando pedido:", error);
