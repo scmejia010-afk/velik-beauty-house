@@ -14,6 +14,7 @@ import { AdminLayout } from "@/pages/admin/AdminLayout"
 import { Pedidos } from "@/pages/admin/Pedidos"
 import { Inventario } from "@/pages/admin/Inventario"
 import { ProtectedRoute } from "@/components/Admin/ProtectedRoute"
+import { WhatsAppButton } from "@/components/WhatsAppButton"
 
 function MainSite() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="inventario" element={<Inventario />} />
           </Route>
         </Routes>
+        <WhatsAppButton />
       </div>
     </Router>
   )

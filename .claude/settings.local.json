@@ -67,7 +67,14 @@
       "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); loc=d.get\\('location',{}\\); print\\('logoUrl:', loc.get\\('logoUrl',''\\)\\)\")",
       "Bash(curl -s -X PUT \"https://services.leadconnectorhq.com/calendars/EDiqwAb54xY6nID5yzB8\" -H \"Authorization: Bearer pit-f7e40478-4e4d-4427-a5d6-7c2ccd453f8e\" -H \"Content-Type: application/json\" -H \"Version: 2021-04-15\" -d \"{\\\\\"appearance\\\\\": {\\\\\"primaryColor\\\\\": \\\\\"#BFA15A\\\\\"}}\")",
       "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d, indent=2\\)\\)\")",
-      "Bash(curl -s -X POST https://services.leadconnectorhq.com/users/ -H 'Authorization: Bearer pit-8372873c-1348-4b71-948e-80b860032966' -H 'Version: 2021-07-28' -H 'Content-Type: application/json' -d '{ *)"
+      "Bash(curl -s -X POST https://services.leadconnectorhq.com/users/ -H 'Authorization: Bearer pit-8372873c-1348-4b71-948e-80b860032966' -H 'Version: 2021-07-28' -H 'Content-Type: application/json' -d '{ *)",
+      "Read(//c/Users/scmej/Downloads/velik-pos/**)",
+      "Bash(node migrar_citas_agendapro.cjs)",
+      "Bash(curl -s -X POST https://aqoztzznsxhvczkanorr.supabase.co/rest/v1/citas -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxb3R6enNueGh2Y3prYW5vcnIiLCJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNzgwMDU5ODc1LCJleHAiOjIwOTU2MzU4NzV9.2Jxnj_q9ni2p8H4wuOP-u9QIDTYkkjdenaTPDjjQFmc' -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxb3R6enNueGh2Y3prYW5vcnIiLCJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNzgwMDU5ODc1LCJleHAiOjIwOTU2MzU4NzV9.2Jxnj_q9ni2p8H4wuOP-u9QIDTYkkjdenaTPDjjQFmc' -H 'Content-Type: application/json' -H 'Prefer: return=minimal' -d '{\"fecha\":\"2026-06-04\",\"start_time\":\"2026-06-04T15:00:00.000Z\",\"end_time\":\"2026-06-04T16:00:00.000Z\",\"titulo\":\"Test\",\"cliente_nombre\":\"Test\",\"profesional_id\":\"test\",\"profesional_nombre\":\"test\",\"status\":\"confirmed\",\"origen\":\"manual\"}')",
+      "Bash(curl -s -X POST https://aqoztzznsxhvczkanorr.supabase.co/rest/v1/citas -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxb3p0enpuc3hodmN6a2Fub3JyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDA1OTg3NSwiZXhwIjoyMDk1NjM1ODc1fQ.2Jxnj_q9ni2p8H4wuOP-u9QIDTYkkjdenaTPDjjQFmc' -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxb3p0enpuc3hodmN6a2Fub3JyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDA1OTg3NSwiZXhwIjoyMDk1NjM1ODc1fQ.2Jxnj_q9ni2p8H4wuOP-u9QIDTYkkjdenaTPDjjQFmc' -H 'Content-Type: application/json' -H 'Prefer: return=minimal' -d '{\"fecha\":\"2026-06-05\",\"start_time\":\"2026-06-05T15:00:00.000Z\",\"end_time\":\"2026-06-05T16:00:00.000Z\",\"titulo\":\"Test\",\"cliente_nombre\":\"Test\",\"profesional_id\":\"test\",\"profesional_nombre\":\"test\",\"status\":\"confirmed\",\"origen\":\"manual\",\"precio\":\"$60.000\",\"cliente_telefono\":\"+573000000000\",\"contact_id\":\"\"}')"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\scmej\\Downloads\\velik-pos"
     ]
   }
 }
