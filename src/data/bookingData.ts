@@ -23,6 +23,7 @@ export const CATEGORIAS = [
 const CP = "Bn1QrO4ITpYI7wSohG9r"  // Carolina Paz     — todas las uñas, cabello, depilación completa, cejas limitadas
 const LV = "DEeqUttYKgjjsfNaS1XY"  // Laura Vanessa     — uñas completas, cejas/lifting limitado, cepillado, depilación sin hilo
 const LA = "UzLj5T8ZOrJ8reSig5os"  // Luz Aida          — uñas limitadas, extensiones pestañas, maquillaje, corporal completo
+const GB = "saGMogKgCH3kmIhq4VlJ"  // Geraldine Berrio  — solo uñas (manicure, pedicure y combos)
 
 export const SERVICIOS: Record<string, Servicio[]> = {
   // ─── MANICURE ────────────────────────────────────────────────────────────────
@@ -31,10 +32,10 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Manos Semipermanente",               calendarId: "EDiqwAb54xY6nID5yzB8", duracion: 60,  precio: "$60.000" },
     { nombre: "Manos Tradicional",                  calendarId: "ItIbYfgFYYvZYQ6Oje0B", duracion: 45,  precio: "$45.000" },
     { nombre: "Manos Evolution",                    calendarId: "uyBy6KxStea3tyJXkxvE", duracion: 45,  precio: "$45.000" },
-    { nombre: "Builder Gel",                        calendarId: "58aCvkqxbMBcFFPgZmyk", duracion: 120, precio: "$120.000", profesionales: [CP, LV] },
+    { nombre: "Builder Gel",                        calendarId: "58aCvkqxbMBcFFPgZmyk", duracion: 120, precio: "$120.000", profesionales: [CP, LV, GB] },
     { nombre: "Baby Boomer",                        calendarId: "HhrSGv6kTKZOtLwLtLaO", duracion: 170, precio: "$170.000" },
     { nombre: "Base Rubber Manos",                  calendarId: "yVTJ5MuqOiTIG6aW4Zzu", duracion: 60,  precio: "$60.000" },
-    { nombre: "Uñas Esculpidas Polygel/Acrílico",   calendarId: "5FzBoBw7GCdwViMPesPC", duracion: 150, precio: "$150.000", profesionales: [CP, LV] },
+    { nombre: "Uñas Esculpidas Polygel/Acrílico",   calendarId: "5FzBoBw7GCdwViMPesPC", duracion: 150, precio: "$150.000", profesionales: [CP, LV, GB] },
     { nombre: "Recubrimiento Polygel/Acrílico",     calendarId: "MmI8fIlxThj3dg3qXB5E", duracion: 150, precio: "$150.000" },
     { nombre: "Retoque Esculpidas Polygel/Acrílico",calendarId: "JuHPG8vMNXKSOiyVNzjR", duracion: 110, precio: "$110.000" },
     { nombre: "Retoque Recubrimiento Poly/Acrílico",calendarId: "g7a3uGcoBdAdrffowsY1", duracion: 100, precio: "$100.000" },
@@ -61,7 +62,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Pies Evolution",                 calendarId: "tKn5Hy3A7pKqg7nhVpgC", duracion: 40, precio: "$40.000" },
     { nombre: "Tradicional Pies",               calendarId: "XbxF4HF4VH3KNB16sNBU", duracion: 45, precio: "$45.000" },
     { nombre: "Retiro Semipermanente Pies",     calendarId: "FJDuHD0L2DqBLPUeYsqM", duracion: 20, precio: "$20.000" },
-    { nombre: "Solo Limpieza Pies",             calendarId: "rcuBG3bPRNwG11VFqgH2", duracion: 30, precio: "$30.000", profesionales: [CP, LV] },
+    { nombre: "Solo Limpieza Pies",             calendarId: "rcuBG3bPRNwG11VFqgH2", duracion: 30, precio: "$30.000", profesionales: [CP, LV, GB] },
   ],
 
   // ─── MANICURA Y PEDICURA ──────────────────────────────────────────────────────
@@ -89,9 +90,9 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Color Cabello Medio",                        calendarId: "XEmC3LZdNFLzri44z5fe", duracion: 60,  precio: "$60.000",  profesionales: [CP, LV] },
     { nombre: "Color Cabello Largo",                        calendarId: "SZnHg7E8gOsBB0CxxpAk", duracion: 90,  precio: "$90.000",  profesionales: [CP, LV] },
     { nombre: "Color Cabello Extra Largo",                  calendarId: "HXfDgBJXCdD5xD7rqgmW", duracion: 90,  precio: "$90.000",  profesionales: [CP, LV] },
-    { nombre: "Cepillado Cabello Corto",                    calendarId: "AFzeRInudMfQvytS7rYI", duracion: 30,  precio: "$30.000" },
-    { nombre: "Cepillado Cabello Medio",                    calendarId: "BhjqV08NlQwTyAer5Rah", duracion: 40,  precio: "$40.000" },
-    { nombre: "Cepillado Cabello Largo",                    calendarId: "zxVN8YcfF9nQh3uOhLcD", duracion: 45,  precio: "$45.000" },
+    { nombre: "Cepillado Cabello Corto",                    calendarId: "AFzeRInudMfQvytS7rYI", duracion: 30,  precio: "$30.000",  profesionales: [CP, LV, LA] },
+    { nombre: "Cepillado Cabello Medio",                    calendarId: "BhjqV08NlQwTyAer5Rah", duracion: 40,  precio: "$40.000",  profesionales: [CP, LV, LA] },
+    { nombre: "Cepillado Cabello Largo",                    calendarId: "zxVN8YcfF9nQh3uOhLcD", duracion: 45,  precio: "$45.000",  profesionales: [CP, LV, LA] },
     { nombre: "Cepillado Cabello Extralargo",               calendarId: "IM2RYaBSfWNytuAmACml", duracion: 60,  precio: "$60.000",  profesionales: [CP, LA] },
     { nombre: "Planchado de Cabello",                       calendarId: "eSmQWFTgnrsIhICBidoF", duracion: 40,  precio: "$40.000",  profesionales: [CP, LA] },
     { nombre: "Ondas",                                      calendarId: "pyw2lCLu7OmMz5i1Xj0i", duracion: 45,  precio: "$45.000",  profesionales: [CP, LA] },
@@ -99,7 +100,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Corte de Puntas",                            calendarId: "4aMo5CLViO46g2Q6jnip", duracion: 30,  precio: "$30.000",  profesionales: [CP, LA] },
     { nombre: "Corte Caballero",                            calendarId: "6V88WbxYuumHKt5RBfGO", duracion: 30,  precio: "$30.000",  profesionales: [CP, LV] },
     { nombre: "Terapia Capilar de L'Oréal",                 calendarId: "gJhd4efPJ7Zs7Ogybq95", duracion: 20,  precio: "$20.000",  profesionales: [CP, LA] },
-    { nombre: "Toxina Botulínica",                          calendarId: "7G42EdlizK39sGWSRTWO", duracion: 20,  precio: "$20.000" },
+    { nombre: "Toxina Botulínica",                          calendarId: "7G42EdlizK39sGWSRTWO", duracion: 20,  precio: "$20.000",  profesionales: [CP, LV, LA] },
   ],
 
   // ─── CEJAS Y PESTAÑAS ────────────────────────────────────────────────────────
@@ -107,33 +108,33 @@ export const SERVICIOS: Record<string, Servicio[]> = {
   "Cejas y Pestañas": [
     { nombre: "Lifting de Pestañas",                      calendarId: "Z7WKPMSF94iQoA8Mf9ne", duracion: 60, precio: "$60.000",  profesionales: [CP, LA] },
     { nombre: "Laminado de Cejas",                        calendarId: "JGZXM08wqm28dl4qfp9T", duracion: 50, precio: "$50.000",  profesionales: [CP, LA] },
-    { nombre: "Laminado de Cejas y Lifting de Pestañas",  calendarId: "KuZ6tseSF1WIC3wmAwGj", duracion: 70, precio: "$70.000" },
+    { nombre: "Laminado de Cejas y Lifting de Pestañas",  calendarId: "KuZ6tseSF1WIC3wmAwGj", duracion: 70, precio: "$70.000",  profesionales: [CP, LV, LA] },
     { nombre: "Extensión de Pestañas Efecto Clásica",     calendarId: "dry2VkC24zeouSdN4VEm", duracion: 70, precio: "$70.000",  profesionales: [LA] },
     { nombre: "Extensión de Pestañas Efecto Híbrido",     calendarId: "dbxPJAla6tTHNv73eo1l", duracion: 90, precio: "$90.000",  profesionales: [LA] },
     { nombre: "Extensión de Pestañas Efecto Tecnológico", calendarId: "4O1RVMdKaXEUaHqQqVP1", duracion: 90, precio: "$90.000",  profesionales: [LA] },
     { nombre: "Retoque Pestañas",                         calendarId: "yuikssBrbkVHsArQoe65", duracion: 60, precio: "$60.000",  profesionales: [LA] },
     { nombre: "Pestañas Punto a Punto",                   calendarId: "zT9oLreL1DCiwWDmO1Dx", duracion: 45, precio: "$45.000",  profesionales: [CP, LV] },
-    { nombre: "Depilación de Cejas con Cera",             calendarId: "VYpzK2GHuBJ63aO2lSaV", duracion: 10, precio: "$10.000" },
+    { nombre: "Depilación de Cejas con Cera",             calendarId: "VYpzK2GHuBJ63aO2lSaV", duracion: 10, precio: "$10.000",  profesionales: [CP, LV, LA] },
     { nombre: "Depilación de Cejas con Hilo",             calendarId: "ozLRNZ5V55zBOpGxcygz", duracion: 15, precio: "$15.000",  profesionales: [CP] },
-    { nombre: "Depilación de Cejas con Henna",            calendarId: "n49lc4VkUvtvdtCRcgTB", duracion: 10, precio: "$10.000" },
-    { nombre: "Depilación Perfilado/Cuchilla Cejas",      calendarId: "GcGJ59uvGEDf3LZCyrg2", duracion: 25, precio: "$25.000" },
+    { nombre: "Depilación de Cejas con Henna",            calendarId: "n49lc4VkUvtvdtCRcgTB", duracion: 10, precio: "$10.000",  profesionales: [CP, LV, LA] },
+    { nombre: "Depilación Perfilado/Cuchilla Cejas",      calendarId: "GcGJ59uvGEDf3LZCyrg2", duracion: 25, precio: "$25.000",  profesionales: [CP, LV, LA] },
   ],
 
   // ─── DEPILACIÓN ──────────────────────────────────────────────────────────────
   // CP: todo incluyendo hilo | LV: todo excepto hilo | LA: todo excepto hilo
   "Depilación": [
-    { nombre: "Depilación Pierna Completa",       calendarId: "cmyFlDKVr8UemAn9N71W", duracion: 90, precio: "$90.000" },
-    { nombre: "Depilación Media Pierna",          calendarId: "eRj3f8o8CLcD7i0rIgm3", duracion: 60, precio: "$60.000" },
-    { nombre: "Depilación Línea del Bikini",      calendarId: "mfXJuW1bdCIPV4GgCSx3", duracion: 45, precio: "$45.000" },
-    { nombre: "Depilación de Pubis Completo",     calendarId: "1vn5jyzI6R8TstZCZhOI", duracion: 60, precio: "$60.000" },
-    { nombre: "Depilación de Axilas",             calendarId: "mSw9Swdz68i0hC5cqNme", duracion: 18, precio: "$18.000" },
-    { nombre: "Depilación Espalda Baja",          calendarId: "9HqMBn6P9DBAsMqZmFit", duracion: 60, precio: "$60.000" },
-    { nombre: "Depilación de Glúteos",            calendarId: "woQv67dSOZkRipYxGaXm", duracion: 20, precio: "$20.000" },
-    { nombre: "Depilación Bigote",                calendarId: "UKZG99bvj0QCeFJaLNk7", duracion: 10, precio: "$10.000" },
+    { nombre: "Depilación Pierna Completa",       calendarId: "cmyFlDKVr8UemAn9N71W", duracion: 90, precio: "$90.000", profesionales: [CP, LV, LA] },
+    { nombre: "Depilación Media Pierna",          calendarId: "eRj3f8o8CLcD7i0rIgm3", duracion: 60, precio: "$60.000", profesionales: [CP, LV, LA] },
+    { nombre: "Depilación Línea del Bikini",      calendarId: "mfXJuW1bdCIPV4GgCSx3", duracion: 45, precio: "$45.000", profesionales: [CP, LV, LA] },
+    { nombre: "Depilación de Pubis Completo",     calendarId: "1vn5jyzI6R8TstZCZhOI", duracion: 60, precio: "$60.000", profesionales: [CP, LV, LA] },
+    { nombre: "Depilación de Axilas",             calendarId: "mSw9Swdz68i0hC5cqNme", duracion: 18, precio: "$18.000", profesionales: [CP, LV, LA] },
+    { nombre: "Depilación Espalda Baja",          calendarId: "9HqMBn6P9DBAsMqZmFit", duracion: 60, precio: "$60.000", profesionales: [CP, LV, LA] },
+    { nombre: "Depilación de Glúteos",            calendarId: "woQv67dSOZkRipYxGaXm", duracion: 20, precio: "$20.000", profesionales: [CP, LV, LA] },
+    { nombre: "Depilación Bigote",                calendarId: "UKZG99bvj0QCeFJaLNk7", duracion: 10, precio: "$10.000", profesionales: [CP, LV, LA] },
     { nombre: "Depilación Bigote con Hilo",       calendarId: "eHXH3nwnTLLoacCnQKeh", duracion: 10, precio: "$10.000", profesionales: [CP] },
     { nombre: "Depilación Barbilla con Hilo",     calendarId: "9M1FFJKZmz9tPhwEitAb", duracion: 10, precio: "$10.000", profesionales: [CP] },
-    { nombre: "Depilación Orejas",                calendarId: "whI104AHCNJGaV35yii2", duracion: 20, precio: "$20.000" },
-    { nombre: "Depilación Nariz",                 calendarId: "ZdfgP31Jmj4hWCEezhda", duracion: 20, precio: "$20.000" },
+    { nombre: "Depilación Orejas",                calendarId: "whI104AHCNJGaV35yii2", duracion: 20, precio: "$20.000", profesionales: [CP, LV, LA] },
+    { nombre: "Depilación Nariz",                 calendarId: "ZdfgP31Jmj4hWCEezhda", duracion: 20, precio: "$20.000", profesionales: [CP, LV, LA] },
     { nombre: "Depilación Rostro Completo con Hilo", calendarId: "hKENNyPe7hZhcz5HGHny", duracion: 30, precio: "$30.000", profesionales: [CP] },
   ],
 
@@ -163,9 +164,10 @@ export const SERVICIOS: Record<string, Servicio[]> = {
 }
 
 export const PROFESIONALES: Profesional[] = [
-  { nombre: "Carolina Paz",  userId: CP, especialidad: "Uñas & Manicure",      iniciales: "CP", foto: "/fotos/carolina.jpg" },
-  { nombre: "Laura Vanessa", userId: LV, especialidad: "Cabello & Pestañas",   iniciales: "LV", foto: "/fotos/laura.jpg" },
-  { nombre: "Luz Aida",      userId: LA, especialidad: "Depilación & Corporal", iniciales: "LA", foto: "/fotos/luz.jpg" },
+  { nombre: "Carolina Paz",     userId: CP, especialidad: "Uñas & Manicure",      iniciales: "CP", foto: "/fotos/carolina.jpg" },
+  { nombre: "Laura Vanessa",    userId: LV, especialidad: "Cabello & Pestañas",   iniciales: "LV", foto: "/fotos/laura.jpg" },
+  { nombre: "Luz Aida",         userId: LA, especialidad: "Depilación & Corporal", iniciales: "LA", foto: "/fotos/luz.jpg" },
+  { nombre: "Geraldine Berrio", userId: GB, especialidad: "Uñas & Manicure",      iniciales: "GB", foto: "/fotos/geraldine.jpg" },
 ]
 
 export const SLOTS_URL = "https://santiagon8nmejia.dominadoresia.com/webhook/booking/slots"
