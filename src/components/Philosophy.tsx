@@ -55,16 +55,16 @@ export function Philosophy() {
           <div className="lg:col-span-5 relative flex gap-3 sm:gap-4 items-center mt-12 lg:mt-0">
             {/* Image 1: Carolina */}
             <div 
-              className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative -rotate-6 hover:rotate-0 transition-transform duration-700 cursor-pointer"
+              className="w-1/4 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative -rotate-12 hover:rotate-0 translate-y-4 hover:translate-y-0 transition-transform duration-700 cursor-pointer"
               onClick={() => setSelectedImage("/fotos/carolina.jpg")}
             >
               <img src="/fotos/carolina.jpg" alt="Carolina Paz" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/5" />
             </div>
             
-            {/* Image 2: Laura (center, higher) */}
+            {/* Image 2: Laura */}
             <div 
-              className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative -translate-y-8 hover:-translate-y-12 transition-transform duration-700 z-10 cursor-pointer"
+              className="w-1/4 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative -translate-y-6 -rotate-3 hover:rotate-0 hover:-translate-y-10 transition-transform duration-700 z-10 cursor-pointer"
               onClick={() => setSelectedImage("/fotos/laura.jpg")}
             >
               <img src="/fotos/laura.jpg" alt="Laura Vanessa" className="w-full h-full object-cover object-center" />
@@ -73,10 +73,19 @@ export function Philosophy() {
 
             {/* Image 3: Luz */}
             <div 
-              className="w-1/3 aspect-[4/6] rounded-[30px] overflow-hidden border-4 border-white shadow-xl relative rotate-6 hover:rotate-0 transition-transform duration-700 cursor-pointer"
+              className="w-1/4 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative -translate-y-6 rotate-3 hover:rotate-0 hover:-translate-y-10 transition-transform duration-700 z-10 cursor-pointer"
               onClick={() => setSelectedImage("/fotos/luz.jpg")}
             >
               <img src="/fotos/luz.jpg" alt="Luz Aida" className="w-full h-full object-cover object-center" />
+              <div className="absolute inset-0 bg-black/5" />
+            </div>
+
+            {/* Image 4: Geraldin */}
+            <div 
+              className="w-1/4 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative rotate-12 hover:rotate-0 translate-y-4 hover:translate-y-0 transition-transform duration-700 cursor-pointer"
+              onClick={() => setSelectedImage("/fotos/geraldin.jpg")}
+            >
+              <img src="/fotos/geraldin.jpg" alt="Geraldin Rendon" className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-black/5" />
             </div>
 
