@@ -23,7 +23,7 @@ export const CATEGORIAS = [
 const CP = "Bn1QrO4ITpYI7wSohG9r"  // Carolina Paz     — todas las uñas, cabello, depilación completa, cejas limitadas
 const LV = "DEeqUttYKgjjsfNaS1XY"  // Laura Vanessa     — uñas completas, cejas/lifting limitado, cepillado, depilación sin hilo
 const LA = "UzLj5T8ZOrJ8reSig5os"  // Luz Aida          — uñas limitadas, extensiones pestañas, maquillaje, corporal completo
-const GB = "saGMogKgCH3kmIhq4VlJ"  // Geraldine Berrio  — solo uñas (manicure, pedicure y combos)
+const GR = "saGMogKgCH3kmIhq4VlJ"  // Geraldin Rendon  — solo uñas (manicure, pedicure y combos)
 
 export const SERVICIOS: Record<string, Servicio[]> = {
   // ─── MANICURE ────────────────────────────────────────────────────────────────
@@ -32,10 +32,10 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Manos Semipermanente",               calendarId: "EDiqwAb54xY6nID5yzB8", duracion: 60,  precio: "$60.000" },
     { nombre: "Manos Tradicional",                  calendarId: "ItIbYfgFYYvZYQ6Oje0B", duracion: 45,  precio: "$45.000" },
     { nombre: "Manos Evolution",                    calendarId: "uyBy6KxStea3tyJXkxvE", duracion: 45,  precio: "$45.000" },
-    { nombre: "Builder Gel",                        calendarId: "58aCvkqxbMBcFFPgZmyk", duracion: 120, precio: "$120.000", profesionales: [CP, LV, GB] },
+    { nombre: "Builder Gel",                        calendarId: "58aCvkqxbMBcFFPgZmyk", duracion: 120, precio: "$120.000", profesionales: [] },
     { nombre: "Baby Boomer",                        calendarId: "HhrSGv6kTKZOtLwLtLaO", duracion: 170, precio: "$170.000" },
     { nombre: "Base Rubber Manos",                  calendarId: "yVTJ5MuqOiTIG6aW4Zzu", duracion: 60,  precio: "$60.000" },
-    { nombre: "Uñas Esculpidas Polygel/Acrílico",   calendarId: "5FzBoBw7GCdwViMPesPC", duracion: 150, precio: "$150.000", profesionales: [CP, LV, GB] },
+    { nombre: "Uñas Esculpidas Polygel/Acrílico",   calendarId: "5FzBoBw7GCdwViMPesPC", duracion: 150, precio: "$150.000", profesionales: [] },
     { nombre: "Recubrimiento Polygel/Acrílico",     calendarId: "MmI8fIlxThj3dg3qXB5E", duracion: 150, precio: "$150.000" },
     { nombre: "Retoque Esculpidas Polygel/Acrílico",calendarId: "JuHPG8vMNXKSOiyVNzjR", duracion: 110, precio: "$110.000" },
     { nombre: "Retoque Recubrimiento Poly/Acrílico",calendarId: "g7a3uGcoBdAdrffowsY1", duracion: 100, precio: "$100.000" },
@@ -62,7 +62,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Pies Evolution",                 calendarId: "tKn5Hy3A7pKqg7nhVpgC", duracion: 40, precio: "$40.000" },
     { nombre: "Tradicional Pies",               calendarId: "XbxF4HF4VH3KNB16sNBU", duracion: 45, precio: "$45.000" },
     { nombre: "Retiro Semipermanente Pies",     calendarId: "FJDuHD0L2DqBLPUeYsqM", duracion: 20, precio: "$20.000" },
-    { nombre: "Solo Limpieza Pies",             calendarId: "rcuBG3bPRNwG11VFqgH2", duracion: 30, precio: "$30.000", profesionales: [CP, LV, GB] },
+    { nombre: "Solo Limpieza Pies",             calendarId: "rcuBG3bPRNwG11VFqgH2", duracion: 30, precio: "$30.000", profesionales: [] },
   ],
 
   // ─── MANICURA Y PEDICURA ──────────────────────────────────────────────────────
@@ -167,7 +167,7 @@ export const PROFESIONALES: Profesional[] = [
   { nombre: "Carolina Paz",     userId: CP, especialidad: "Uñas & Manicure",      iniciales: "CP", foto: "/fotos/carolina.jpg" },
   { nombre: "Laura Vanessa",    userId: LV, especialidad: "Cabello & Pestañas",   iniciales: "LV", foto: "/fotos/laura.jpg" },
   { nombre: "Luz Aida",         userId: LA, especialidad: "Depilación & Corporal", iniciales: "LA", foto: "/fotos/luz.jpg" },
-  { nombre: "Geraldine Berrio", userId: GB, especialidad: "Uñas & Manicure",      iniciales: "GB", foto: "/fotos/geraldine.jpg" },
+  { nombre: "Geraldin Rendon", userId: GR, especialidad: "Uñas & Manicure",      iniciales: "GR", foto: "/fotos/geraldin.jpg" },
 ]
 
 export const SLOTS_URL = "https://santiagon8nmejia.dominadoresia.com/webhook/booking/slots"
