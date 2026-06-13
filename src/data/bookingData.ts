@@ -163,7 +163,7 @@ export const PROFESIONALES: Profesional[] = [
   { nombre: "Carolina Paz",     userId: CP, especialidad: "Uñas & Manicure",      iniciales: "CP", foto: "/fotos/carolina.jpg" },
   { nombre: "Laura Vanessa",    userId: LV, especialidad: "Cabello & Pestañas",   iniciales: "LV", foto: "/fotos/laura.jpg" },
   { nombre: "Luz Aida",         userId: LA, especialidad: "Facial & Corporal",    iniciales: "LA", foto: "/fotos/luz.jpg" },
-  { nombre: "Geraldine Berrio", userId: GB, especialidad: "Uñas & Manicure",      iniciales: "GB", foto: "/fotos/geraldine.jpg" },
+  { nombre: "Geraldine Berrio", userId: GB, especialidad: "Uñas & Manicure",      iniciales: "GB", foto: "/fotos/geraldin.jpg" },
 ]
 
 export const SLOTS_URL = "https://santiagon8nmejia.dominadoresia.com/webhook/booking/slots"
