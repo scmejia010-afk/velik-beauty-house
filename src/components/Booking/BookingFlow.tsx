@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react"
 import { ChevronLeft, Clock, CheckCircle, Loader2, ChevronRight, Sparkles, Scissors, Eye, Feather, Gem, Paintbrush, Flower2, Footprints, type LucideIcon } from "lucide-react"
 import { CATEGORIAS, SERVICIOS, PROFESIONALES, SLOTS_URL, CREAR_URL } from "@/data/bookingData"
 import type { Servicio, Profesional } from "@/data/bookingData"
+import ClienteSearch from "./ClienteSearch"
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -429,12 +430,13 @@ function Step5({
         <Row label="Precio" value={servicio.precio} gold />
       </div>
 
-      {/* Formulario */}
-      <div className="space-y-4">
-        <Field label="Nombre completo *" value={nombre} onChange={v => onChange("nombre", v)} placeholder="Tu nombre" />
-        <Field label="Teléfono *" value={telefono} onChange={v => onChange("telefono", v)} placeholder="+57 300 000 0000" type="tel" />
-        <Field label="Correo electrónico" value={email} onChange={v => onChange("email", v)} placeholder="tu@email.com" type="email" />
-      </div>
+      {/* Formulario con autocompletado de clientes */}
+      <ClienteSearch
+        nombre={nombre}
+        telefono={telefono}
+        email={email}
+        onChange={onChange}
+      />
 
       <button
         onClick={onConfirm}
