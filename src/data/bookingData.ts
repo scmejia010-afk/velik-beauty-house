@@ -24,8 +24,9 @@ const CP = "Bn1QrO4ITpYI7wSohG9r"  // Carolina Paz     — uñas, cabello, cejas
 const LV = "DEeqUttYKgjjsfNaS1XY"  // Laura Vanessa    — uñas, cabello, cejas, pestañas, depilación
 const LA = "UzLj5T8ZOrJ8reSig5os"  // Luz Aida         — SOLO faciales, masajes, estrías y maquillaje
 const GB = "saGMogKgCH3kmIhq4VlJ"  // Geraldine Berrio — SOLO uñas (manicure, pedicure y combos)
+const ZR = "xUf32I3dzoylUW8VDH9z"  // Zuly Rojas       — SOLO uñas (manicure, pedicure y combos)
 
-const NAILS = [GB]
+const NAILS = [GB, ZR]
 const HAIR: string[] = []
 
 export const SERVICIOS: Record<string, Servicio[]> = {
