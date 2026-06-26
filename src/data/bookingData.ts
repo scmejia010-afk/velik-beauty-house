@@ -161,6 +161,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
 export const PROFESIONALES: Profesional[] = [
   { nombre: "Luz Aida",         userId: LA, especialidad: "Facial & Corporal",    iniciales: "LA", foto: "/fotos/luz.jpg" },
   { nombre: "Geraldine Berrio", userId: GB, especialidad: "Uñas & Manicure",      iniciales: "GB", foto: "/fotos/geraldin.jpg" },
+  { nombre: "Zuly Rojas",       userId: ZR, especialidad: "Uñas & Manicure",      iniciales: "ZR", foto: "/fotos/zuly.png" },
 ]
 
 export const SLOTS_URL = "https://santiagon8nmejia.dominadoresia.com/webhook/booking/slots"
