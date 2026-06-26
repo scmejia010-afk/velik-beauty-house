@@ -459,21 +459,6 @@ function Row({ label, value, gold }: { label: string; value: string; gold?: bool
   )
 }
 
-function Field({ label, value, onChange, placeholder, type = "text" }: { label: string; value: string; onChange: (v: string) => void; placeholder: string; type?: string }) {
-  return (
-    <div>
-      <label className="block text-xs text-white/40 uppercase tracking-widest mb-2">{label}</label>
-      <input
-        type={type}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full bg-white/5 border border-white/10 focus:border-[#DCC7B2]/50 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 outline-none transition-colors"
-      />
-    </div>
-  )
-}
-
 // ── Main BookingFlow ──────────────────────────────────────────────────────────
 
 export function BookingFlow() {
