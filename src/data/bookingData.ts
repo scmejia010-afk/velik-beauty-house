@@ -20,8 +20,6 @@ export const CATEGORIAS = [
   "Maquillaje Profesional", "Corporal",
 ]
 
-const CP = "Bn1QrO4ITpYI7wSohG9r"  // Carolina Paz     — uñas, cabello, cejas, depilación (incluye hilo)
-const LV = "DEeqUttYKgjjsfNaS1XY"  // Laura Vanessa    — uñas, cabello, cejas, pestañas, depilación
 const LA = "UzLj5T8ZOrJ8reSig5os"  // Luz Aida         — SOLO faciales, masajes, estrías y maquillaje
 const GB = "saGMogKgCH3kmIhq4VlJ"  // Geraldine Berrio — SOLO uñas (manicure, pedicure y combos)
 const ZR = "xUf32I3dzoylUW8VDH9z"  // Zuly Rojas       — SOLO uñas (manicure, pedicure y combos)
@@ -30,7 +28,7 @@ const NAILS = [GB, ZR]
 const HAIR: string[] = []
 
 export const SERVICIOS: Record<string, Servicio[]> = {
-  // ─── MANICURE ── Carolina, Laura y Geraldine ─────────────────────────────────
+  // ─── MANICURE ── Geraldine y Zuly ────────────────────────────────────────────
   "Manicure": [
     { nombre: "Manos Semipermanente",               calendarId: "EDiqwAb54xY6nID5yzB8", duracion: 60,  precio: "$60.000",  profesionales: NAILS },
     { nombre: "Manos Tradicional",                  calendarId: "ItIbYfgFYYvZYQ6Oje0B", duracion: 45,  precio: "$35.000",  profesionales: NAILS },
@@ -56,7 +54,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Garantías",                          calendarId: "Oi2Dn1v3MpIR3wn06LyY", duracion: 30,  precio: "$0",       profesionales: NAILS },
   ],
 
-  // ─── PEDICURE ── Carolina, Laura y Geraldine ─────────────────────────────────
+  // ─── PEDICURE ── Geraldine y Zuly ────────────────────────────────────────────
   "Pedicure": [
     { nombre: "Pies Semipermanente",            calendarId: "szaDqVWMTKAFCVcYjgTh", duracion: 60, precio: "$60.000", profesionales: NAILS },
     { nombre: "Pedicura Tradicional + Pedi Spa",calendarId: "MPv75km6l8sal1NKHqtV", duracion: 60, precio: "$60.000", profesionales: NAILS },
@@ -67,7 +65,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Solo Limpieza Pies",             calendarId: "rcuBG3bPRNwG11VFqgH2", duracion: 30, precio: "$30.000", profesionales: NAILS },
   ],
 
-  // ─── MANICURA Y PEDICURA ── Carolina, Laura y Geraldine ─────────────────────
+  // ─── MANICURA Y PEDICURA ── Geraldine y Zuly ─────────────────────────────────
   "Manicura y Pedicura": [
     { nombre: "Uñas Semipermanente (Manos y Pies)",        calendarId: "0jYIRtI8bl33hIyhVJC1", duracion: 90,  precio: "$120.000", profesionales: NAILS },
     { nombre: "Manos Semipermanentes y Pies Tradicional",  calendarId: "xpyrWObNXPeV2kMJtlIy", duracion: 120, precio: "$100.000", profesionales: NAILS },
@@ -80,7 +78,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Retiro Semipermanente Manos y Pies",        calendarId: "fcpxmqMktM3vzoyrhumR", duracion: 30,  precio: "$30.000",  profesionales: NAILS },
   ],
 
-  // ─── CABELLO ── Carolina y Laura ─────────────────────────────────────────────
+  // ─── CABELLO ─────────────────────────────────────────────────────────────────
   "Cabello": [
     { nombre: "Valoración de Cabello",                      calendarId: "yePA3PPHJC9Fdu6A6WMt", duracion: 30,  precio: "$30.000",  profesionales: [] },
     { nombre: "Alisado Natural Argán y Coco (Corto)",       calendarId: "tYgB9RKWsWnAY6yzHbzo", duracion: 300, precio: "$250.000", profesionales: HAIR },
@@ -104,7 +102,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Toxina Botulínica",                          calendarId: "7G42EdlizK39sGWSRTWO", duracion: 20,  precio: "$0",       profesionales: HAIR },
   ],
 
-  // ─── CEJAS Y PESTAÑAS ── Carolina y Laura (extensiones/retoque solo Laura) ──
+  // ─── CEJAS Y PESTAÑAS ────────────────────────────────────────────────────────
   "Cejas y Pestañas": [
     { nombre: "Lifting de Pestañas",                      calendarId: "Z7WKPMSF94iQoA8Mf9ne", duracion: 60, precio: "$120.000", profesionales: HAIR },
     { nombre: "Laminado de Cejas",                        calendarId: "JGZXM08wqm28dl4qfp9T", duracion: 50, precio: "$100.000", profesionales: HAIR },
@@ -120,7 +118,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Depilación Perfilado/Cuchilla Cejas",      calendarId: "GcGJ59uvGEDf3LZCyrg2", duracion: 25, precio: "$25.000", profesionales: HAIR },
   ],
 
-  // ─── DEPILACIÓN ── Carolina y Laura (hilo solo Carolina) ─────────────────────
+  // ─── DEPILACIÓN ──────────────────────────────────────────────────────────────
   "Depilación": [
     { nombre: "Depilación Pierna Completa",       calendarId: "cmyFlDKVr8UemAn9N71W", duracion: 90, precio: "$100.000", profesionales: HAIR },
     { nombre: "Depilación Media Pierna",          calendarId: "eRj3f8o8CLcD7i0rIgm3", duracion: 60, precio: "$60.000",  profesionales: HAIR },
@@ -137,7 +135,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Depilación Rostro Completo con Hilo", calendarId: "hKENNyPe7hZhcz5HGHny", duracion: 30, precio: "$100.000", profesionales: [] },
   ],
 
-  // ─── MAQUILLAJE PROFESIONAL ── Luz (Baño de Novia: Carolina y Laura) ─────────
+  // ─── MAQUILLAJE PROFESIONAL ── Luz ───────────────────────────────────────────
   "Maquillaje Profesional": [
     { nombre: "Maquillaje Social",    calendarId: "71J4eTC3TIEuDXfsP1Iw", duracion: 60, precio: "$60.000", profesionales: [LA] },
     { nombre: "Maquillaje Blindado",  calendarId: "hdrmUKbZXwO4tbNVsIkb", duracion: 60, precio: "$60.000", profesionales: [LA] },
@@ -145,7 +143,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Baño de Novia Brazos", calendarId: "OybBhb6gij304Vromp7n", duracion: 15, precio: "$15.000", profesionales: HAIR },
   ],
 
-  // ─── CORPORAL ── Luz (Piedras Volcánicas: Laura y Luz) ───────────────────────
+  // ─── CORPORAL ── Luz ─────────────────────────────────────────────────────────
   "Corporal": [
     { nombre: "Drenaje Linfático",                           calendarId: "wAwK46EAzP7OMVbVZ4Na", duracion: 60,  precio: "$60.000",  profesionales: [LA] },
     { nombre: "Masaje Relajación Piedras Volcánicas + Velas",calendarId: "q2Iz4gfTyoB3JkRNZ4CZ", duracion: 60,  precio: "$60.000",  profesionales: [LA] },

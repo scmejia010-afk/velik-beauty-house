@@ -3,7 +3,7 @@ import { Star, MessageSquareQuote } from "lucide-react"
 const reviews = [
   {
     name: "Yegnive Valero",
-    text: "En Velik encontrarás belleza, muy buena atención y Laura realiza unas uñitas espectaculares a mi me fascinaron y por lo general conozco muchos lugares pero acá me quedo! Luz Ramírez te atiende con los brazos abiertos y súper responsable !",
+    text: "En Velik encontrarás belleza, muy buena atención y realizan unas uñitas espectaculares, a mi me fascinaron y por lo general conozco muchos lugares pero acá me quedo! Luz Ramírez te atiende con los brazos abiertos y súper responsable !",
     rating: 5,
     date: "Hace 3 semanas"
   },
