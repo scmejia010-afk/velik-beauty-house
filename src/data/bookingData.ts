@@ -20,15 +20,14 @@ export const CATEGORIAS = [
   "Maquillaje Profesional", "Corporal",
 ]
 
-const LA = "UzLj5T8ZOrJ8reSig5os"  // Luz Aida         — SOLO faciales, masajes, estrías y maquillaje
-const GB = "saGMogKgCH3kmIhq4VlJ"  // Geraldine Berrio — SOLO uñas (manicure, pedicure y combos)
-const ZR = "xUf32I3dzoylUW8VDH9z"  // Zuly Rojas       — SOLO uñas (manicure, pedicure y combos)
+const LA = "UzLj5T8ZOrJ8reSig5os"  // Luz Aida   — SOLO faciales, masajes, estrías y maquillaje
+const ZR = "xUf32I3dzoylUW8VDH9z"  // Zuly Rojas — SOLO uñas (manicure, pedicure y combos)
 
-const NAILS = [GB, ZR]
+const NAILS = [ZR]
 const HAIR: string[] = []
 
 export const SERVICIOS: Record<string, Servicio[]> = {
-  // ─── MANICURE ── Geraldine y Zuly ────────────────────────────────────────────
+  // ─── MANICURE ── Zuly ────────────────────────────────────────────
   "Manicure": [
     { nombre: "Manos Semipermanente",               calendarId: "EDiqwAb54xY6nID5yzB8", duracion: 60,  precio: "$60.000",  profesionales: NAILS },
     { nombre: "Manos Tradicional",                  calendarId: "ItIbYfgFYYvZYQ6Oje0B", duracion: 45,  precio: "$35.000",  profesionales: NAILS },
@@ -54,7 +53,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Garantías",                          calendarId: "Oi2Dn1v3MpIR3wn06LyY", duracion: 30,  precio: "$0",       profesionales: NAILS },
   ],
 
-  // ─── PEDICURE ── Geraldine y Zuly ────────────────────────────────────────────
+  // ─── PEDICURE ── Zuly ────────────────────────────────────────────
   "Pedicure": [
     { nombre: "Pies Semipermanente",            calendarId: "szaDqVWMTKAFCVcYjgTh", duracion: 60, precio: "$60.000", profesionales: NAILS },
     { nombre: "Pedicura Tradicional + Pedi Spa",calendarId: "MPv75km6l8sal1NKHqtV", duracion: 60, precio: "$60.000", profesionales: NAILS },
@@ -65,7 +64,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Solo Limpieza Pies",             calendarId: "rcuBG3bPRNwG11VFqgH2", duracion: 30, precio: "$30.000", profesionales: NAILS },
   ],
 
-  // ─── MANICURA Y PEDICURA ── Geraldine y Zuly ─────────────────────────────────
+  // ─── MANICURA Y PEDICURA ── Zuly ─────────────────────────────────
   "Manicura y Pedicura": [
     { nombre: "Uñas Semipermanente (Manos y Pies)",        calendarId: "0jYIRtI8bl33hIyhVJC1", duracion: 90,  precio: "$120.000", profesionales: NAILS },
     { nombre: "Manos Semipermanentes y Pies Tradicional",  calendarId: "xpyrWObNXPeV2kMJtlIy", duracion: 120, precio: "$100.000", profesionales: NAILS },
@@ -159,9 +158,8 @@ export const SERVICIOS: Record<string, Servicio[]> = {
 }
 
 export const PROFESIONALES: Profesional[] = [
-  { nombre: "Luz Aida",         userId: LA, especialidad: "Facial & Corporal",    iniciales: "LA", foto: "/fotos/luz.jpg" },
-  { nombre: "Geraldine Berrio", userId: GB, especialidad: "Uñas & Manicure",      iniciales: "GB", foto: "/fotos/geraldin.jpg" },
-  { nombre: "Zuly Rojas",       userId: ZR, especialidad: "Uñas & Manicure",      iniciales: "ZR", foto: "/fotos/zuly.png" },
+  { nombre: "Luz Aida",   userId: LA, especialidad: "Facial & Corporal", iniciales: "LA", foto: "/fotos/luz.jpg" },
+  { nombre: "Zuly Rojas", userId: ZR, especialidad: "Uñas & Manicure",  iniciales: "ZR", foto: "/fotos/zuly.png" },
 ]
 
 export const SLOTS_URL = "https://santiagon8nmejia.dominadoresia.com/webhook/booking/slots"
