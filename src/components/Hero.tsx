@@ -111,6 +111,8 @@ function GlassPanel() {
   }, []);
 
   const marqueeBrands = ["HYDRATE", "GLOW", "AMPLIFY", "REPLENISH", "BARE"];
+  const phoneNumber = "573016370099";
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola, me gustaría agendar una cita.")}`;
 
   return (
     <div
@@ -132,12 +134,32 @@ function GlassPanel() {
       >
         {/* Contenido Centrado */}
         <div className="flex-1 flex flex-col items-center justify-center px-6 md:px-12 text-center mt-12">
-          <p className="font-accent text-brand-gold tracking-[0.3em] uppercase text-xs md:text-sm mb-6">
-            Experiencia Velik
+          <p className="font-accent text-brand-gold tracking-[0.2em] uppercase text-xs md:text-sm mb-4 font-bold">
+            ⭐ 5.0 en Google · +50 reseñas · A 3 min del parque de Laureles
           </p>
-          <h2 className="font-serif text-brand-dark text-4xl md:text-6xl lg:text-[80px] leading-[1.1] tracking-tight w-full max-w-[1000px] mx-auto">
-            Transformamos el cuidado diario en un <span className="italic text-brand-gold">ritual de sanación</span>. Descubre la línea premium para revitalizar tu esencia.
-          </h2>
+          <h1 className="font-serif text-brand-dark text-4xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight w-full max-w-[900px] mx-auto mb-6">
+            Uñas, cabello y facial de spa en <span className="italic text-brand-gold">Laureles</span>.
+          </h1>
+          <p className="text-brand-dark/70 text-lg md:text-xl max-w-[800px] mx-auto mb-10 font-medium">
+            Sin frizz, sin dolor, sin lugares fríos. En Velik cuidamos tu belleza como si fuera nuestra — con productos veganos premium y artistas que sí saben lo que hacen.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
+            <a 
+              href={whatsappUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-brand-dark text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] md:text-xs hover:bg-black transition-colors shadow-xl"
+            >
+              💬 Agenda por WhatsApp en 30s
+            </a>
+            <a 
+              href="#services" 
+              className="w-full sm:w-auto bg-transparent border border-brand-dark/20 text-brand-dark px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] md:text-xs hover:bg-brand-light transition-colors"
+            >
+              Ver servicios y precios ↓
+            </a>
+          </div>
         </div>
 
         {/* Marquee Inferior */}

@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 
+import { Link } from "react-router-dom"
+
 const links = [
-  { label: "Productos", href: "#products" },
-  { label: "Galería", href: "#gallery" },
-  { label: "Membresía", href: "#membership" },
+  { label: "Servicios", href: "#services" },
+  { label: "Testimonios", href: "#reviews" },
   { label: "Nosotros", href: "#philosophy" },
+  { label: "Productos", href: "#products" },
   { label: "FAQ", href: "#faq" },
 ]
 
@@ -45,12 +47,12 @@ export function Navbar() {
         </nav>
 
         {/* CTA */}
-        <a
-          href="/agendar"
+        <Link
+          to="/agendar"
           className="hidden md:inline-flex px-7 py-3 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
         >
           Reservar Cita
-        </a>
+        </Link>
 
         {/* Mobile Menu */}
         <button
@@ -75,13 +77,13 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="/agendar"
+          <Link
+            to="/agendar"
             onClick={() => setOpen(false)}
             className="block mt-6 px-8 py-4 rounded-full bg-white text-black text-center text-xs font-black uppercase tracking-widest"
           >
             Reservar Cita
-          </a>
+          </Link>
         </div>
       )}
     </header>

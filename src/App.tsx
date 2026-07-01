@@ -22,12 +22,12 @@ function MainSite() {
       <Navbar />
       <main>
         <Hero />
-        <ProductsGrid />
         <ServicesGrid />
-        <Philosophy />
-        <FAQ />
-        <LocationMap />
         <Reviews />
+        <Philosophy />
+        <LocationMap />
+        <ProductsGrid />
+        <FAQ />
       </main>
       <Footer />
     </>

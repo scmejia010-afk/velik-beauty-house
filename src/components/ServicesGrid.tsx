@@ -1,29 +1,35 @@
 import { ArrowUpRight } from "lucide-react"
 
+const phoneNumber = "573016370099";
+
 const services = [
   {
-    title: "Spa de Uñas",
+    title: "Uñas que duran 4 semanas 💅",
     price: "Desde $35.000",
-    desc: "Semipermanente, acrílico, polygel, press on, baby boomer y más. Arte y precisión en cada detalle.",
+    desc: "Manicure ruso, semipermanente, acrílico y baby boomer. Cutícula limpia, color al borde, cero levantamientos.",
     video: "/fotos/spadeuñas.MOV",
+    wame: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola, quiero agendar una cita para Spa de Uñas.")}`,
   },
   {
-    title: "Peluquería",
+    title: "Adiós al frizz, sin formol ✨",
     price: "Desde $45.000",
-    desc: "Alisados naturales de coco y argán, tinturas, cortes, cepillados y tratamientos capilares premium.",
+    desc: "Alisados naturales de coco y argán, color, cortes y tratamientos que sí reparan. Valoración de cabello gratis al agendar.",
     video: "/fotos/pelovideo.MOV",
+    wame: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola, quiero agendar una cita para Peluquería.")}`,
   },
   {
-    title: "Cejas & Pestañas",
+    title: "Mirada despierta en 40 min 👁️",
     price: "Desde $20.000",
-    desc: "Laminado de cejas, lifting de pestañas, extensiones pelo a pelo y depilación con hilo o cera.",
+    desc: "Laminado de cejas, lifting de pestañas, extensiones pelo a pelo y depilación con hilo.",
     image: "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=600&h=600&fit=crop",
+    wame: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola, quiero agendar una cita para Cejas y Pestañas.")}`,
   },
   {
-    title: "Masajes & Faciales",
+    title: "Reset Completo 🌿",
     price: "Desde $100.000",
-    desc: "Limpiezas faciales, masajes relajantes, piedras volcánicas, tratamiento de estrías y más.",
+    desc: "Limpieza facial profunda, masajes con piedras volcánicas y tratamiento de estrías.",
     video: "/fotos/masaje.mp4",
+    wame: `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola, quiero agendar una cita para Masajes o Faciales.")}`,
   },
 ]
 
@@ -33,14 +39,14 @@ export function ServicesGrid() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div className="space-y-4">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400">Todo en un lugar</p>
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400">Tú eliges, nosotras te mimamos</p>
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
             Nuestros <br />
             <span className="italic font-light text-gray-400">Servicios.</span>
           </h2>
         </div>
-        <p className="text-gray-500 max-w-xs font-medium">
-          Atención profesional, productos premium y un espacio diseñado para consentirte.
+        <p className="text-gray-500 max-w-sm font-medium text-lg leading-snug">
+          Servicios pensados para que salgas sintiéndote otra — no solo viéndote otra.
         </p>
       </div>
 
@@ -76,14 +82,20 @@ export function ServicesGrid() {
               </div>
             </div>
 
-            <div className="mt-8 space-y-3 px-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-2xl font-bold uppercase tracking-tight">{service.title}</h3>
-                <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all duration-300">
-                  <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-                </div>
+            <div className="mt-8 space-y-3 px-4 flex flex-col justify-between flex-1">
+              <div>
+                <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-2 leading-tight">{service.title}</h3>
+                <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-6">{service.desc}</p>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed">{service.desc}</p>
+              <a 
+                href={service.wame}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-between px-6 py-4 rounded-full border-2 border-brand-light hover:border-black hover:bg-black hover:text-white transition-all duration-300 group/btn"
+              >
+                <span className="font-bold text-xs uppercase tracking-widest">Agendar por WhatsApp</span>
+                <ArrowUpRight className="w-5 h-5 opacity-50 group-hover/btn:opacity-100" />
+              </a>
             </div>
           </div>
         ))}
