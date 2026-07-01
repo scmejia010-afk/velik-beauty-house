@@ -13,8 +13,10 @@ import { Login } from "@/pages/admin/Login"
 import { AdminLayout } from "@/pages/admin/AdminLayout"
 import { Pedidos } from "@/pages/admin/Pedidos"
 import { Inventario } from "@/pages/admin/Inventario"
+import { PowerShakes as PowerShakesAdmin } from "@/pages/admin/PowerShakes"
 import { ProtectedRoute } from "@/components/Admin/ProtectedRoute"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
+import { PowerShakes } from "@/pages/PowerShakes"
 
 function MainSite() {
   return (
@@ -41,10 +43,12 @@ function App() {
         <Routes>
           <Route path="/" element={<MainSite />} />
           <Route path="/agendar" element={<BookingFlow />} />
+          <Route path="/powershakes" element={<PowerShakes />} />
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
             <Route path="pedidos" element={<Pedidos />} />
             <Route path="inventario" element={<Inventario />} />
+            <Route path="powershakes" element={<PowerShakesAdmin />} />
           </Route>
         </Routes>
         <WhatsAppButton />

@@ -1,6 +1,6 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
-import { LayoutDashboard, Package, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, LogOut, Gift } from "lucide-react";
 
 export function AdminLayout() {
   const location = useLocation();
@@ -14,6 +14,7 @@ export function AdminLayout() {
   const navItems = [
     { name: "Pedidos", path: "/admin/pedidos", icon: LayoutDashboard },
     { name: "Inventario", path: "/admin/inventario", icon: Package },
+    { name: "PowerShakes", path: "/admin/powershakes", icon: Gift },
   ];
 
   return (
