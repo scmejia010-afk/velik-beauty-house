@@ -55,7 +55,7 @@ export function Philosophy() {
           <div className="lg:col-span-5 relative flex gap-2 sm:gap-3 items-center mt-12 lg:mt-0">
             {/* Image 1: Luz */}
             <div 
-              className="w-1/3 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative -rotate-6 hover:rotate-0 translate-y-4 hover:translate-y-0 transition-transform duration-700 cursor-pointer"
+              className="w-1/2 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative -rotate-6 hover:rotate-0 translate-y-4 hover:translate-y-0 transition-transform duration-700 cursor-pointer"
               onClick={() => setSelectedImage("/fotos/luz.jpg")}
             >
               <img src="/fotos/luz.jpg" alt="Luz Aida" className="w-full h-full object-cover object-center" />
@@ -64,19 +64,10 @@ export function Philosophy() {
 
             {/* Image 2: Zuly */}
             <div 
-              className="w-1/3 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative rotate-0 hover:-translate-y-4 transition-transform duration-700 z-10 cursor-pointer"
+              className="w-1/2 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative rotate-6 hover:-translate-y-4 transition-transform duration-700 z-10 cursor-pointer"
               onClick={() => setSelectedImage("/fotos/zuly.png")}
             >
               <img src="/fotos/zuly.png" alt="Zuly Rojas" className="w-full h-full object-cover object-center" />
-              <div className="absolute inset-0 bg-black/5" />
-            </div>
-
-            {/* Image 3: Geraldin */}
-            <div 
-              className="w-1/3 aspect-[4/6] rounded-[20px] sm:rounded-[30px] overflow-hidden border-2 sm:border-4 border-white shadow-xl relative rotate-6 hover:rotate-0 -translate-y-6 hover:-translate-y-10 transition-transform duration-700 z-20 cursor-pointer"
-              onClick={() => setSelectedImage("/fotos/geraldin.jpg")}
-            >
-              <img src="/fotos/geraldin.jpg" alt="Geraldin Berrio" className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-black/5" />
             </div>
 
