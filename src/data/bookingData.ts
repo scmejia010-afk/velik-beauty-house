@@ -35,7 +35,7 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Manos Evolution",                    calendarId: "uyBy6KxStea3tyJXkxvE", duracion: 60,  precio: "$45.000",  profesionales: NAILS },
     { nombre: "Builder Gel",                        calendarId: "58aCvkqxbMBcFFPgZmyk", duracion: 120, precio: "$120.000", profesionales: NAILS },
     { nombre: "Baby Boomer",                        calendarId: "HhrSGv6kTKZOtLwLtLaO", duracion: 170, precio: "$170.000", profesionales: NAILS },
-    { nombre: "Base Rubber Manos",                  calendarId: "yVTJ5MuqOiTIG6aW4Zzu", duracion: 75,  precio: "$60.000",  profesionales: NAILS },
+    { nombre: "Base Rubber Manos",                  calendarId: "yVTJ5MuqOiTIG6aW4Zzu", duracion: 80,  precio: "$60.000",  profesionales: NAILS },
     { nombre: "Uñas Esculpidas Polygel/Acrílico",   calendarId: "5FzBoBw7GCdwViMPesPC", duracion: 150, precio: "$140.000", profesionales: NAILS },
     { nombre: "Recubrimiento Polygel/Acrílico",     calendarId: "MmI8fIlxThj3dg3qXB5E", duracion: 150, precio: "$100.000", profesionales: NAILS },
     { nombre: "Retoque Esculpidas Polygel/Acrílico",calendarId: "JuHPG8vMNXKSOiyVNzjR", duracion: 120, precio: "$110.000", profesionales: NAILS },
