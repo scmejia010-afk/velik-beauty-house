@@ -30,46 +30,13 @@ export function ScrollVideo({ desktopSrc, mobileSrc }: ScrollVideoProps) {
     if (!video) return;
 
     let hls: Hls | null = null;
-    let seekPending = false;
-    let currentTarget = 0;
     let timeout: ReturnType<typeof setTimeout>;
     let hasLoaded = false;
-
-    const doSeek = () => {
-      if (!video) return;
-      if (video.seeking) {
-        seekPending = true;
-        return;
-      }
-      seekPending = false;
-      // Añadimos un pequeño factor de suavizado para que no salte brusco
-      video.currentTime = currentTarget;
-    };
-
-    video.addEventListener("seeked", () => {
-      if (seekPending) {
-        doSeek();
-      }
-    });
 
     const handleLoad = () => {
       if (!hasLoaded) {
         hasLoaded = true;
         setIsLoaded(true);
-        // Configuramos GSAP ScrollTrigger para el scrubbing (solo dentro del Hero)
-        ScrollTrigger.create({
-          trigger: "#hero-container",
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1.5, // Suavizado
-          onUpdate: (self) => {
-            if (video.duration) {
-              currentTarget = self.progress * video.duration;
-              doSeek();
-            }
-          },
-        });
-
         // Fade out del video al llegar al final del hero
         if (containerRef.current) {
           gsap.fromTo(
@@ -92,9 +59,8 @@ export function ScrollVideo({ desktopSrc, mobileSrc }: ScrollVideoProps) {
     const initVideo = () => {
       if (Hls.isSupported() && currentSrc.includes(".m3u8")) {
         hls = new Hls({
-          maxBufferLength: 120,
-          maxMaxBufferLength: 600,
-          maxBufferSize: 200 * 1024 * 1024, // 200MB buffer
+          maxBufferLength: 30, // Reducido para carga más rápida
+          maxMaxBufferLength: 60,
           startPosition: 0,
           capLevelToPlayerSize: false,
           startLevel: -1,
@@ -104,11 +70,8 @@ export function ScrollVideo({ desktopSrc, mobileSrc }: ScrollVideoProps) {
         hls.loadSource(currentSrc);
         hls.attachMedia(video);
 
-        hls.on(Hls.Events.MANIFEST_PARSED, (_event, data) => {
-          // Forzamos la máxima calidad para que el scrubbing se vea premium
-          const maxLevel = data.levels.length - 1;
-          hls!.currentLevel = maxLevel;
-          hls!.startLevel = maxLevel;
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play().catch(e => console.log("Autoplay prevented:", e));
         });
 
         hls.on(Hls.Events.FRAG_BUFFERED, () => {
@@ -193,6 +156,8 @@ export function ScrollVideo({ desktopSrc, mobileSrc }: ScrollVideoProps) {
           ref={videoRef}
           muted
           playsInline
+          autoPlay
+          loop
           preload="auto"
           crossOrigin="anonymous"
           className="w-full h-full object-cover scale-[1.02]"
