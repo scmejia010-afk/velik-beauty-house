@@ -183,13 +183,15 @@ function GlassPanel() {
 export function Hero() {
   return (
     <section id="hero-container" className="relative h-[250vh] bg-[#1E1E1E]">
-      {/* Imagen estática de fondo del salón */}
-      <img
-        src="/fotos/salon.png"
-        alt="Velik Beauty House Salón"
-        className="fixed top-0 left-0 w-full h-full object-cover z-0"
-      />
-      <div className="fixed inset-0 bg-black/40 pointer-events-none z-0" />
+      {/* Contenedor sticky para que la imagen se quede fija SOLO durante esta sección */}
+      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0">
+        <img
+          src="/fotos/salon.png"
+          alt="Velik Beauty House Salón"
+          className="w-full h-full object-cover scale-[1.02]"
+        />
+        <div className="absolute inset-0 bg-black/40 pointer-events-none z-0" />
+      </div>
       <ScrollFloat text={"Belleza\nQue Sana"} />
       <GlassPanel />
     </section>
