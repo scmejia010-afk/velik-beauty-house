@@ -567,6 +567,30 @@ export function ProductsGrid() {
   const [customerApt, setCustomerApt] = useState("")
 
   const handleBuyClick = (product: Product) => {
+    const w = window as any;
+    w.dataLayer = w.dataLayer || [];
+    
+    // Extraer el precio numérico
+    const priceStr = product.sizes[0]?.price || "0";
+    const numericPrice = parseInt(priceStr.replace(/[^0-9]/g, "")) || 0;
+
+    w.dataLayer.push({
+      event: "add_to_cart",
+      ecommerce: {
+        currency: "COP",
+        value: numericPrice,
+        items: [
+          {
+            item_name: product.title,
+            item_id: product.title,
+            price: numericPrice,
+            item_category: product.category,
+            quantity: 1
+          }
+        ]
+      }
+    });
+
     setCheckoutProduct(product)
     setSelectedSize(product.sizes[0] || null)
     setCheckoutStep("cart")
