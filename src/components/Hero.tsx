@@ -185,7 +185,7 @@ export function Hero() {
     <section id="hero-container" className="relative h-[250vh] bg-[#1E1E1E]">
       {/* Imagen estática de fondo del salón */}
       <img
-        src="/fotos/salon.jpg"
+        src="/fotos/salon.png"
         alt="Velik Beauty House Salón"
         className="fixed top-0 left-0 w-full h-full object-cover z-0"
       />
