@@ -187,7 +187,13 @@ function GlassPanel() {
 export function Hero() {
   return (
     <section id="hero-container" className="relative h-[250vh] bg-[#1E1E1E]">
-      <ScrollVideo desktopSrc={VIDEO_URL} mobileSrc={VIDEO_URL} />
+      {/* Imagen estática de fondo del salón */}
+      <img
+        src="/fotos/salon.jpg"
+        alt="Velik Beauty House Salón"
+        className="fixed top-0 left-0 w-full h-full object-cover z-0"
+      />
+      <div className="fixed inset-0 bg-black/40 pointer-events-none z-0" />
       <ScrollFloat text={"Belleza\nQue Sana"} />
       <GlassPanel />
     </section>
