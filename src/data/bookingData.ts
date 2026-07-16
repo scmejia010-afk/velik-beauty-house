@@ -154,7 +154,6 @@ export const SERVICIOS: Record<string, Servicio[]> = {
     { nombre: "Camuflaje de Estrías",                        calendarId: "xU7HfkiIbhZwHo1EnrTz", duracion: 120, precio: "$1.600.000", profesionales: [LA] },
     { nombre: "Limpieza Facial Especial",                    calendarId: "vxUBF94v8PKqobjUBeZc", duracion: 90,  precio: "$150.000",  profesionales: [LA] },
     { nombre: "Limpieza Facial Tradicional",                 calendarId: "fz9614uqbCIz8bLDXYNR", duracion: 60,  precio: "$100.000",  profesionales: [LA] },
-    { nombre: "Cosmetología Facial",                         calendarId: "6Gq72d3MJ8FqYsWYEeWD", duracion: 30,  precio: "$30.000",  profesionales: [LA] },
   ],
 }
 
