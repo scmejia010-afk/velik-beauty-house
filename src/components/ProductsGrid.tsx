@@ -643,6 +643,27 @@ export function ProductsGrid() {
           console.error("Error guardando pedido:", error);
         }
 
+        // DataLayer Event para JAIR (Conversión real de compra)
+        const w = window as any;
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({
+          event: "purchase",
+          ecommerce: {
+            transaction_id: transaction.id,
+            currency: "COP",
+            value: amountInCents / 100, // Wompi lo da en centavos
+            items: [
+              {
+                item_name: checkoutProduct.title,
+                item_id: checkoutProduct.title,
+                price: amountInCents / 100,
+                item_category: checkoutProduct.category,
+                quantity: 1
+              }
+            ]
+          }
+        });
+
         setCheckoutStep("success");
       } else {
         alert("El pago no fue aprobado. Estado: " + transaction.status);
