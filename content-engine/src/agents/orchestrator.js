@@ -20,6 +20,7 @@
  */
 import { db } from '../lib/db.js';
 import { checkAuthenticity } from '../lib/kids.js';
+import { persistEpisodeImages } from '../lib/storage.js';
 
 /**
  * Costo en créditos por etapa.
@@ -264,10 +265,15 @@ async function produceEpisode({ hf, series, episode }) {
     );
     credits += scenes.length * CREDIT_COST.imagePerScene;
 
-    const imageUrls = images.map(i => i.url ?? i.result_url ?? i);
+    // Las URLs de Higgsfield caducan en horas. Copiar las imágenes a
+    // Storage antes de seguir es lo que permite revisar el episodio mañana.
+    const imageUrls = await persistEpisodeImages({
+      episodeId: episode.id,
+      urls: images.map(i => i.url ?? i.result_url ?? i),
+    });
 
-    // Guardar las imágenes apenas existen, antes del audio y el ensamblaje.
-    // Si una etapa posterior falla, el trabajo ya pagado no se pierde.
+    // Guardarlas apenas existen, antes del audio y el ensamblaje: si una
+    // etapa posterior falla, el trabajo ya pagado no se pierde.
     await db.from('episodes').update({ images: imageUrls }).eq('id', episode.id);
 
     const narration = scenes.map(s => s.narration).join(' ');

@@ -256,7 +256,36 @@ pre { font: 400 11px/1.5 var(--mono); margin: 5px 0 0; white-space: pre-wrap;
 }
 
 /* En el celular: la tubería se vuelve rejilla, los botones se hacen tocables. */
+/* Taller: donde se escribe la historia. Es lo primero que se usa, así que
+   va arriba de todo y se abre solo cuando no hay ninguna serie. */
+.studio { padding: 16px; display: grid; gap: 12px; }
+.studio label { font: 500 10.5px var(--display); letter-spacing: .12em;
+  text-transform: uppercase; color: var(--fg-dim); display: block; margin-bottom: 6px; }
+.studio textarea, .studio select, .studio input {
+  width: 100%; background: var(--deep-2); color: var(--fg);
+  border: 1px solid var(--line-hot); border-radius: 3px;
+  padding: 11px 12px; font: 300 14px/1.5 var(--body); resize: vertical;
+}
+.studio textarea { min-height: 96px; }
+.studio textarea:focus, .studio select:focus, .studio input:focus {
+  outline: none; border-color: var(--aurora); box-shadow: 0 0 14px rgba(79,224,196,.18);
+}
+.studio .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.studio .hint { font-size: 12px; color: var(--fg-faint); margin: -4px 0 0; }
+.studio .examples { display: flex; flex-wrap: wrap; gap: 6px; }
+.studio .examples button { font: 400 11.5px var(--body); text-transform: none;
+  letter-spacing: 0; padding: 6px 10px; color: var(--fg-dim); }
+
+/* Serie activa: sobre la que produce el botón de encender. */
+.series-pick { padding: 14px 16px; display: grid; gap: 10px; }
+.series-pick .cast { font: 400 11.5px var(--mono); color: var(--fg-faint); }
+.bible-row { display: flex; gap: 10px; align-items: baseline; font-size: 12.5px; }
+.bible-row b { color: var(--fg-dim); font-weight: 600; min-width: 74px; flex: none;
+  font: 500 10.5px var(--display); letter-spacing: .1em; text-transform: uppercase; }
+.bible-row span { color: var(--fg-faint); min-width: 0; overflow-wrap: anywhere; }
+
 @media (max-width: 620px) {
+  .studio .pair { grid-template-columns: 1fr; }
   .wrap { padding-block: 18px 72px; }
   h1 { font-size: 19px; }
   .controls { width: 100%; }
@@ -417,6 +446,18 @@ function panelSecret() {
   try { return localStorage.getItem('panel-secret') ?? ''; } catch { return ''; }
 }
 
+/* La serie elegida se guarda solo en este navegador. Puede venir vacía
+   (ventana privada, datos borrados), así que el panel elige la primera
+   serie cuando no hay nada guardado. */
+let activeSeriesId = null;
+function rememberSeries(id) {
+  activeSeriesId = id;
+  try { localStorage.setItem('serie-activa', id); } catch { /* sin memoria, no pasa nada */ }
+}
+function recallSeries() {
+  try { return localStorage.getItem('serie-activa'); } catch { return null; }
+}
+
 function alertBox(msg) {
   const el = $('alert');
   if (!msg) { el.hidden = true; el.textContent = ''; return; }
@@ -439,8 +480,13 @@ async function load() {
   }
 }
 
+let lastData = null;
+let studioPinned = false;
+
 function render(d) {
+  lastData = d;
   $('stamp').textContent = 'telemetría · ' + when(d.generatedAt);
+  renderSeriesPicker(d);
   renderPipe(d);
   renderReview(d);
   renderGauges(d);
@@ -550,6 +596,35 @@ function renderQueue(d) {
     </div>`).join('') : '<div class="empty">La cola está vacía.</div>';
 }
 
+function renderSeriesPicker(d) {
+  const list = d.series ?? [];
+  $('tag-series').textContent = list.length;
+  $('active-panel').hidden = list.length === 0;
+  // Con una serie ya creada, el taller estorba arriba: se pliega.
+  if (list.length && !studioPinned) $('studio').hidden = true;
+  $('studio-toggle').textContent = $('studio').hidden ? 'Crear otra' : 'Ocultar';
+  if (!list.length) return;
+
+  if (!activeSeriesId || !list.some(s => s.id === activeSeriesId)) {
+    activeSeriesId = recallSeries();
+    if (!list.some(s => s.id === activeSeriesId)) activeSeriesId = list[0].id;
+  }
+  const s = list.find(x => x.id === activeSeriesId);
+  const cast = (s.characters ?? []).map(c => c.name).filter(Boolean).join(' · ');
+
+  $('active-series').innerHTML = `
+    ${list.length > 1 ? `<select id="series-select">${
+      list.map(o => `<option value="${esc(o.id)}" ${o.id === s.id ? 'selected' : ''}>${esc(o.title)}</option>`).join('')
+    }</select>` : `<strong style="font-size:16px">${esc(s.title)}</strong>`}
+    <div class="bible-row"><b>Personajes</b><span>${esc(cast || 'sin definir')}</span></div>
+    <div class="bible-row"><b>Mundo</b><span>${esc(s.setting ?? '—')}</span></div>
+    <div class="bible-row"><b>Estilo</b><span>${esc(s.art_style ?? '—')}</span></div>
+    <div class="bible-row"><b>Premisa</b><span>${esc(s.premise ?? '—')}</span></div>`;
+
+  const sel = $('series-select');
+  if (sel) sel.addEventListener('change', e => { rememberSeries(e.target.value); render(lastData); });
+}
+
 function renderGallery(d) {
   const done = d.episodes.filter(e => (e.images ?? []).length);
   $('tag-gallery').textContent = done.length;
@@ -633,6 +708,48 @@ document.addEventListener('click', e => {
   if (r) review(r.dataset.reject, false);
 });
 
+$('studio-toggle').addEventListener('click', () => {
+  const s = $('studio');
+  s.hidden = !s.hidden;
+  studioPinned = !s.hidden;
+  $('studio-toggle').textContent = s.hidden ? 'Crear otra' : 'Ocultar';
+});
+
+document.addEventListener('click', e => {
+  const ex = e.target.closest('[data-example]');
+  if (ex) { $('premise').value = ex.dataset.example; $('premise').focus(); }
+});
+
+$('create-series').addEventListener('click', async () => {
+  const btn = $('create-series');
+  const premise = $('premise').value.trim();
+  if (premise.length < 10) {
+    alertBox('Describe la historia con un poco más de detalle antes de crearla.');
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Escribiendo la biblia…';
+  alertBox('');
+  try {
+    const res = await fetch('/api/series', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-panel-secret': panelSecret() },
+      body: JSON.stringify({ premise, language: $('lang').value, targetAge: $('age').value }),
+    });
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(body.error ?? res.status);
+    rememberSeries(body.series.id);
+    studioPinned = false;
+    $('premise').value = '';
+    await load();
+  } catch (e) {
+    alertBox('No se pudo crear la serie: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Crear la serie';
+  }
+});
+
 $('refresh').addEventListener('click', load);
 
 $('run').addEventListener('click', async () => {
@@ -645,7 +762,7 @@ $('run').addEventListener('click', async () => {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-panel-secret': panelSecret() },
       // Tope conservador: un clic accidental no puede gastar el cupo del mes.
-      body: JSON.stringify({ episodes: 3, creditBudget: 30 }),
+      body: JSON.stringify({ seriesId: activeSeriesId, episodes: 3, creditBudget: 30 }),
     });
     const body = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(body.error ?? res.status);

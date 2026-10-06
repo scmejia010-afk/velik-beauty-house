@@ -18,6 +18,11 @@ export default async function handler(req, res) {
   }
 
   const { seriesId, episodes = 3, creditBudget = 30, premise } = req.body ?? {};
+  if (!seriesId && !premise) {
+    return res.status(400).json({
+      error: 'elige una serie en el panel, o crea una primero',
+    });
+  }
   try {
     const result = await runOrchestrator({
       ai: makeStoryAI({ complete: completeWithClaude }),
