@@ -6,7 +6,8 @@
     "check": "node --check src/lib/limits.js && node --check src/lib/quota.js && node --check src/lib/kids.js",
     "capacity": "node scripts/capacity.js",
     "unit-economics": "node scripts/unit-economics.js",
-    "dry-run": "node scripts/dry-run.js"
+    "dry-run": "node scripts/dry-run.js",
+    "simulate": "node scripts/simulate.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.107.0",
