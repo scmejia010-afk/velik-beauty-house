@@ -4,9 +4,12 @@
   "type": "module",
   "scripts": {
     "check": "node --check src/lib/limits.js && node --check src/lib/quota.js && node --check src/lib/kids.js",
-    "capacity": "node scripts/capacity.js"
+    "capacity": "node scripts/capacity.js",
+    "unit-economics": "node scripts/unit-economics.js",
+    "dry-run": "node scripts/dry-run.js"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.107.0"
+    "@supabase/supabase-js": "^2.107.0",
+    "@anthropic-ai/sdk": "^0.70.0"
   }
 }

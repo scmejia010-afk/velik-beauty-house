@@ -45,10 +45,14 @@ Investigación de 2026-10. Estos cuatro datos son la base de toda la arquitectur
 
 Reusa el stack que ya corre en Velik: Supabase + Vercel. Sin infraestructura nueva.
 
-## Los cinco agentes
+## Los agentes
+
+El **Orquestador** dirige la cadena completa de una serie. Los demás son
+disparables por separado.
 
 | Agente | Cadencia | Qué hace |
 |---|---|---|
+| **Orchestrator** | diaria | Crea la serie, esquematiza y guioniza episodios, los produce y los deja en revisión. Máquina de estados con presupuesto de créditos. |
 | **Scout** | diaria | Detecta tendencias y ángulos de hook por nicho. Escribe en `trends`. |
 | **Writer** | por tendencia | Guion de +60s con hook en los primeros 3s. Escribe en `videos`. |
 | **Producer** | por guion | Higgsfield: video, voz de la cuenta, doblaje. Llena `media_url`. |
@@ -88,15 +92,19 @@ las APIs, sino las ~35/día que una persona puede revisar de verdad.
 - [x] Clientes de publicación: Meta, TikTok, YouTube (`src/lib/platforms/`)
 - [x] Los cinco agentes (`src/agents/`)
 - [x] Cron endpoints y cola de revisión (`api/`)
+- [x] Series narrativas y orquestador (`src/agents/orchestrator.js`, `db/003_series.sql`)
+- [x] Prompts de storytelling (`src/lib/storytelling.js`)
+- [x] Producción por imágenes: ~10 créditos/episodio contra ~84 del video generado
 - [ ] OAuth y renovación de tokens por cuenta
 - [ ] Panel visual (la API de revisión ya existe: `api/review.js`)
-- [ ] Integración real del MCP de Higgsfield en el Producer
+- [ ] Verificar los endpoints reales de Higgsfield en `src/lib/higgsfield.js`
 
 ## Puesta en marcha
 
 1. Aplicar `db/schema.sql`, `db/functions.sql` y `db/002_kids.sql` en Supabase.
 2. Copiar `.env.example` a `.env` y llenar las credenciales.
-3. `npm run capacity` para dimensionar antes de escalar cuentas.
+3. `npm run capacity` y `npm run unit-economics` para dimensionar antes de escalar.
+4. `npm run dry-run` verifica la lógica de decisión sin gastar créditos.
 4. Iniciar la **auditoría del cliente de TikTok**: sin ella el tope es de
    5 creadores cada 24h, y tiene tiempos de espera externos.
 
@@ -107,3 +115,20 @@ APIs oficiales de cada plataforma. No incluye ni incluirá generación de
 interacción artificial (vistas, seguidores, engagement): es fraude contra los
 programas de monetización de los que el proyecto cobra, y la vía más directa a
 la desmonetización y retención de pagos.
+
+## Economía del formato
+
+La decisión más importante del proyecto no es el nicho ni el número de
+cuentas: es el **formato de producción**.
+
+| Formato | Créditos/pieza | Piezas con 900 créditos/mes |
+|---|---|---|
+| Video generado (70s) | ~84 | **10/mes** |
+| Imágenes + narración (70s) | ~10 | **90/mes** |
+
+Nueve veces más producción con el mismo cupo. El ensamblaje (paneo y zoom
+sobre imagen fija, sincronizado con la narración) es procesamiento de video,
+no generación: no consume créditos. Por eso el Orquestador produce por
+imágenes y no por video.
+
+`npm run unit-economics` recalcula con otros supuestos.
