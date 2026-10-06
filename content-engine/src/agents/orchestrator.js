@@ -264,6 +264,12 @@ async function produceEpisode({ hf, series, episode }) {
     );
     credits += scenes.length * CREDIT_COST.imagePerScene;
 
+    const imageUrls = images.map(i => i.url ?? i.result_url ?? i);
+
+    // Guardar las imágenes apenas existen, antes del audio y el ensamblaje.
+    // Si una etapa posterior falla, el trabajo ya pagado no se pierde.
+    await db.from('episodes').update({ images: imageUrls }).eq('id', episode.id);
+
     const narration = scenes.map(s => s.narration).join(' ');
     const audio = await hf.generateAudio({ text: narration, voiceId: series.voice_id });
     credits += CREDIT_COST.audioPerEpisode;
@@ -287,6 +293,8 @@ async function produceEpisode({ hf, series, episode }) {
       format: totalSec >= 60 ? 'long' : 'short',
       production_mode: 'images',
       media_url: media.url,
+      thumbnail_url: imageUrls[0] ?? null,
+      audio_url: audio.url ?? null,
       hf_job_id: media.jobId,
       status: 'ready',
       made_for_kids: true,

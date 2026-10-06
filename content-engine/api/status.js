@@ -16,9 +16,9 @@ export default async function handler(req, res) {
     const [series, episodes, pendingReview, queue, published, accounts, runs, metrics] =
       await Promise.all([
         db.from('series').select('id, title, premise, status, episode_count, characters, art_style'),
-        db.from('episodes').select('id, series_id, number, title, lesson, status').order('number'),
+        db.from('episodes').select('id, series_id, number, title, lesson, status, images').order('number'),
         db.from('videos')
-          .select('id, title, hook, duration_sec, media_url, created_at')
+          .select('id, title, hook, duration_sec, media_url, thumbnail_url, created_at, episode_id, episodes(images)')
           .eq('status', 'ready').eq('human_reviewed', false),
         db.from('publications')
           .select('id, status, scheduled_for, error, videos(title), accounts(handle, platform)')

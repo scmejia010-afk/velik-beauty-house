@@ -217,11 +217,67 @@ pre { font: 400 11px/1.5 var(--mono); margin: 5px 0 0; white-space: pre-wrap;
   font-size: 13.5px; overflow-wrap: anywhere;
 }
 
+/* Tira de escenas: lo que de verdad se revisa. En el celular se desliza. */
+.strip {
+  display: flex; gap: 8px; padding: 12px 16px 14px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.strip img {
+  height: 148px; width: auto; flex: none; border-radius: 4px;
+  border: 1px solid var(--line); background: var(--deep-2);
+  scroll-snap-align: start; cursor: zoom-in;
+  aspect-ratio: 752 / 1344; object-fit: cover;
+}
+.strip .ghost-frame {
+  height: 148px; aspect-ratio: 752/1344; flex: none; border-radius: 4px;
+  border: 1px dashed var(--line); display: grid; place-items: center;
+  font: 400 10px var(--mono); color: var(--fg-faint); text-align: center; padding: 6px;
+}
+
+/* Visor: toca una escena y se abre grande. En el celular es la única forma
+   de juzgar si el personaje quedó bien. */
+#viewer {
+  position: fixed; inset: 0; z-index: 50; background: rgba(7,6,15,.95);
+  display: grid; place-items: center; padding: 20px; cursor: zoom-out;
+}
+/* El display:grid de arriba le gana al [hidden] del navegador, así que el
+   visor aparecía abierto al cargar la página tapando la cabecera. */
+#viewer[hidden] { display: none; }
+#viewer img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+#viewer .hint {
+  position: absolute; bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  font: 400 11px var(--mono); color: var(--fg-faint);
+}
+
+.thumb {
+  width: 44px; height: 44px; flex: none; border-radius: 4px; object-fit: cover;
+  border: 1px solid var(--line); background: var(--deep-2); cursor: zoom-in;
+}
+
+/* En el celular: la tubería se vuelve rejilla, los botones se hacen tocables. */
+@media (max-width: 620px) {
+  .wrap { padding-block: 18px 72px; }
+  h1 { font-size: 19px; }
+  .controls { width: 100%; }
+  .controls button { flex: 1 1 auto; padding: 12px 14px; }
+  .pipeline { padding: 14px 12px; }
+  .pipe-track { min-width: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 10px; }
+  .stage { padding-right: 0; }
+  .stage:not(:last-child)::after { display: none; }
+  .stage .n { font-size: 21px; }
+  .row { padding: 14px 14px; }
+  .row .actions { width: 100%; }
+  .row .actions button { flex: 1 1 auto; padding: 11px 10px; }
+  .strip img, .strip .ghost-frame { height: 190px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 
+<div id="viewer" hidden><img id="viewer-img" alt=""><span class="hint">toca para cerrar</span></div>
 <canvas id="field" aria-hidden="true"></canvas>
 <div id="grid" aria-hidden="true"></div>
 
@@ -262,6 +318,11 @@ pre { font: 400 11px/1.5 var(--mono); margin: 5px 0 0; white-space: pre-wrap;
       <section class="panel">
         <header><h2>Cola de publicación</h2><span class="spacer"></span><span class="tag" id="tag-queue">0</span></header>
         <div id="queue"></div>
+      </section>
+
+      <section class="panel">
+        <header><h2>Episodios producidos</h2><span class="spacer"></span><span class="tag" id="tag-gallery">0</span></header>
+        <div id="gallery"></div>
       </section>
 
       <section class="panel">
@@ -384,6 +445,7 @@ function render(d) {
   renderReview(d);
   renderGauges(d);
   renderQueue(d);
+  renderGallery(d);
   renderSeries(d);
   renderPerf(d);
   renderRuns(d);
@@ -417,20 +479,36 @@ function renderReview(d) {
   const tag = $('tag-review');
   tag.textContent = list.length;
   tag.className = 'tag' + (list.length ? ' hot' : '');
-  $('review').innerHTML = list.length ? list.map(v => `
-    <div class="row">
+  $('review').innerHTML = list.length ? list.map(v => {
+    const imgs = v.episodes?.images ?? [];
+    return `
+    <div class="row" style="padding-bottom:0">
       <div class="main">
         <strong>${esc(v.title)}</strong>
         <div class="meta">${v.duration_sec}s${v.hook ? ' · ' + esc(v.hook) : ''}</div>
       </div>
       <span class="pill wait">sin revisar</span>
-      <div class="actions">
-        ${v.media_url ? `<a href="${esc(v.media_url)}" target="_blank" rel="noopener"><button class="ghost">Ver</button></a>` : ''}
+    </div>
+    ${strip(imgs)}
+    <div class="row" style="border-top:0; padding-top:0">
+      <div class="actions" style="flex:1 1 auto">
+        ${v.media_url ? `<a href="${esc(v.media_url)}" target="_blank" rel="noopener"><button class="ghost">Video</button></a>` : ''}
         <button class="ghost" data-approve="${esc(v.id)}">Aprobar</button>
         <button class="ghost" data-reject="${esc(v.id)}">Rechazar</button>
       </div>
-    </div>`).join('')
+    </div>`;
+  }).join('')
     : '<div class="empty">Nada pendiente.<br><b>Encender 3 episodios</b> arranca una tanda.</div>';
+}
+
+/* Tira deslizable de escenas. Tocar una la abre grande. */
+function strip(images) {
+  if (!images?.length) {
+    return '<div class="strip"><div class="ghost-frame">sin imágenes<br>guardadas</div></div>';
+  }
+  return '<div class="strip">' + images.map((u, i) =>
+    `<img src="${esc(u)}" alt="escena ${i + 1}" loading="lazy" data-zoom="${esc(u)}">`
+  ).join('') + '</div>';
 }
 
 /* Anillo por cuenta: el consumo del día se lee de un golpe. */
@@ -470,6 +548,21 @@ function renderQueue(d) {
       </div>
       <span class="pill ${p.status === 'queued' ? 'ok' : p.status === 'skipped_quota' ? 'wait' : 'bad'}">${esc(p.status)}</span>
     </div>`).join('') : '<div class="empty">La cola está vacía.</div>';
+}
+
+function renderGallery(d) {
+  const done = d.episodes.filter(e => (e.images ?? []).length);
+  $('tag-gallery').textContent = done.length;
+  $('gallery').innerHTML = done.length ? done.map(e => `
+    <div class="row" style="padding-bottom:4px">
+      <div class="main">
+        <strong>${String(e.number).padStart(2, '0')} · ${esc(e.title)}</strong>
+        <div class="meta">${esc(e.lesson ?? '')} · ${e.images.length} escenas</div>
+      </div>
+      <span class="pill ${e.status === 'published' ? 'ok' : 'wait'}">${esc(e.status)}</span>
+    </div>
+    ${strip(e.images)}`).join('')
+    : '<div class="empty">Todavía no hay episodios con imágenes guardadas.</div>';
 }
 
 function renderSeries(d) {
@@ -525,7 +618,15 @@ async function review(videoId, approved) {
   }
 }
 
+const viewer = $('viewer'), viewerImg = $('viewer-img');
+function closeViewer() { viewer.hidden = true; viewerImg.src = ''; }
+viewer.addEventListener('click', closeViewer);
+addEventListener('keydown', e => { if (e.key === 'Escape') closeViewer(); });
+closeViewer();
+
 document.addEventListener('click', e => {
+  const z = e.target.closest('[data-zoom]');
+  if (z) { viewerImg.src = z.dataset.zoom; viewer.hidden = false; return; }
   const a = e.target.closest('[data-approve]');
   const r = e.target.closest('[data-reject]');
   if (a) review(a.dataset.approve, true);

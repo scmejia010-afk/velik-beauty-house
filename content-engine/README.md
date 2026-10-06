@@ -106,6 +106,11 @@ episodios, ver cupo y cola, disparar producción. La **terminal** para
 verificar y dimensionar. Los **crons de Vercel** para lo automático.
 Detalle en `docs/panel.md`.
 
+## Ponerlo en línea
+
+Guía paso a paso en `DESPLIEGUE.md`: Supabase, Vercel y cómo dejarlo en la
+pantalla de inicio del teléfono.
+
 ## Puesta en marcha
 
 1. Aplicar `db/schema.sql`, `db/functions.sql` y `db/002_kids.sql` en Supabase.
