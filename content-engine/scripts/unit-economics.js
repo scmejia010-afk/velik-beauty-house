@@ -94,9 +94,10 @@ const MONTHLY_CREDITS = 900;
 
 const FORMATS = [
   { label: 'Video generado, 70s', creditsPerPiece: 84 },
-  // Imágenes + narración + animación por software (Ken Burns, no generación).
-  // 4 imágenes a ~2 créditos + audio. El audio es barato comparado con video.
-  { label: 'Imagenes + voz, 70s', creditsPerPiece: 10 },
+  // MEDIDO el 2026-10-06: 4 imágenes con gpt_image_2 (1k/low) costaron
+  // 2 créditos, o sea 0.5 por imagen. Un episodio de 9 escenas son 4.5
+  // créditos de imagen más el audio (estimado en 2, aún sin medir).
+  { label: 'Imagenes + voz, 70s', creditsPerPiece: 7 },
 ];
 
 console.log(`\n=== CUPO MENSUAL: ${MONTHLY_CREDITS} creditos incluidos ===\n`);

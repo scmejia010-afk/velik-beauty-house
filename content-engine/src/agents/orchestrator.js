@@ -21,11 +21,22 @@
 import { db } from '../lib/db.js';
 import { checkAuthenticity } from '../lib/kids.js';
 
-/** Costo en créditos por etapa, para controlar el presupuesto. */
+/**
+ * Costo en créditos por etapa.
+ *
+ * imagePerScene está MEDIDO, no estimado: 4 imágenes con gpt_image_2 a
+ * 1k/low consumieron 2 créditos (506 -> 504) el 2026-10-06. Son 0.5 por
+ * imagen, cuatro veces más barato de lo que suponíamos.
+ *
+ * audioPerEpisode sigue siendo una estimación: falta medirlo.
+ */
 const CREDIT_COST = {
-  imagePerScene: 2,
+  imagePerScene: 0.5,
   audioPerEpisode: 2,
 };
+
+/** Modelo e parámetros verificados para el estilo ilustrado de la serie. */
+export const IMAGE_MODEL = { model: 'gpt_image_2', resolution: '1k', quality: 'low' };
 
 export async function runOrchestrator({
   ai,                       // { outlineSeries, outlineEpisodes, writeEpisode }
