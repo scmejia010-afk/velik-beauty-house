@@ -24,5 +24,11 @@
       "path": "/api/cron-producer",
       "schedule": "0 */2 * * *"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    }
   ]
 }

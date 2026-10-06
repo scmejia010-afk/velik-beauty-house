@@ -1,0 +1,317 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Content Engine</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Tablero de operación: resumen arriba, cola de trabajo al centro, registro abajo. */
+  :root {
+    --bg: #f7f5f1;
+    --surface: #ffffff;
+    --surface-2: #efebe4;
+    --fg: #22201c;
+    --fg-dim: #6b655c;
+    --line: #ddd7cd;
+    --accent: #2f6f5e;
+    --accent-soft: #e2ece8;
+    --warn: #9a6512;
+    --warn-soft: #f6ecd8;
+    --bad: #9d3b2f;
+    --bad-soft: #f7e3df;
+    --display: "Fraunces", Georgia, serif;
+    --body: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17191a; --surface: #1f2223; --surface-2: #282c2d;
+      --fg: #eceae5; --fg-dim: #9b9790; --line: #343839;
+      --accent: #6fbfa4; --accent-soft: #223029;
+      --warn: #d8a24f; --warn-soft: #302819;
+      --bad: #e08476; --bad-soft: #31211e;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17191a; --surface: #1f2223; --surface-2: #282c2d;
+    --fg: #eceae5; --fg-dim: #9b9790; --line: #343839;
+    --accent: #6fbfa4; --accent-soft: #223029;
+    --warn: #d8a24f; --warn-soft: #302819;
+    --bad: #e08476; --bad-soft: #31211e;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 400 15px/1.5 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-block: 28px 64px; padding-left: 20px; padding-right: 20px; }
+
+  header.top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 20px; margin-bottom: 28px; }
+  h1 { font: 700 27px/1.1 var(--display); margin: 0; text-wrap: balance; }
+  .sub { color: var(--fg-dim); font-size: 13px; }
+  .spacer { flex: 1 1 auto; }
+
+  button {
+    font: 500 14px var(--body); color: var(--fg);
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 7px; padding: 8px 14px; cursor: pointer;
+  }
+  button:hover { background: var(--surface-2); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  button.primary:hover { filter: brightness(1.08); }
+  button:disabled { opacity: .5; cursor: default; }
+
+  /* Resumen */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 30px; }
+  .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; min-width: 0; }
+  .tile .k { font: 500 11px var(--body); letter-spacing: .07em; text-transform: uppercase; color: var(--fg-dim); }
+  .tile .v { font: 700 25px/1.2 var(--display); margin-top: 5px; font-variant-numeric: tabular-nums; }
+  .tile .n { font-size: 12px; color: var(--fg-dim); margin-top: 2px; }
+
+  section { margin-bottom: 34px; }
+  h2 { font: 600 13px var(--body); letter-spacing: .08em; text-transform: uppercase;
+       color: var(--fg-dim); margin: 0 0 12px; display: flex; align-items: center; gap: 9px; }
+  h2 .count { font-family: var(--mono); font-size: 12px; letter-spacing: 0;
+               background: var(--surface-2); border-radius: 20px; padding: 1px 8px; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
+         padding: 13px 16px; border-top: 1px solid var(--line); }
+  .card > .row:first-child { border-top: 0; }
+  .row .main { flex: 1 1 260px; min-width: 0; }
+  .row .main strong { font-weight: 600; display: block; }
+  .row .meta { font-size: 12.5px; color: var(--fg-dim); font-variant-numeric: tabular-nums; }
+  .row .actions { display: flex; gap: 8px; }
+
+  /* El estado se codifica en forma, no solo en texto. */
+  .pill { font: 500 11.5px var(--mono); padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+  .pill.ok   { background: var(--accent-soft); color: var(--accent); }
+  .pill.wait { background: var(--warn-soft);   color: var(--warn); }
+  .pill.bad  { background: var(--bad-soft);    color: var(--bad); }
+
+  /* Cupo: barra que muestra consumo del día */
+  .quota { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; }
+  .bar { height: 6px; background: var(--surface-2); border-radius: 4px; overflow: hidden; grid-column: 1 / -1; }
+  .bar > i { display: block; height: 100%; background: var(--accent); }
+  .bar > i.hot { background: var(--bad); }
+
+  .empty { padding: 20px 16px; color: var(--fg-dim); font-size: 13.5px; }
+  .scroll { overflow-x: auto; }
+  pre { font: 400 12px/1.5 var(--mono); margin: 0; white-space: pre-wrap; color: var(--fg-dim); }
+  .err { background: var(--bad-soft); color: var(--bad); border: 1px solid var(--bad);
+         border-radius: 9px; padding: 13px 16px; margin-bottom: 22px; font-size: 14px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Content Engine</h1>
+      <div class="sub" id="stamp">Cargando…</div>
+    </div>
+    <div class="spacer"></div>
+    <button id="refresh">Actualizar</button>
+    <button class="primary" id="run">Producir 3 episodios</button>
+  </header>
+
+  <div id="error" class="err" hidden></div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <section>
+    <h2>Esperando tu revisión <span class="count" id="n-review">0</span></h2>
+    <div class="card" id="review"></div>
+  </section>
+
+  <section>
+    <h2>Cupo de hoy por cuenta</h2>
+    <div class="card" id="quotas"></div>
+  </section>
+
+  <section>
+    <h2>Cola de publicación <span class="count" id="n-queue">0</span></h2>
+    <div class="card" id="queue"></div>
+  </section>
+
+  <section>
+    <h2>Series y episodios</h2>
+    <div class="card" id="series"></div>
+  </section>
+
+  <section>
+    <h2>Últimas corridas del orquestador</h2>
+    <div class="card scroll" id="runs"></div>
+  </section>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => (n ?? 0).toLocaleString('es-CO');
+
+// El secreto del panel se guarda solo en este navegador. No viaja a Claude
+// ni a otros visitantes, y puede venir vacío: el panel debe funcionar igual.
+function panelSecret() {
+  try { return localStorage.getItem('panel-secret') ?? ''; } catch { return ''; }
+}
+
+function showError(msg) {
+  const box = $('error');
+  if (!msg) { box.hidden = true; return; }
+  box.hidden = false;
+  box.textContent = msg;
+}
+
+async function load() {
+  showError('');
+  $('stamp').textContent = 'Cargando…';
+  let data;
+  try {
+    const res = await fetch('/api/status');
+    if (!res.ok) throw new Error(`El servidor respondió ${res.status}`);
+    data = await res.json();
+  } catch (e) {
+    $('stamp').textContent = 'Sin conexión con el servidor';
+    showError(
+      'No se pudieron cargar los datos: ' + e.message
+      + '. Revisa que SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY estén configuradas.'
+    );
+    return;
+  }
+  render(data);
+}
+
+function render(d) {
+  $('stamp').textContent = 'Actualizado ' + new Date(d.generatedAt).toLocaleString('es-CO');
+
+  const produced = d.episodes.filter(e => e.status === 'produced').length;
+  $('tiles').innerHTML = [
+    ['Series activas', d.series.filter(s => s.status === 'active').length, `${d.series.length} en total`],
+    ['Episodios', d.episodes.length, `${produced} producidos`],
+    ['Por revisar', d.pendingReview.length, 'bloquean la cola'],
+    ['En cola', d.queue.filter(q => q.status === 'queued').length, 'esperan turno'],
+    ['Publicados', d.published.length, 'últimos 20'],
+    ['Vistas', fmt(d.totals.views), d.totals.avgRpm ? `RPM ${d.totals.avgRpm}` : 'sin métricas aún'],
+  ].map(([k, v, n]) => `
+    <div class="tile"><div class="k">${esc(k)}</div>
+    <div class="v">${esc(String(v))}</div><div class="n">${esc(n)}</div></div>`).join('');
+
+  // Revisión: la única etapa que exige una persona.
+  $('n-review').textContent = d.pendingReview.length;
+  $('review').innerHTML = d.pendingReview.length ? d.pendingReview.map(v => `
+    <div class="row">
+      <div class="main">
+        <strong>${esc(v.title)}</strong>
+        <div class="meta">${v.duration_sec}s${v.hook ? ' · ' + esc(v.hook) : ''}</div>
+      </div>
+      <span class="pill wait">sin revisar</span>
+      <div class="actions">
+        ${v.media_url ? `<a href="${esc(v.media_url)}" target="_blank" rel="noopener"><button>Ver</button></a>` : ''}
+        <button data-approve="${esc(v.id)}">Aprobar</button>
+        <button data-reject="${esc(v.id)}">Rechazar</button>
+      </div>
+    </div>`).join('')
+    : '<div class="empty">Nada pendiente. Produce episodios para que aparezcan aquí.</div>';
+
+  // Cupo: lo que decide si hoy se puede publicar.
+  $('quotas').innerHTML = d.quotas.length ? d.quotas.map(q => {
+    const pct = q.cap ? Math.min(100, Math.round(q.used / q.cap * 100)) : 0;
+    return `<div class="row">
+      <div class="main quota">
+        <strong>${esc(q.label || q.platform)}</strong>
+        <span class="meta">${q.used} de ${q.cap} · quedan ${q.remaining}</span>
+        <span class="bar"><i class="${pct > 80 ? 'hot' : ''}" style="width:${pct}%"></i></span>
+      </div>
+      <span class="pill ${q.remaining > 0 ? 'ok' : 'bad'}">${q.remaining > 0 ? 'con cupo' : 'agotado'}</span>
+    </div>`;
+  }).join('') : '<div class="empty">No hay cuentas registradas todavía.</div>';
+
+  $('n-queue').textContent = d.queue.length;
+  $('queue').innerHTML = d.queue.length ? d.queue.map(p => `
+    <div class="row">
+      <div class="main">
+        <strong>${esc(p.videos?.title ?? 'sin título')}</strong>
+        <div class="meta">${esc(p.accounts?.platform ?? '')} · ${esc(p.accounts?.handle ?? '')}
+          · ${new Date(p.scheduled_for).toLocaleString('es-CO')}</div>
+        ${p.error ? `<div class="meta">${esc(p.error)}</div>` : ''}
+      </div>
+      <span class="pill ${p.status === 'queued' ? 'ok' : p.status === 'skipped_quota' ? 'wait' : 'bad'}">${esc(p.status)}</span>
+    </div>`).join('') : '<div class="empty">La cola está vacía.</div>';
+
+  $('series').innerHTML = d.series.length ? d.series.map(s => {
+    const eps = d.episodes.filter(e => e.series_id === s.id);
+    const names = (s.characters ?? []).map(c => c.name).filter(Boolean).join(', ');
+    return `<div class="row">
+      <div class="main">
+        <strong>${esc(s.title)}</strong>
+        <div class="meta">${names ? esc(names) + ' · ' : ''}${eps.length} episodios</div>
+        <div class="meta">${eps.map(e => `${e.number}. ${esc(e.title)} [${esc(e.status)}]`).join(' · ')}</div>
+      </div>
+      <span class="pill ${s.status === 'active' ? 'ok' : 'wait'}">${esc(s.status)}</span>
+    </div>`;
+  }).join('') : '<div class="empty">Ninguna serie creada. El botón de arriba crea la primera.</div>';
+
+  $('runs').innerHTML = d.runs.length ? d.runs.map(r => `
+    <div class="row">
+      <div class="main">
+        <strong>${new Date(r.started_at).toLocaleString('es-CO')}</strong>
+        <div class="meta">etapa: ${esc(r.stage)} · ${r.credits_spent} créditos</div>
+        ${r.report ? `<pre>${esc(JSON.stringify(r.report.stages ?? r.report))}</pre>` : ''}
+      </div>
+      <span class="pill ${r.status === 'completed' ? 'ok' : r.status === 'running' ? 'wait' : 'bad'}">${esc(r.status)}</span>
+    </div>`).join('') : '<div class="empty">Sin corridas registradas.</div>';
+}
+
+async function review(videoId, approved) {
+  showError('');
+  try {
+    const res = await fetch('/api/review', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ videoId, approved, reviewer: 'panel' }),
+    });
+    if (!res.ok) throw new Error((await res.json()).error ?? res.status);
+    await load();
+  } catch (e) {
+    showError('No se pudo guardar la revisión: ' + e.message);
+  }
+}
+
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-approve]');
+  const r = e.target.closest('[data-reject]');
+  if (a) review(a.dataset.approve, true);
+  if (r) review(r.dataset.reject, false);
+});
+
+$('refresh').addEventListener('click', load);
+
+$('run').addEventListener('click', async () => {
+  const btn = $('run');
+  btn.disabled = true;
+  btn.textContent = 'Produciendo…';
+  showError('');
+  try {
+    const res = await fetch('/api/trigger', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-panel-secret': panelSecret() },
+      // Presupuesto conservador: un clic accidental no puede gastar el mes.
+      body: JSON.stringify({ episodes: 3, creditBudget: 30 }),
+    });
+    const body = await res.json();
+    if (!res.ok) throw new Error(body.error ?? res.status);
+    await load();
+  } catch (e) {
+    showError('No se pudo producir: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Producir 3 episodios';
+  }
+});
+
+load();
+</script>

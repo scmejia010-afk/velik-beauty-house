@@ -96,8 +96,15 @@ las APIs, sino las ~35/día que una persona puede revisar de verdad.
 - [x] Prompts de storytelling (`src/lib/storytelling.js`)
 - [x] Producción por imágenes: ~10 créditos/episodio contra ~84 del video generado
 - [ ] OAuth y renovación de tokens por cuenta
-- [ ] Panel visual (la API de revisión ya existe: `api/review.js`)
+- [x] Panel de operación (`public/index.html`) — ver `docs/panel.md`
 - [ ] Verificar los endpoints reales de Higgsfield en `src/lib/higgsfield.js`
+
+## Desde dónde se maneja
+
+El **panel web** (`public/index.html`) para el día a día: revisar y aprobar
+episodios, ver cupo y cola, disparar producción. La **terminal** para
+verificar y dimensionar. Los **crons de Vercel** para lo automático.
+Detalle en `docs/panel.md`.
 
 ## Puesta en marcha
 
