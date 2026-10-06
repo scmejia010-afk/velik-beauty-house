@@ -79,3 +79,44 @@ for (const s of [{ label: 'Infantil, RPM 0.33', rpm: 0.33 }, { label: 'Infantil,
     + ` | ${r800 >= CHEAP_USD ? 'RENTABLE' : 'PIERDE'}`
   );
 }
+
+// ---------------------------------------------------------------
+// Escenario de créditos incluidos en el plan
+// ---------------------------------------------------------------
+// Si el plan incluye N créditos/mes sin costo adicional, el costo marginal
+// es cero hasta agotarlos. La pregunta deja de ser "¿cuánto cuesta una
+// pieza?" y pasa a ser "¿cuántas piezas rinde el cupo mensual?".
+//
+// El cupo se vuelve el cuello de botella real del sistema, por delante de
+// los límites de las APIs (593/día) y de la revisión humana (~35/día).
+
+const MONTHLY_CREDITS = 900;
+
+const FORMATS = [
+  { label: 'Video generado, 70s', creditsPerPiece: 84 },
+  // Imágenes + narración + animación por software (Ken Burns, no generación).
+  // 4 imágenes a ~2 créditos + audio. El audio es barato comparado con video.
+  { label: 'Imagenes + voz, 70s', creditsPerPiece: 10 },
+];
+
+console.log(`\n=== CUPO MENSUAL: ${MONTHLY_CREDITS} creditos incluidos ===\n`);
+
+for (const f of FORMATS) {
+  const pieces = Math.floor(MONTHLY_CREDITS / f.creditsPerPiece);
+  console.log(`${f.label}  (${f.creditsPerPiece} creditos/pieza)`);
+  console.log(`  Alcanza para ${pieces} piezas/mes  (~${(pieces / 30).toFixed(1)}/dia)`);
+
+  for (const s of [
+    { label: 'infantil RPM 0.33', rpm: 0.33 },
+    { label: 'infantil RPM 3.00', rpm: 3.00 },
+    { label: 'general  RPM 7.00', rpm: 7.00 },
+  ]) {
+    const monthly = revenuePerPiece(pieces * 800, s.rpm);
+    console.log(`    ${s.label.padEnd(20)} -> USD ${monthly}/mes con 800 vistas/pieza`);
+  }
+  console.log('');
+}
+
+console.log('Nota: con creditos incluidos el margen es positivo por definicion');
+console.log('(costo marginal cero), pero el INGRESO ABSOLUTO lo limita el cupo.');
+console.log('900 creditos no son un negocio: son un presupuesto de validacion.');
