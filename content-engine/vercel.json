@@ -1,0 +1,9 @@
+{
+  "crons": [
+    { "path": "/api/cron-publisher", "schedule": "*/15 * * * *" },
+    { "path": "/api/cron-analyst",   "schedule": "0 7 * * *" },
+    { "path": "/api/cron-scout",     "schedule": "0 6 * * *" },
+    { "path": "/api/cron-writer",    "schedule": "30 6 * * *" },
+    { "path": "/api/cron-producer",  "schedule": "0 */2 * * *" }
+  ]
+}

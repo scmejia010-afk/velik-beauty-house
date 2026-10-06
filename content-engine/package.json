@@ -1,0 +1,12 @@
+{
+  "name": "content-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check src/lib/limits.js && node --check src/lib/quota.js && node --check src/lib/kids.js",
+    "capacity": "node scripts/capacity.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.107.0"
+  }
+}

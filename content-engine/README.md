@@ -63,20 +63,42 @@ El **Analyst** cierra el ciclo: mide qué hook retuvo más allá del segundo 3 y
 qué geografía pagó, y el Scout usa eso para la siguiente tanda. Esta
 realimentación es lo que hace que el sistema mejore en vez de solo repetir.
 
+## Nicho
+
+Contenido infantil (preescolar) en inglés. Este nicho tiene dos
+restricciones severas documentadas en `docs/riesgos.md` que condicionan
+todo el diseño:
+
+- **COPPA** recorta el ingreso hasta un 80%: sin anuncios personalizados,
+  el RPM cae a ~$0.33–3.00 y se desactivan memberships y comentarios.
+- **Política de contenido inauténtico**: en enero 2026 YouTube terminó 16
+  canales con 4.700 millones de vistas por contenido de plantilla generado
+  en masa. El contenido infantil con IA es el blanco exacto.
+
+Por eso el sistema está diseñado para **calidad con revisión humana
+obligatoria**, no para volumen. El techo real no son las 593 piezas/día de
+las APIs, sino las ~35/día que una persona puede revisar de verdad.
+
 ## Estado
 
-- [x] Esquema de base de datos (`db/schema.sql`, `db/functions.sql`)
+- [x] Esquema de base de datos (`db/schema.sql`, `db/functions.sql`, `db/002_kids.sql`)
 - [x] Límites y proyección de ingresos (`src/lib/limits.js`)
 - [x] Compuerta de cupo y validación de monetización (`src/lib/quota.js`)
-- [ ] Clientes de publicación por plataforma
-- [ ] Los cinco agentes
-- [ ] Panel
-- [ ] OAuth y gestión de tokens por cuenta
+- [x] Reglas del nicho infantil y compuerta de autenticidad (`src/lib/kids.js`)
+- [x] Clientes de publicación: Meta, TikTok, YouTube (`src/lib/platforms/`)
+- [x] Los cinco agentes (`src/agents/`)
+- [x] Cron endpoints y cola de revisión (`api/`)
+- [ ] OAuth y renovación de tokens por cuenta
+- [ ] Panel visual (la API de revisión ya existe: `api/review.js`)
+- [ ] Integración real del MCP de Higgsfield en el Producer
 
-## Decisiones pendientes
+## Puesta en marcha
 
-1. **Nicho, idioma y mercado objetivo** — define el multiplicador de ingreso (hasta 10×).
-2. **Número de cuentas en los primeros 3 meses** — define la capacidad diaria.
+1. Aplicar `db/schema.sql`, `db/functions.sql` y `db/002_kids.sql` en Supabase.
+2. Copiar `.env.example` a `.env` y llenar las credenciales.
+3. `npm run capacity` para dimensionar antes de escalar cuentas.
+4. Iniciar la **auditoría del cliente de TikTok**: sin ella el tope es de
+   5 creadores cada 24h, y tiene tiempos de espera externos.
 
 ## Alcance
 
